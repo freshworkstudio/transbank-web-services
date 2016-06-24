@@ -12,6 +12,7 @@ Transbank's Webpay One Click Kit: [download](https://docs.google.com/uc?id=0B4vI
 
 ## Background
 El webservice de Webpay One Click contempla los siguientes métodos:
+
 This webservice implements this methods:
 
  - initInscription
@@ -49,6 +50,7 @@ echo (new RedirectorHelper())->getOneClickRedirectHtml($response);
 exit; //el usuario es enviado a webpay para aprobar la inscripción de su tarjeta
 ```
 `var_dump($response): `
+
 ![sp dev test](https://cloud.githubusercontent.com/assets/1103494/16324748/404d6e12-3985-11e6-859b-6ae3f049f4c9.png)
 
 ### finishInscription
@@ -73,6 +75,7 @@ var_dump($response);
 exit;
 ```
 `var_dump($response): `
+
 ![var_dump](https://cloud.githubusercontent.com/assets/1103494/16324732/085d7100-3985-11e6-8081-27b15f020200.png)
 
 Ahora, deberás asociar el tbkUser (token) al usuario dentro de tu base de datos para después usar ese código para realizar cargos en la tarjeta del usuario.
@@ -103,6 +106,7 @@ var_dump($response);
 exit;
 ```
 `var_dump($response): `
+
 ![sp dev authorize](https://cloud.githubusercontent.com/assets/1103494/16324927/158d7f80-3987-11e6-9966-c32bc55663fb.png)
 
 ### codeReverseOneClick
