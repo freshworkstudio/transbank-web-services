@@ -1,0 +1,24 @@
+{
+    "name": "freshwork/transbank",
+    "description": "SDK para webservices de transbank (Webpay Plus, Webpay OneClick, Webpay PatPass)",
+    "license": "GPLv3",
+    "authors": [
+        {
+            "name": "Gonzalo De Spirito",
+            "email": "gonzalo@freshworkstudio.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Freshwork\\Transbank\\": "src/"
+        },
+        "classmap": [
+            "src/wss"
+        ]
+    },
+    "require": {
+
+    },
+    "minimum-stability": "dev"
+
+}
