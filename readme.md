@@ -1,14 +1,87 @@
 #Transbank WebServices SDK
 Librería para la integración de Webpay Plus, Webpay OneClick y Webpay Patpass
 
+# Installation
+```bash
+composer require freshwork/transbank
+```
+
+#QuickStart
+
+## Webpay OneClick on Integration Environment
+Este ejemplo ejecuta el método `initInscription` de WebPay One Click.
+```php
+<?php
+
+use Freshwork\Transbank\CertificationBagFactory;
+use Freshwork\Transbank\TransbankServiceFactory;
+use Freshwork\Transbank\RedirectorHelper;
+
+include 'vendor/autoload.php';
+
+//You always need to create a certificationBag where you put your private_key and certificate. This lines uses the integration certificates for OneClick that comes bundled into the package.
+$certificationBag = CertificationBagFactory::integrationOneClick();
+
+//OneClick Instance
+$oneClick = TransbankServiceFactory::oneclick($certificationBag);
+
+//Response from Transbank (token & url to redirect the user)
+$response = $oneClick->initInscription('username', 'gonzalo@freshworkstudio.com', 'http://test.dev/tbkresponse');
+
+//Generates a HTML Form and a script tag that sends the form immediately. You need to pass the url and the token.
+echo RedirectorHelper::redirectHTML($response->urlWebpay, $response->token);
+```
+### In production
+Just change this line
+``` php
+	$certificationBag = CertificationBagFactory::production('/path/to/private.key', '/path/to/certificate.crt');
+
+//OR
+$certificationBag = new CertificationBag('/path/to/private.key', '/path/to/certificate.crt', null, CertificationBag::PRODUCTION);
+```
+## WebService Normal
+Transacción normal con Webpay. (Pago tarjeta de crédito y débito)
+Webpay Normal transaction.
+``` php
+<?php
+
+use Freshwork\Transbank\CertificationBagFactory;
+use Freshwork\Transbank\TransbankServiceFactory;
+use Freshwork\Transbank\RedirectorHelper;
+
+include 'vendor/autoload.php';
+
+//Get a certificationBag with certificates and private key of WebpayNormal for integration environment.
+$bag = CertificationBagFactory::integrationWebpayNormal();
+
+$plus = TransbankServiceFactory::normal($bag);
+
+//For normal transactions, you can just add one TransactionDetail
+//Para transacciones normales, solo se puede añadir una linea de detalle de transacción.
+$plus->addTransactionDetail(10000, 'Orden824201'); //Amount and BuyOrder
+
+$response = $plus->initTransaction('http://test.dev/response', 'http://test.dev/thanks');
+
+echo RedirectorHelper::redirectHTML($response->url, $response->token);
+```
+
+### When the user arrives at test.dev/response
+```php
+$bag = CertificationBagFactory::integrationWebpayNormal();
+
+$plus = TransbankServiceFactory::normal($bag);
+
+$response = $plus->getTransactionResult();
+//If everything goes well (check stock, check amount, etc) you can call acknowledgeTransaction to accept the payment. Otherwise, the transaction is reverted in 30 seconds.
+//Si todo está bien, peudes llamar a acknowledgeTransaction. Si no se llama a este método, la transaccion se reversará en 30 segundos.
+$plus->acknowledgeTransaction();
+
+//Redirect back to Webpay Flow and then to the thanks page
+return RedirectorHelper::redirectBackNormal($response->urlRedirection);
+```
+
 #One Click
 "La modalidad de pago Oneclick permite al tarjetahabiente realizar pagos en el comercio sin la necesidad de ingresar cada vez información de la tarjeta de crédito al momento de realizar la compra. El modelo de pago contempla un proceso previo de inscripción o enrolamiento del tarjetahabiente, a través del comercio, que desee utilizar el servicio. Este tipo de pago facilita la venta, disminuye el tiempo de la transacción y reduce los riesgos de ingreso erróneo de los datos del medio de pago."
-
-
-Kit de integración webpay one click de Transbank: [descargar](https://docs.google.com/uc?id=0B4vI7QiPcsVOSFNaaGpQTi0yZGc&export=download)
-
-Transbank's Webpay One Click Kit: [download](https://docs.google.com/uc?id=0B4vI7QiPcsVOSFNaaGpQTi0yZGc&export=download)
-
 
 ## Background
 El webservice de Webpay One Click contempla los siguientes métodos:
@@ -21,7 +94,6 @@ This webservice implements this methods:
  - codeReverseOneClick
  - removeUser
 
-## Quick Start
 ### initInscription
 Permite asociar una tarjeta de crédito a un usuario en tu aplicación.
 Este método inicia el proceso de inscripción de tarjeta. Transbank devolverá un token y una URL donde redirigir al usuario para que realice este proceso.
@@ -30,22 +102,17 @@ This method starts the credit card inscription. It returns a token and an URL to
 Allows you to associate a credit card with a user of your application.
 
 ```php
+...
 use Freshwork\Transbank\TransbankServiceFactory;
 use Freshwork\Transbank\RedirectorHelper;
 
-//Crear objeto WebpayOneClick
-$oneClick = TransbankServiceFactory::createOneClickWith(
-	'/path/to/597020000000.key',
-	'/path/to/597020000000.crt',
-	false //false: integración. true: producción
-);
 
 // $response: Freshwork\Transbank\WebpayOneClick\oneClickInscriptionOutput
 $response = $oneClick->initInscription('username', 'user@company.cl', 'http://misitio.cl/webpayresponse');
 
 //Devuelve el html un formulario <form> con los datos y un <script> que envia el formulario automáticamente.
 //It returns the html of a <form> and a <script> that submits the form immediately.
-echo (new RedirectorHelper())->getOneClickRedirectHtml($response);
+echo RedirectorHelper::redirectHTML($response->urlWebpay, $response->token);
 
 exit; //el usuario es enviado a webpay para aprobar la inscripción de su tarjeta
 ```
@@ -59,14 +126,7 @@ El usuario, tras finalizar el proceso en Webpay, será redirigido a http://misit
 Once the user completes the credit card inscription, Transbank redirected the user back to http://misitio.cl/webpayresponse with a token provided through POST data.
 
 ```php
-use Freshwork\Transbank\TransbankServiceFactory;
-
-$oneClick = TransbankServiceFactory::createOneClickWith(
-	'/path/to/597020000000.key',
-	'/path/to/597020000000.crt',
-	false //false: integración. true: producción
-);
-
+...
 $token = $_POST['TBK_TOKEN'];
 
 $response = $oneClick->finishInscription($token);
@@ -88,19 +148,15 @@ Charge the credit card of the user
 
 
 ```php
-use Freshwork\Transbank\TransbankServiceFactory;
-
-$oneClick = TransbankServiceFactory::createOneClickWith(
-	'/path/to/597020000000.key',
-	'/path/to/597020000000.crt',
-	false //false: integración. true: producción
-);
 
 // Identificador único de la compra generado por el comercio. Debe ser timestamp [yyyymmddhhMMss] + un correlativo de tres dígitos.
 // Ej: Para la tercera transacción realizada el día 15 de julio de 2011 a las 11:55:50 la orden de compra sería: 20110715115550003.
 $buyOrder = date('ymdhis') . str_pad(1, 3, '0', STR_PAD_LEFT);
 
-$response = $oneClick->authorize(1000, $buyOrder, 'username', '9bf43307-6fa0-4b3b-888d-f36b6d040162');
+//This comes from the database. The token retrieved in the finishInscription process saved with the user data in the database.
+$authToken = '9bf43307-6fa0-4b3b-888d-f36b6d040162'; //$user->tbkToken;
+
+$response = $oneClick->authorize(1000, $buyOrder, 'username', $authToken);
 
 var_dump($response);
 exit;
