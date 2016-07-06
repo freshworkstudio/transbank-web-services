@@ -1,8 +1,7 @@
 <?php
-namespace Freshwork\Transbank\WebpayNormal;
+namespace Freshwork\Transbank\WebpayPatPass;
 
 class cardDetail
-
 {
     var $cardNumber; //string
     var $cardExpirationDate; //string

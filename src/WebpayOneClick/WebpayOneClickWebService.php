@@ -37,7 +37,7 @@ class WebpayOneClickWebService extends TransbankWebService
     /**
      * Integration URL
      */
-    const INTEGRATION_WSDL = 'https://tbk.orangepeople.cl/webpayserver/wswebpay/OneClickPaymentService?wsdl';
+    const INTEGRATION_WSDL = 'https://webpay3gint.transbank.cl/webpayserver/wswebpay/OneClickPaymentService?wsdl';
 
     /**
      * Production URL

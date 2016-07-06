@@ -1,8 +1,7 @@
 <?php
-namespace Freshwork\Transbank\WebpayNormal;
+namespace Freshwork\Transbank\WebpayPatPass;
 
 class transactionResultOutput
-
 {
     var $accountingDate; //string
     var $buyOrder; //string

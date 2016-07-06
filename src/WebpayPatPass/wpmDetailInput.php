@@ -1,8 +1,7 @@
 <?php
-namespace Freshwork\Transbank\WebpayNormal;
+namespace Freshwork\Transbank\WebpayPatPass;
 
 class wpmDetailInput
-
 {
     var $serviceId; //string
     var $cardHolderId; //string

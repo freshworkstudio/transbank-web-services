@@ -1,32 +1,38 @@
 <?php
-namespace Freshwork\Transbank\WebpayNormal;
+namespace Freshwork\Transbank\WebpayStandard;
 
 use Freshwork\Transbank\TransbankSoap;
 use Freshwork\Transbank\TransbankWebService;
-use Freshwork\Transbank\WebpayNormal\acknowledgeTransaction;
-use Freshwork\Transbank\WebpayNormal\acknowledgeTransactionResponse;
-use Freshwork\Transbank\WebpayNormal\cardDetail;
-use Freshwork\Transbank\WebpayNormal\getTransactionResult;
-use Freshwork\Transbank\WebpayNormal\getTransactionResultResponse;
-use Freshwork\Transbank\WebpayNormal\initTransaction;
-use Freshwork\Transbank\WebpayNormal\initTransactionResponse;
-use Freshwork\Transbank\WebpayNormal\transactionResultOutput;
-use Freshwork\Transbank\WebpayNormal\wpmDetailInput;
-use Freshwork\Transbank\WebpayNormal\wsInitTransactionInput;
-use Freshwork\Transbank\WebpayNormal\wsInitTransactionOutpu;
-use Freshwork\Transbank\WebpayNormal\wsTransactionDetail;
-use Freshwork\Transbank\WebpayNormal\wsTransactionDetailOutput;
+use Freshwork\Transbank\WebpayStandard\acknowledgeTransaction;
+use Freshwork\Transbank\WebpayStandard\acknowledgeTransactionResponse;
+use Freshwork\Transbank\WebpayStandard\cardDetail;
+use Freshwork\Transbank\WebpayStandard\getTransactionResult;
+use Freshwork\Transbank\WebpayStandard\getTransactionResultResponse;
+use Freshwork\Transbank\WebpayStandard\initTransaction;
+use Freshwork\Transbank\WebpayStandard\initTransactionResponse;
+use Freshwork\Transbank\WebpayStandard\transactionResultOutput;
+use Freshwork\Transbank\WebpayStandard\wpmDetailInput;
+use Freshwork\Transbank\WebpayStandard\wsInitTransactionInput;
+use Freshwork\Transbank\WebpayStandard\wsInitTransactionOutput;
+use Freshwork\Transbank\WebpayStandard\wsTransactionDetail;
+use Freshwork\Transbank\WebpayStandard\wsTransactionDetailOutput;
 
 /**
  * Class WebpayNormal
  * @package Freshwork\Transbank\WebpayNormal
  */
-class WebpayNormal extends TransbankWebService
+class WebpayStandardWebService extends TransbankWebService
 {
     /**
-     * @var
+     * Integration URL
      */
-    var $soapClient;
+    const INTEGRATION_WSDL  = 'https://webpay3gint.transbank.cl/WSWebpayTransaction/cxf/WSWebpayService?wsdl';
+
+    /**
+     * Production URL
+     */
+    const PRODUCTION_WSDL   = 'https://webpay3g.transbank.cl/WSWebpayTransaction/cxf/WSWebpayService?wsdl';
+
     /**
      * @var array
      */
@@ -47,30 +53,24 @@ class WebpayNormal extends TransbankWebService
     ];
 
     /**
-     * Integration URL
-     */
-    const INTEGRATION_WSDL  = 'https://tbk.orangepeople.cl/WSWebpayTransaction/cxf/WSWebpayService?wsdl';
-
-    /**
-     * Production URL
-     */
-    const PRODUCTION_WSDL   = 'https://webpay3g.transbank.cl/WSWebpayTransaction/cxf/WSWebpayService?wsdl';
-
-    /**
+     * Método que permite iniciar una transacción de pago Webpay.
+     *
      * @param wsInitTransactionInput $initTransactionInput
-     * @return mixed
+     * @return initTransactionResponse
      */
     function initTransaction(wsInitTransactionInput $initTransactionInput)
     {
         $initInscription = new initTransaction();
         $initInscription->wsInitTransactionInput = $initTransactionInput;
 
-        return $this->callSoapMethod('initInscription', $initInscription);
+        return $this->callSoapMethod('initTransaction', $initInscription);
     }
 
     /**
+     * Método que permite obtener el resultado de la transacción y los datos de la misma.
+     *
      * @param string $token
-     * @return mixed
+     * @return getTransactionResultResponse
      */
     function getTransactionResult($token)
     {
@@ -81,8 +81,10 @@ class WebpayNormal extends TransbankWebService
     }
 
     /**
+     * Método que permite informar a Webpay la correcta recepción del resultado de la transacción.
+     *
      * @param string $token
-     * @return mixed
+     * @return acknowledgeTransactionResponse
      */
     function acknowledgeTransaction($token)
     {

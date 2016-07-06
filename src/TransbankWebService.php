@@ -40,7 +40,7 @@ class TransbankWebService
         $this->certificationBag = $certificationBag;
 
         $this->soapClient = new TransbankSoap($url, [
-            "classmap" => WebpayOneClickWebService::$classmap,
+            "classmap" => static::$classmap,
             "trace" => true,
             "exceptions" => true
         ]);
@@ -139,9 +139,9 @@ class TransbankWebService
         if ($url) return $url;
 
         if ($certificationBag->getEnvironment() == CertificationBag::PRODUCTION) {
-            return WebpayOneClickWebService::PRODUCTION_WSDL;
+            return static::PRODUCTION_WSDL;
         }
 
-        return WebpayOneClickWebService::INTEGRATION_WSDL;
+        return static::INTEGRATION_WSDL;
     }
 }

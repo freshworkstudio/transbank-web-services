@@ -1,7 +1,6 @@
 <?php
-namespace Freshwork\Transbank\WebpayNormal;
+namespace Freshwork\Transbank\WebpayPatPass;
 
 class acknowledgeTransactionResponse
-
 {
 }

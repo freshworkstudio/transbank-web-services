@@ -15,17 +15,24 @@ class RedirectorHelper
     /**
      * @var string
      */
-    public $title = 'Redireccionando a Webpay...';
+    static $title = 'Redireccionando a Webpay...';
 
     /**
      * Get the basic form a script to redirect the user for one click
-     * @param oneClickInscriptionOutput $initInscriptionResponse
+     * @param string $url
+     * @param string $token
+     * @param string $field_name
      * @return string
      */
-    public function getOneClickRedirectHtml(oneClickInscriptionOutput $initInscriptionResponse)
+    public static function redirectHTML($url, $token = '', $field_name = 'TBK_TOKEN')
     {
-        $response = $initInscriptionResponse;
-        return $this->addHtmlWrapper($this->getForm($response->urlWebpay, $response->token));
+        if (!$token) $token = $_POST['token_ws'];
+        return self::addHtmlWrapper(self::getForm($url, $token, $field_name));
+    }
+
+    public static function redirectBackNormal($url, $token = '', $field_name = 'token_ws')
+    {
+        return self::redirectHTML($url, $token, $field_name);
     }
 
     /**
@@ -34,12 +41,12 @@ class RedirectorHelper
      * @param $formHtml
      * @return string
      */
-    public function addHtmlWrapper($formHtml)
+    public static function addHtmlWrapper($formHtml)
     {
         return
 '<html>
     <head>
-        <title>' . $this->title . '</title>
+        <title>' . self::$title . '</title>
     </head>
     <body>
         ' . $formHtml . '
@@ -53,13 +60,13 @@ class RedirectorHelper
      * @param string $token
      * @return string
      */
-    public function getForm($urlWebpay, $token)
+    public static function getForm($url, $token, $field_name)
     {
         $rand = uniqid();
 
         return '
-        <form action="' . $urlWebpay . '" id="webpay-form-' . $rand . '" method="POST">
-            <input type="hidden" name="TBK_TOKEN" value="' . $token . '" />
+        <form action="' . $url . '" id="webpay-form-' . $rand . '" method="POST">
+            <input type="hidden" name="' . $field_name . '" value="' . $token . '" />
         </form>
 
         <script>document.getElementById("webpay-form-' . $rand . '").submit();</script>';

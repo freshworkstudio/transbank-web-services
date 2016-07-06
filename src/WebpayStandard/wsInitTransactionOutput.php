@@ -1,5 +1,5 @@
 <?php
-namespace Freshwork\Transbank\WebpayNormal;
+namespace Freshwork\Transbank\WebpayStandard;
 
 class wsInitTransactionOutput
 

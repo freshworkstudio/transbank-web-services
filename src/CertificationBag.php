@@ -13,12 +13,12 @@ class CertificationBag
     /**
      * Transbank integration environment
      */
-    const INTEGRATION = 0;
+    const INTEGRATION = 'integration';
 
     /**
      * Transbank production environment
      */
-    const PRODUCTION = 1;
+    const PRODUCTION = 'production';
 
     /**
      * @var string
@@ -48,13 +48,14 @@ class CertificationBag
     {
         if ($server_certificate === null)
         {
-            $server_certificate = dirname(__FILE__) . '/certs/transbank.crt';
+            $server_certificate = dirname(__FILE__) . '/certs/transbank.pem';
         }
         $this->client_private_key = $client_private_key;
         $this->client_certificate = $client_certificate;
         $this->server_certificate = $server_certificate;
         $this->environment = $environment;
     }
+
 
     /**
      * @return mixed

@@ -1,8 +1,7 @@
 <?php
-namespace Freshwork\Transbank\WebpayNormal;
+namespace Freshwork\Transbank\WebpayPatPass;
 
 class wsTransactionDetail
-
 {
     var $sharesAmount; //decimal
     var $sharesNumber; //int

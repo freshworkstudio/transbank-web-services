@@ -1,8 +1,7 @@
 <?php
-namespace Freshwork\Transbank\WebpayNormal;
+namespace Freshwork\Transbank\WebpayPatPass;
 
 class wsTransactionDetailOutput
-
 {
     var $authorizationCode; //string
     var $paymentTypeCode; //string

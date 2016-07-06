@@ -2,7 +2,7 @@
 
 namespace Freshwork\Transbank;
 
-
+use Freshwork\Transbank\WebpayStandard\WebpayStandardWebService;
 use Freshwork\Transbank\WebpayOneClick\WebpayOneClickWebService;
 
 /**
@@ -17,27 +17,30 @@ class TransbankServiceFactory
      * @param string|null $wsdlUrl
      * @return WebpayOneClick
      */
-    static public function createOneClick(CertificationBag $certificationBag, $wsdlUrl = null)
+    static public function oneclick(CertificationBag $certificationBag, $wsdlUrl = null)
     {
         $service = new WebpayOneClickWebService($certificationBag, $wsdlUrl);
         return new WebpayOneClick($service);
     }
 
+
     /**
-     * Create Web
-     * @param string $client_private_key
-     * @param string $client_certificate
-     * @param bool $production_environment
-     * @param string|null $wsdlUrl
-     * @return WebpayOneClick
+     * @param CertificationBag $certificationBag
+     * @return WebpayWebService
      */
-    static public function createOneClickWith($client_private_key, $client_certificate, $production_environment = false, $wsdlUrl = null)
+    static public function patpass(CertificationBag $certificationBag, $wsdlUrl = null) {
+        $service = new WebpayStandardWebService($certificationBag, $wsdlUrl);
+        return new WebpayPatPass($service);
+    }
+
+    /**
+     * @param CertificationBag $certificationBag
+     * @param null $wsdlUrl
+     * @return WebpayWebService
+     */
+    public static function normal(CertificationBag $certificationBag, $wsdlUrl = null)
     {
-        $env = ($production_environment) ? CertificationBag::PRODUCTION : CertificationBag::INTEGRATION;
-        $certificationBag = new CertificationBag($client_private_key, $client_certificate, null, $env);
-
-        $service = new WebpayOneClickWebService($certificationBag, $wsdlUrl);
-
-        return new WebpayOneClick($service);
+        $service = new WebpayStandardWebService($certificationBag, $wsdlUrl);
+        return new WebpayNormal($service);
     }
 }

@@ -44,7 +44,6 @@ class WebpayOneClick
         $initInscriptionInput->username = $username;
         $initInscriptionInput->email = $email;
         $initInscriptionInput->responseURL = $responseURL;
-
         return $this->service->initInscription($initInscriptionInput)->return;
     }
 
@@ -52,14 +51,16 @@ class WebpayOneClick
      * Permite finalizar el proceso de inscripción del tarjetahabiente en Oneclick. Entre otras cosas, retorna el identificador del usuario en Oneclick, el cual será utilizado para realizar las transacciones de pago.
      * Una vez terminado el flujo de inscripción en Transbank el usuario es enviado a la URL de fin de inscripción que definió el comercio. En ese instante el comercio debe llamar a finishInscription.
      *
-     * @param string $inscriptionToken Token received on the responseURL defined on initInscription
+     * @param string $token Token received on the responseURL defined on initInscription
      *
      * @return WebpayOneClick\oneClickFinishInscriptionOutput
      */
-    public function finishInscription($inscriptionToken)
+    public function finishInscription($token = null)
     {
+        if (!$token) $token = $_POST['TBK_TOKEN'];
+
         $finishInscriptionInput = new oneClickFinishInscriptionInput();
-        $finishInscriptionInput->token = $inscriptionToken;
+        $finishInscriptionInput->token = $token;
 
         return $this->service->finishInscription($finishInscriptionInput)->return;
     }
