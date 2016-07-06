@@ -177,6 +177,9 @@ $response = $oneClick->codeReverseOneClick($buyOrder);
 $response = $oneClick->removeUser($userToken, $username);
 ```
 
+#PatPass
+Coming soon. It's technically possible to implement with this package right now using `WebpayPatPass` class, but it still need some adjustments to be easier to implement.
+
 
 ## Advanced Usage
 Este paquete ofrece una clase `WebpayOneClick` (recomendado) ó  `WebpayOneClickWebService` para interactuar con el Web Service.
