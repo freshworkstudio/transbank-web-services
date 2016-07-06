@@ -21,19 +21,23 @@ use Freshwork\Transbank\RedirectorHelper;
 include 'vendor/autoload.php';
 
 //You always need to create a certificationBag where you put your private_key and certificate. This lines uses the integration certificates for OneClick that comes bundled into the package.
+//Siempre necesitas un certificationBag, que es como una bolsa donde colocas los certificados necesarios (private key, certificado comercio, certificado tbk y defines el ambiente)
 $certificationBag = CertificationBagFactory::integrationOneClick();
 
 //OneClick Instance
 $oneClick = TransbankServiceFactory::oneclick($certificationBag);
 
 //Response from Transbank (token & url to redirect the user)
+//Si todo sale bien, respuesta de transbank trae token y url a donde dirigir al usuario.
 $response = $oneClick->initInscription('username', 'gonzalo@freshworkstudio.com', 'http://test.dev/tbkresponse');
 
 //Generates a HTML Form and a script tag that sends the form immediately. You need to pass the url and the token.
+//Esta clase toma el token y la url, y genera el html de un formulario POST que se envía inmediatamente por javascript. Puedes hacerlo tu, pero aquí lo tienes listo.
 echo RedirectorHelper::redirectHTML($response->urlWebpay, $response->token);
 ```
 ### In production
 Just change this line
+
 Para que funcione en producción en vez de integración, solo debes cambiar esta línea
 ``` php
 $certificationBag = CertificationBagFactory::production('/path/to/private.key', '/path/to/certificate.crt');
