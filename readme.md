@@ -9,7 +9,8 @@ composer require freshwork/transbank
 #QuickStart
 
 ## Webpay OneClick on Integration Environment
-Este ejemplo ejecuta el método `initInscription` de WebPay One Click.
+Este ejemplo ejecuta el método `initInscription` de WebPayOneClick.
+This method executes `initInscription` for WebpayOneClick
 ```php
 <?php
 
@@ -33,6 +34,7 @@ echo RedirectorHelper::redirectHTML($response->urlWebpay, $response->token);
 ```
 ### In production
 Just change this line
+Para que funcione en producción en vez de integración, solo debes cambiar esta línea
 ``` php
 $certificationBag = CertificationBagFactory::production('/path/to/private.key', '/path/to/certificate.crt');
 
@@ -43,7 +45,7 @@ If the `CertificationBag` is setted on `CertificationBag::PRODUCTION`, the under
 
 ## WebService Normal
 Transacción normal con Webpay. (Pago tarjeta de crédito y débito)
-Webpay Normal transaction.
+Webpay Normal transaction. (Debit and credit card)
 ``` php
 <?php
 
