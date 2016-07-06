@@ -34,11 +34,13 @@ echo RedirectorHelper::redirectHTML($response->urlWebpay, $response->token);
 ### In production
 Just change this line
 ``` php
-	$certificationBag = CertificationBagFactory::production('/path/to/private.key', '/path/to/certificate.crt');
+$certificationBag = CertificationBagFactory::production('/path/to/private.key', '/path/to/certificate.crt');
 
 //OR
 $certificationBag = new CertificationBag('/path/to/private.key', '/path/to/certificate.crt', null, CertificationBag::PRODUCTION);
 ```
+If the `CertificationBag` is setted on `CertificationBag::PRODUCTION`, the underlying classes (`WebpayNormal`, `WebpayOneClick`, etc) uses the production url endpoints of the WebService automatically.
+
 ## WebService Normal
 Transacción normal con Webpay. (Pago tarjeta de crédito y débito)
 Webpay Normal transaction.
