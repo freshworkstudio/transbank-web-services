@@ -12,7 +12,7 @@ composer require freshwork/transbank
 
 #Index
 
-[Transacción Normal](#one-click) | [Webpay OneClick](#webservice-normal)  | [Webpay PatPass](#patpass)
+[Transacción Normal](#webservice-normal) | [Webpay OneClick](#one-click)  | [Webpay PatPass](#patpass)
 #QuickStart
 
 
