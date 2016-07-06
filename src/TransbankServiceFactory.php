@@ -1,5 +1,4 @@
 <?php
-
 namespace Freshwork\Transbank;
 
 use Freshwork\Transbank\WebpayStandard\WebpayStandardWebService;

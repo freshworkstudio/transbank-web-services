@@ -1,5 +1,4 @@
 <?php
-
 namespace Freshwork\Transbank\WebpayOneClick;
 
 use Freshwork\Transbank\CertificationBag;
