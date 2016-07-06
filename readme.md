@@ -14,6 +14,7 @@ composer require freshwork/transbank
 
 ## Webpay OneClick on Integration Environment
 Este ejemplo ejecuta el método `initInscription` de WebPayOneClick.
+
 This method executes `initInscription` for WebpayOneClick
 ```php
 <?php
@@ -53,6 +54,7 @@ If the `CertificationBag` is setted on `CertificationBag::PRODUCTION`, the under
 
 ## WebService Normal
 Transacción normal con Webpay. (Pago tarjeta de crédito y débito)
+
 Webpay Normal transaction. (Debit and credit card)
 ``` php
 <?php
