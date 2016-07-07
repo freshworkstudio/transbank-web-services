@@ -4,5 +4,8 @@ namespace Freshwork\Transbank;
 
 class WebpayPatPass extends WebpayWebService
 {
-    //@TODO: Implement custm methods to be more friendly
+    public function init($returnURL, $finalURL, $sessionId = null)
+    {
+        return $this->initTransaction($returnURL, $finalURL, $sessionId, self::PATPASS);
+    }
 }

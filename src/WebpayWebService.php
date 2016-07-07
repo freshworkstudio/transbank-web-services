@@ -22,7 +22,7 @@ class WebpayWebService
 
     const TIENDA_MALL = 'TR_MALL_WS';
 
-    const PATPASS = 'TRX_NORMAL_WS_WPM';
+    const PATPASS = 'TR_NORMAL_WS_WPM';
 
     /**
      * @var WebpayStandardWebService

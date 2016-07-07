@@ -34,8 +34,8 @@ class CertificationBagFactory
      */
     public static function integrationPatPass()
     {
-        $private_key = dirname(__FILE__) . '/certs/webpay-patpass-integration/597020000541.key';
-        $client_certificate = dirname(__FILE__) . '/certs/webpay-patpass-integration/597020000541.crt';
+        $private_key = dirname(__FILE__) . '/certs/webpay-patpass-integration/597020000548.key';
+        $client_certificate = dirname(__FILE__) . '/certs/webpay-patpass-integration/597020000548.crt';
 
         return new CertificationBag($private_key, $client_certificate, null, CertificationBag::INTEGRATION);
     }
