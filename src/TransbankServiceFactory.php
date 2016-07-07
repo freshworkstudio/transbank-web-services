@@ -25,7 +25,7 @@ class TransbankServiceFactory
 
     /**
      * @param CertificationBag $certificationBag
-     * @return WebpayWebService
+     * @return WebpayPatPass
      */
     static public function patpass(CertificationBag $certificationBag, $wsdlUrl = null) {
         $service = new WebpayStandardWebService($certificationBag, $wsdlUrl);
@@ -35,11 +35,22 @@ class TransbankServiceFactory
     /**
      * @param CertificationBag $certificationBag
      * @param null $wsdlUrl
-     * @return WebpayWebService
+     * @return WebpayNormal
      */
     public static function normal(CertificationBag $certificationBag, $wsdlUrl = null)
     {
         $service = new WebpayStandardWebService($certificationBag, $wsdlUrl);
         return new WebpayNormal($service);
+    }
+
+    /**
+     * @param CertificationBag $certificationBag
+     * @param null $wsdlUrl
+     * @return WebpayMall
+     */
+    public static function mall(CertificationBag $certificationBag, $wsdlUrl = null)
+    {
+        $service = new WebpayStandardWebService($certificationBag, $wsdlUrl);
+        return new WebpayMall($service);
     }
 }

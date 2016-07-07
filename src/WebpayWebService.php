@@ -20,6 +20,8 @@ class WebpayWebService
 {
     const TIENDA_NORMAL = 'TR_NORMAL_WS';
 
+    const TIENDA_MALL = 'TR_MALL_WS';
+
     const PATPASS = 'TRX_NORMAL_WS_WPM';
 
     /**
@@ -102,23 +104,29 @@ class WebpayWebService
      * @param string $finalURL URL del comercio a la cual Webpay redireccionará posterior al voucher de éxito de Webpay.
      * @param string|null $sessionId Identificador de sesión, uso interno de comercio, este valor es
      * devuelto al final de la transacción.
-     *
      * @param string $transactionType
+     * @param null $buyOrder
+     * @param null $commerceCode
+     *
      * @return WebpayStandard\wsInitTransactionOutput
      * @throws EmptyTransactionException
      */
-    public function initTransaction($returnURL, $finalURL, $sessionId = null, $transactionType = WebpayWebService::TIENDA_NORMAL)
+    public function initTransaction($returnURL, $finalURL, $sessionId = null, $transactionType = self::TIENDA_NORMAL, $buyOrder = null, $commerceCode = null)
     {
         $this->validateTransactionDetails();
 
         $input = new wsInitTransactionInput();
+
+        $this->validateParametersBasedOnTransactionType($transactionType, $buyOrder, $commerceCode, $input);
+
         $input->sessionId = $sessionId;
         $input->returnURL = $returnURL;
         $input->finalURL = $finalURL;
         $input->wSTransactionType = $transactionType;
         $input->transactionDetails = $this->transactionDetails;
         $input->transactionDetails;
-        $input->wPMDetail = $this->inscriptionInformation;
+
+
         return $this->service->initTransaction($input)->return;
     }
 
@@ -157,6 +165,37 @@ class WebpayWebService
     {
         if (count($this->transactionDetails) <= 0) {
             throw new EmptyTransactionException('You have to add at least one detail to the transaction with ->addDetail(...)');
+        }
+    }
+
+    /**
+     * @param $transactionType
+     * @param $buyOrder
+     * @param $commerceCode
+     * @param $input
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function validateParametersBasedOnTransactionType($transactionType, $buyOrder, $commerceCode, $input)
+    {
+        if ($transactionType == self::TIENDA_MALL) {
+            if (!$commerceCode) {
+                $commerceCode = SecurityHelper::getCommonName($this->service->getCertificationBag()->getClientCertificate());
+            }
+            if (!$buyOrder) {
+                throw new \InvalidArgumentException('Mall transactions needs a buyOrder defined for the transaction itself and a buyOrder per transactionDetail. Please add a buyOrder on initTransaction()');
+            }
+
+            $input->buyOrder = $buyOrder;
+            $input->commerceId = $commerceCode;
+        }
+
+        if ($transactionType == self::PATPASS) {
+            if (!$this->inscriptionInformation) {
+                throw new \InvalidArgumentException('Patpass transactions needs inscriptionInformation to perform the contract with the user. You need to call ->addInscriptionInfo(..) before ->initInscription().');
+            }
+
+            $input->wPMDetail = $this->inscriptionInformation;
         }
     }
 }
