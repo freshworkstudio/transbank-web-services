@@ -196,10 +196,52 @@ $response = $oneClick->removeUser($userToken, $username);
 ```
 
 #PatPass
-Coming soon. It's technically possible to implement with this package right now using `WebpayPatPass` class, but it still need some adjustments to be easier to implement.
+Una transacción de autorización de PatPass by Webpay corresponde a una solicitud de inscripción de pago recurrente con tarjetas de crédito, en donde el primer pago se resuelve al instante, y los subsiguientes quedan programados para ser ejecutados mes a mes. PatPass by Webpay cuenta con fecha de caducidad o termino, la cual debe ser proporcionada junto a otros datos para esta transacción. La transacción puede ser realizada en Dólares y Pesos, para este último caso es posible enviar el monto en UF y Webpay realizará la conversión a pesos al momento de realizar el cargo al tarjetahabiente.
 
 
-## Advanced Usage
+El proceso de Patpass es el mismo que en una transacción Normal o Mall, pero aca se debe completar la información de la inscripción `addInscriptionInfo`  antes de llamar al método `init`
+Notar que esta clase se recomienda el uso del metodo `init` y no `initInscription` .
+
+This process is similar to the normal transaction and mall transaction flow, but you have to call `addInscriptionInfo` before executing `init` call.
+
+### init
+```php
+<?php
+
+use Freshwork\Transbank\CertificationBagFactory;
+use Freshwork\Transbank\TransbankServiceFactory;
+use Freshwork\Transbank\RedirectorHelper;
+
+include 'vendor/autoload.php';
+
+$bag = CertificationBagFactory::integrationPatPass();
+
+$patpass = TransbankServiceFactory::patpass($bag);
+
+$patpass->addTransactionDetail(1000, '50'); //Amount & BuyOrder
+
+//Id del servicio a contratar, Rut cliente, Nombre, Apellido, Segundo apellido, Email cliente, Celular Cliente, Fecha termino contrato, Email comercio
+$patpass->addInscriptionInfo('serviceID', '11.111.111-5', 'Gonzalo', 'De Spirito', 'Zúñiga', 'gonzalo@email.com',
+    '987654321', '2017-12-01', 'contacto@comercio.cl');
+
+$response = $patpass->init('http://test.dev/response', 'http://test.dev/thanks');
+echo RedirectorHelper::redirectHTML($response->url, $response->token);
+```
+
+### response
+```php
+
+$response = $patpass->getTransactionResult();
+//If everything goes well (check stock, check amount, etc) you can call acknowledgeTransaction to accept the payment. Otherwise, the transaction is reverted in 30 seconds.
+//Si todo está bien, peudes llamar a acknowledgeTransaction. Si no se llama a este método, la transaccion se reversará en 30 segundos.
+$plus->acknowledgeTransaction();
+
+//Redirect back to Webpay Flow and then to the thanks page
+return RedirectorHelper::redirectBackNormal($response->urlRedirection);
+```
+
+
+# Advanced Usage of the package
 Este paquete ofrece una clase `WebpayOneClick` (recomendado) ó  `WebpayOneClickWebService` para interactuar con el Web Service.
 
 This package offers a  `WebpayOneClick` class (recommended) or a `WebpayOneClickWebService` class to implement the web service easily.
