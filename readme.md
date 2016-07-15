@@ -12,7 +12,8 @@ composer require freshwork/transbank
 
 #Index
 
-[Transacción Normal](#webservice-normal) | [Webpay OneClick](#one-click)  | [Webpay PatPass](#patpass) | [Logs](#logs)  | [CertificationBag](#CertificationBag) 
+[Transacción Normal](#webservice-normal) | [Webpay OneClick](#one-click)  | [Webpay PatPass](#patpass) | [Logs](#logs)  | [CertificationBag](#certificationbag) | [Test Data / Datos de prueba](#test-data) 
+
 #QuickStart
 
 
@@ -141,6 +142,8 @@ exit; //el usuario es enviado a webpay para aprobar la inscripción de su tarjet
 `var_dump($response): `
 
 ![sp dev test](https://cloud.githubusercontent.com/assets/1103494/16324748/404d6e12-3985-11e6-859b-6ae3f049f4c9.png)
+
+![pago seguro webpay](https://cloud.githubusercontent.com/assets/1103494/16889963/7272ee14-4ab8-11e6-8638-9a0d8cbcf502.png)
 
 ### finishInscription
 El usuario, tras finalizar el proceso en Webpay, será redirigido a http://misitio.cl/webpayresponse con un token enviado por POST.
@@ -332,7 +335,33 @@ $bag->setEnvironment(CertificationBag::INTEGRATION);
 $oneClickService = new WebpayOneClickWebService($bag);
 ```
 
+## Test Data
+Estos son los datos de tarjetas para que puedas probar en el ambiente de integración. 
 
+Just for the integration environment: 
+
+![image](https://cloud.githubusercontent.com/assets/1103494/16890030/f125835c-4ab8-11e6-8bf9-847c847085a7.png)
+
+#####VISA CREDIT CARD (WILL BE APPROVED / SERÁ APROBADA)
+Number: 4051885600446623
+CVV: 123
+Year: any / cualquiera
+Month: any / cualquiera
+
+#####MASTERCARD CREDIT CARD (WILL BE DENIED / SERÁ DENEGADA)
+Number: 5186059559590568
+CVV: 123
+Year: any / cualquiera
+Month: any / cualquiera
+
+#####DEBIT CARD
+CardNumber: 12345678
+
+####BANK VIEW
+RUT: 11.111.111-1
+Password: 123
+
+![captura de pantalla 2016-07-15 a las 6 28 41 p m](https://cloud.githubusercontent.com/assets/1103494/16890148/fdcf065e-4ab9-11e6-8d1a-83b9f8537c5c.png)
 
 
 # Advanced Usage of the package
