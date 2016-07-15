@@ -1,10 +1,10 @@
 <?php
-
-
 namespace Freshwork\Transbank;
 
 
 use DOMDocument;
+use Freshwork\Transbank\Log\LoggerInterface;
+use Freshwork\Transbank\Log\LogHandler;
 use SoapClient;
 use WSSESoap;
 use XMLSecurityKey;
@@ -68,19 +68,28 @@ class TransbankSoap extends SoapClient {
      * @throws \Exception
      */
     function __doRequest($request, $location, $saction, $version, $one_way = NULL) {
-        $doc = new DOMDocument('1.0');
-        $doc->loadXML($request);
-        $objWSSE = new WSSESoap($doc);
-        $objKey = new XMLSecurityKey(XMLSecurityKey::RSA_SHA1,array('type' =>
+	    LogHandler::log(['location' => $location, 'xml' => $request], LoggerInterface::LEVEL_INFO, 'unsigned_request_raw');
+
+	    $doc = new DOMDocument('1.0');
+	    $doc->loadXML($request);
+	    $objWSSE = new WSSESoap($doc);
+	    $objKey = new XMLSecurityKey(XMLSecurityKey::RSA_SHA1,array('type' =>
             'private'));
-        $objKey->loadKey($this->getPrivateKey(), TRUE);
-        $options = array("insertBefore" => TRUE); $objWSSE->signSoapDoc($objKey, $options); $objWSSE->addIssuerSerial($this->getCertificate());
-        $objKey = new XMLSecurityKey(XMLSecurityKey::AES256_CBC); $objKey->generateSessionKey();
-        $retVal = parent::__doRequest($objWSSE->saveXML(), $location, $saction,
-            $version);
-        $doc = new DOMDocument();
-        $doc->loadXML($retVal);
-        return $doc->saveXML();
+	    $objKey->loadKey($this->getPrivateKey(), TRUE);
+	    $options = array("insertBefore" => TRUE);
+	    $objWSSE->signSoapDoc($objKey, $options);
+	    $objWSSE->addIssuerSerial($this->getCertificate());
+	    $objKey = new XMLSecurityKey(XMLSecurityKey::AES256_CBC); $objKey->generateSessionKey();
+
+	    $signed_request = $objWSSE->saveXML();
+	    LogHandler::log(['location' => $location, 'xml' => $signed_request], LoggerInterface::LEVEL_INFO, 'signed_request_raw');
+
+	    $retVal = parent::__doRequest($signed_request, $location, $saction,
+            $version, $one_way);
+	    $doc = new DOMDocument();
+	    $doc->loadXML($retVal);
+	    LogHandler::log(['location' => $location, 'xml' => $retVal], LoggerInterface::LEVEL_INFO, 'response_raw');
+	    return $doc->saveXML();
     }
 
 

@@ -16,7 +16,7 @@ use Freshwork\Transbank\WebpayOneClick\initInscriptionResponse;
  * Class WebpayPlus
  * @package Freshwork\Transbank
  */
-class WebpayWebService
+class WebpayWebService extends TransbankService
 {
     const TIENDA_NORMAL = 'TR_NORMAL_WS';
 

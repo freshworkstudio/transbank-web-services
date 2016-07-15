@@ -3,14 +3,16 @@ namespace Freshwork\Transbank;
 
 
 use Freshwork\Transbank\Exceptions\InvalidCertificateException;
+use Freshwork\Transbank\Log\LogHandler;
 use Freshwork\Transbank\WebpayOneClick\WebpayOneClickWebService;
 use SoapValidation;
+use Freshwork\Transbank\Log\LoggerInterface;
 
 /**
  * Class TransbankWebService
  * @package Freshwork\Transbank
  */
-class TransbankWebService
+abstract class TransbankWebService
 {
     /**
      * @var TransbankSoap
@@ -27,11 +29,12 @@ class TransbankWebService
      */
     protected static $classmap = [];
 
-    /**
-     * WebpayOneClick constructor.
-     * @param CertificationBag $certificationBag
-     * @param string $url
-     */
+	/**
+	 * WebpayOneClick constructor.
+	 * @param CertificationBag $certificationBag
+	 * @param string $url
+	 * @param LoggerInterface $logger
+	 */
     function __construct(CertificationBag $certificationBag, $url = null)
     {
         $url = $this->getWsdlUrl($certificationBag, $url);
@@ -64,7 +67,7 @@ class TransbankWebService
         $this->certificationBag = $certificationBag;
     }
 
-    /**
+	/**
      * @return TransbankSoap
      */
     public function getSoapClient()
@@ -84,7 +87,10 @@ class TransbankWebService
 
         if ($validation !== true)
         {
-            throw new InvalidCertificateException('The Transbank response fails on the certificate signature validation.');
+        	$msg = 'The Transbank response fails on the certificate signature validation. Response doesn\t comes from Transbank';
+        	LogHandler::log($msg, LoggerInterface::LEVEL_ERROR);
+
+            throw new InvalidCertificateException($msg);
         }
     }
 
@@ -99,16 +105,25 @@ class TransbankWebService
         $args = func_get_args();
         array_shift($args);
 
-        //Call $this->getSoapClient()->$method($args[0], $arg[1]...)
-        $response = call_user_func_array([$this->getSoapClient(), $method], $args);
+	    LogHandler::log($args, LoggerInterface::LEVEL_INFO, 'request_object');
 
-        //Validate the signature of the response
+	    try{
+		    //Call $this->getSoapClient()->$method($args[0], $arg[1]...)
+		    $response = call_user_func_array([$this->getSoapClient(), $method], $args);
+	    } finally {
+		    LogHandler::log($response,LoggerInterface::LEVEL_INFO, 'response_object');
+	    }
+
+	    //Validate the signature of the response
         $this->validateResponseCertificate();
+
+	    LogHandler::log("Response certificate validated successfully", LoggerInterface::LEVEL_INFO, 'response_certificate_validated');
+
         return $response;
     }
 
     /**
-     * This method allow you to call any method on
+     * This method allows you to call any method on the SoapClient
      * @param $name
      * @param array $arguments
      * @return mixed

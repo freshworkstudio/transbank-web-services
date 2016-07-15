@@ -12,7 +12,7 @@ composer require freshwork/transbank
 
 #Index
 
-[Transacción Normal](#webservice-normal) | [Webpay OneClick](#one-click)  | [Webpay PatPass](#patpass)
+[Transacción Normal](#webservice-normal) | [Webpay OneClick](#one-click)  | [Webpay PatPass](#patpass) | [Logs](#logs)  | [CertificationBag](#CertificationBag) 
 #QuickStart
 
 
@@ -120,9 +120,13 @@ This method starts the credit card inscription. It returns a token and an URL to
 Allows you to associate a credit card with a user of your application.
 
 ```php
-...
 use Freshwork\Transbank\TransbankServiceFactory;
 use Freshwork\Transbank\RedirectorHelper;
+
+$certificationBag = CertificationBagFactory::integrationOneClick();
+
+//OneClick Instance
+$oneClick = TransbankServiceFactory::oneclick($certificationBag);
 
 
 // $response: Freshwork\Transbank\WebpayOneClick\oneClickInscriptionOutput
@@ -239,6 +243,96 @@ $plus->acknowledgeTransaction();
 //Redirect back to Webpay Flow and then to the thanks page
 return RedirectorHelper::redirectBackNormal($response->urlRedirection);
 ```
+## Logs
+Para el proceso de certificación con Transbank, muchas veces se solicita los logs de las transacciones realizadas.
+Por defecto, el sistema usa `Freshwork\Transbank\Log\VoidLogger` que no guarda ni imprime los logs que emite el paquete. No hace nada :)
+Puedes cambiar la configuración para usar `TransbankCertificactionLogger` o crear tu propia implementación de la
+interfaz `Freshwork\Transbank\Log\LoggerInterface`. 
+
+Transbank asks for your logs to certificate your project. By default, the package uses an useless 
+`Freshwork\Transbank\Log\VoidLogger`, but you can use `TransbankCertificactionLogger` or create your own
+implementation of `Freshwork\Transbank\Log\LoggerInterface` to generate some useful logs you can send. 
+```php
+use Freshwork\Transbank\TransbankServiceFactory;
+use Freshwork\Transbank\RedirectorHelper;
+use Freshwork\Transbank\Log\LoggerFactory;
+use Freshwork\Transbank\Log\TransbankCertificationLogger;
+
+//To use TransbankCertificationLogger, but you can pass any LoggerInterface implementation. Even your own.
+//After this line, any LogHandler::log(..) call will use this implementation. 
+LoggerFactory::setLogger(new TransbankCertificationLogger('/dir/to/save/logs'));
+
+$certificationBag = CertificationBagFactory::integrationOneClick();
+
+//OneClick Instance
+$oneClick = TransbankServiceFactory::oneclick($certificationBag);
+
+
+// $response: Freshwork\Transbank\WebpayOneClick\oneClickInscriptionOutput
+$response = $oneClick->initInscription('username', 'user@company.cl', 'http://misitio.cl/webpayresponse');
+
+//Devuelve el html un formulario <form> con los datos y un <script> que envia el formulario automáticamente.
+//It returns the html of a <form> and a <script> that submits the form immediately.
+echo RedirectorHelper::redirectHTML($response->urlWebpay, $response->token);
+
+exit; //el usuario es enviado a webpay para aprobar la inscripción de su tarjeta
+
+```
+Internamente, se generan varios logs, entre ellos un log con los datos de entrada al llamar aun método de soap, el xml generado, el xml recibido, el objeto recibido y errores por si falla la validación del certificado. 
+Si necesitas logear más información, puedes usar: 
+
+Internally, with every response/request generated, the clases generates a log. 
+If you need to log anything else, you can use `LogHandler::log`: 
+
+`LogHandler::log($data, $level = LoggerInterface::LEVEL_INFO, $type = null)`
+```php
+use Freshwork\Transbank\Log\LogHandler;
+use Freshwork\Transbank\Log\LoggerInterface;
+
+LogHandler::log('Comenzando proceso de pago', LoggerInterface::LEVEL_INFO); 
+LogHandler::log('Error!!', LoggerInterface::LEVEL_ERROR, 'mensajes_internos'); 
+LogHandler::log(['datos' => 'más datos', 'otros_datos']); 
+```
+
+## CertificationBag
+
+```php
+use Freshwork\Transbank\CertificationBag;
+
+//Para desarrollo
+$bag = new CertificationBag(
+	'path/to/cert/597020000000.key',
+	'path/to/cert/597020000000.crt',
+	null,
+	CertificationBag::INTEGRATION
+);
+
+//Producción
+$bag = new CertificationBag(
+	'path/to/cert/597020000001.key',
+	'path/to/cert/597020000001.crt',
+	null,
+	CertificationBag::PRODUCTION
+);
+```
+Ya teniendo el `CertificationBag`,  se puede instanciar la clase  `WebpayOneClickWebService`
+
+Once you have a  CertificationBag` instance, you can create a `WebpayOneClickWebService`
+
+```php
+use Freshwork\Transbank\CertificationBag;
+use Freshwork\Transbank\CertificationBag;
+
+$bag = new CertificationBag(
+    '/path/to/597020000000.key',
+	'/path/to/597020000000.crt'
+);
+$bag->setEnvironment(CertificationBag::INTEGRATION);
+
+$oneClickService = new WebpayOneClickWebService($bag);
+```
+
+
 
 
 # Advanced Usage of the package
@@ -282,10 +376,6 @@ $oneClick = TransbankServiceFactory::createOneClick($bag);
 //...
 ```
 
-
-
-
-
 ### `WebpayOneClickWebService` (más completo)
 El otro método para interactuar con el webservice es la clase `WebpayOneClickWebService` .  `WebpayOneClick` implementa todos estos métodos internamente.
 
@@ -295,43 +385,6 @@ You have another way: `WebpayOneClickWebService`. Actually, `WebpayOneClick` imp
 
 To instantiate this class, you have to set the  environment and certificates on which your are going to work. To simplify this process, we implemented a `CertificationBag` class. Imagine this class, as a bag where you put the private_key, the certificate and where you define your environment (integration, production). Remember that you need different certificates based on your environment.
 
-### CertificationBag
-
-```php
-use Freshwork\Transbank\CertificationBag;
-
-//Para desarrollo
-$bag = new CertificationBag(
-	'path/to/cert/597020000000.key',
-	'path/to/cert/597020000000.crt',
-	null,
-	CertificationBag::INTEGRATION
-);
-
-//Producción
-$bag = new CertificationBag(
-	'path/to/cert/597020000001.key',
-	'path/to/cert/597020000001.crt',
-	null,
-	CertificationBag::PRODUCTION
-);
-```
-Ya teniendo el `CertificationBag`,  se puede instanciar la clase  `WebpayOneClickWebService`
-
-Once you have a  CertificationBag` instance, you can create a `WebpayOneClickWebService`
-
-```php
-use Freshwork\Transbank\CertificationBag;
-use Freshwork\Transbank\CertificationBag;
-
-$bag = new CertificationBag(
-    '/path/to/597020000000.key',
-	'/path/to/597020000000.crt'
-);
-$bag->setEnvironment(CertificationBag::INTEGRATION);
-
-$oneClickService = new WebpayOneClickWebService($bag);
-```
 
 #### example
 As you can see it's a little bit more complicated, but but it's more OOP.

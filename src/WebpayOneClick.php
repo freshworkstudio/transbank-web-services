@@ -12,7 +12,7 @@ use Freshwork\Transbank\WebpayOneClick\WebpayOneClickWebService;
  * Class WebpayOneClick
  * @package Freshwork\Transbank
  */
-class WebpayOneClick
+class WebpayOneClick extends TransbankService
 {
     /**
      * @var WebpayOneClickWebService
