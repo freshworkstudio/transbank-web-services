@@ -110,8 +110,10 @@ abstract class TransbankWebService
 	    try{
 		    //Call $this->getSoapClient()->$method($args[0], $arg[1]...)
 		    $response = call_user_func_array([$this->getSoapClient(), $method], $args);
-	    } finally {
 		    LogHandler::log($response,LoggerInterface::LEVEL_INFO, 'response_object');
+	    } catch (\SoapFault $e) {
+		    LogHandler::log('SOAP ERROR (' . $e->faultcode . '): ' . $e->getMessage(), LoggerInterface::LEVEL_ERROR, 'error');
+		    throw new \SoapFault($e->faultcode, $e->faultstring);
 	    }
 
 	    //Validate the signature of the response
