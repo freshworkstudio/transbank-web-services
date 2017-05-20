@@ -2,9 +2,6 @@
 namespace Freshwork\Transbank;
 
 
-use Freshwork\Transbank\WebpayOneClick\initInscriptionResponse;
-use Freshwork\Transbank\WebpayOneClick\oneClickInscriptionOutput;
-
 /**
  * Class RedirectorHelper
  * @package Freshwork\Transbank

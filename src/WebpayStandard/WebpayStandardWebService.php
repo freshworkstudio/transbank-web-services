@@ -1,21 +1,7 @@
 <?php
 namespace Freshwork\Transbank\WebpayStandard;
 
-use Freshwork\Transbank\TransbankSoap;
 use Freshwork\Transbank\TransbankWebService;
-use Freshwork\Transbank\WebpayStandard\acknowledgeTransaction;
-use Freshwork\Transbank\WebpayStandard\acknowledgeTransactionResponse;
-use Freshwork\Transbank\WebpayStandard\cardDetail;
-use Freshwork\Transbank\WebpayStandard\getTransactionResult;
-use Freshwork\Transbank\WebpayStandard\getTransactionResultResponse;
-use Freshwork\Transbank\WebpayStandard\initTransaction;
-use Freshwork\Transbank\WebpayStandard\initTransactionResponse;
-use Freshwork\Transbank\WebpayStandard\transactionResultOutput;
-use Freshwork\Transbank\WebpayStandard\wpmDetailInput;
-use Freshwork\Transbank\WebpayStandard\wsInitTransactionInput;
-use Freshwork\Transbank\WebpayStandard\wsInitTransactionOutput;
-use Freshwork\Transbank\WebpayStandard\wsTransactionDetail;
-use Freshwork\Transbank\WebpayStandard\wsTransactionDetailOutput;
 
 /**
  * Class WebpayNormal

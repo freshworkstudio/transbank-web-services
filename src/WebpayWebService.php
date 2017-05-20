@@ -4,13 +4,10 @@ namespace Freshwork\Transbank;
 
 use Freshwork\Transbank\Exceptions\EmptyTransactionException;
 use Freshwork\Transbank\WebpayStandard\acknowledgeTransactionResponse;
-use Freshwork\Transbank\WebpayStandard\getTransactionResultResponse;
-use Freshwork\Transbank\WebpayStandard\initTransaction;
 use Freshwork\Transbank\WebpayStandard\WebpayStandardWebService;
 use Freshwork\Transbank\WebpayStandard\wpmDetailInput;
 use Freshwork\Transbank\WebpayStandard\wsInitTransactionInput;
 use Freshwork\Transbank\WebpayStandard\wsTransactionDetail;
-use Freshwork\Transbank\WebpayOneClick\initInscriptionResponse;
 
 /**
  * Class WebpayPlus

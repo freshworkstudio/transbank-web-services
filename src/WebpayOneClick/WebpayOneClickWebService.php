@@ -1,31 +1,7 @@
 <?php
 namespace Freshwork\Transbank\WebpayOneClick;
 
-use Freshwork\Transbank\CertificationBag;
-use Freshwork\Transbank\TransbankSoap;
 use Freshwork\Transbank\TransbankWebService;
-use Freshwork\Transbank\WebpayOneClick\authorize;
-use Freshwork\Transbank\WebpayOneClick\authorizeResponse;
-use Freshwork\Transbank\WebpayOneClick\baseBean;
-use Freshwork\Transbank\WebpayOneClick\codeReverseOneClick;
-use Freshwork\Transbank\WebpayOneClick\codeReverseOneClickResponse;
-use Freshwork\Transbank\WebpayOneClick\finishInscription;
-use Freshwork\Transbank\WebpayOneClick\finishInscriptionResponse;
-use Freshwork\Transbank\WebpayOneClick\initInscription;
-use Freshwork\Transbank\WebpayOneClick\initInscriptionResponse;
-use Freshwork\Transbank\WebpayOneClick\oneClickFinishInscriptionInput;
-use Freshwork\Transbank\WebpayOneClick\oneClickFinishInscriptionOutput;
-use Freshwork\Transbank\WebpayOneClick\oneClickInscriptionInput;
-use Freshwork\Transbank\WebpayOneClick\oneClickInscriptionOutput;
-use Freshwork\Transbank\WebpayOneClick\oneClickPayInput;
-use Freshwork\Transbank\WebpayOneClick\oneClickPayOutput;
-use Freshwork\Transbank\WebpayOneClick\oneClickRemoveUserInput;
-use Freshwork\Transbank\WebpayOneClick\oneClickReverseInput;
-use Freshwork\Transbank\WebpayOneClick\oneClickReverseOutput;
-use Freshwork\Transbank\WebpayOneClick\removeUser;
-use Freshwork\Transbank\WebpayOneClick\removeUserResponse;
-use Freshwork\Transbank\WebpayOneClick\reverse;
-use Freshwork\Transbank\WebpayOneClick\reverseResponse;
 
 /**
  * Class WebpayOneClick

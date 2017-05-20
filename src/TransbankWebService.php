@@ -4,7 +4,6 @@ namespace Freshwork\Transbank;
 
 use Freshwork\Transbank\Exceptions\InvalidCertificateException;
 use Freshwork\Transbank\Log\LogHandler;
-use Freshwork\Transbank\WebpayOneClick\WebpayOneClickWebService;
 use SoapValidation;
 use Freshwork\Transbank\Log\LoggerInterface;
 
@@ -97,7 +96,7 @@ abstract class TransbankWebService
     /**
      * @param $method
      * @return mixed
-     * @throws InvalidCertificateException
+     * @throws \SoapFault
      */
     protected function callSoapMethod($method)
     {
