@@ -1,4 +1,4 @@
-#Transbank WebServices SDK
+# Transbank WebServices SDK
 Librería para la integración de Webpay Plus, Webpay OneClick y Webpay Patpass. Esta librería es mantenida por Gonzalo De Spirito de [freshworkstudio.com](http://freshworkstudio.com) y [simplepay.cl](http://simplepay.cl).
 
 ![Freshwork Studio's Transbank SDK](https://cloud.githubusercontent.com/assets/1103494/16623124/b0082046-436a-11e6-870a-2e5f6dbd9ef8.jpg)
@@ -10,11 +10,11 @@ Librería para la integración de Webpay Plus, Webpay OneClick y Webpay Patpass.
 composer require freshwork/transbank
 ```
 
-#Index
+# Index
 
 [Transacción Normal](#webservice-normal) | [Webpay OneClick](#one-click)  | [Webpay PatPass](#patpass) | [Logs](#logs)  | [CertificationBag](#certificationbag) | [Test Data / Datos de prueba](#test-data) 
 
-#QuickStart
+# QuickStart
 
 
 ## Webpay OneClick on Integration Environment
@@ -99,7 +99,7 @@ $plus->acknowledgeTransaction();
 return RedirectorHelper::redirectBackNormal($response->urlRedirection);
 ```
 
-#One Click
+# One Click
 "La modalidad de pago Oneclick permite al tarjetahabiente realizar pagos en el comercio sin la necesidad de ingresar cada vez información de la tarjeta de crédito al momento de realizar la compra. El modelo de pago contempla un proceso previo de inscripción o enrolamiento del tarjetahabiente, a través del comercio, que desee utilizar el servicio. Este tipo de pago facilita la venta, disminuye el tiempo de la transacción y reduce los riesgos de ingreso erróneo de los datos del medio de pago."
 
 ## Background
@@ -202,7 +202,7 @@ $response = $oneClick->codeReverseOneClick($buyOrder);
 $response = $oneClick->removeUser($userToken, $username);
 ```
 
-#PatPass
+# PatPass
 Una transacción de autorización de PatPass by Webpay corresponde a una solicitud de inscripción de pago recurrente con tarjetas de crédito, en donde el primer pago se resuelve al instante, y los subsiguientes quedan programados para ser ejecutados mes a mes. PatPass by Webpay cuenta con fecha de caducidad o termino, la cual debe ser proporcionada junto a otros datos para esta transacción. La transacción puede ser realizada en Dólares y Pesos, para este último caso es posible enviar el monto en UF y Webpay realizará la conversión a pesos al momento de realizar el cargo al tarjetahabiente.
 
 
@@ -342,22 +342,22 @@ Just for the integration environment:
 
 ![image](https://cloud.githubusercontent.com/assets/1103494/16890030/f125835c-4ab8-11e6-8bf9-847c847085a7.png)
 
-#####VISA CREDIT CARD (WILL BE APPROVED / SERÁ APROBADA)
+##### VISA CREDIT CARD (WILL BE APPROVED / SERÁ APROBADA)
 Number: 4051885600446623
 CVV: 123
 Year: any / cualquiera
 Month: any / cualquiera
 
-#####MASTERCARD CREDIT CARD (WILL BE DENIED / SERÁ DENEGADA)
+##### MASTERCARD CREDIT CARD (WILL BE DENIED / SERÁ DENEGADA)
 Number: 5186059559590568
 CVV: 123
 Year: any / cualquiera
 Month: any / cualquiera
 
-#####DEBIT CARD
+##### DEBIT CARD
 CardNumber: 12345678
 
-####BANK VIEW
+#### BANK VIEW
 RUT: 11.111.111-1
 Password: 123
 
