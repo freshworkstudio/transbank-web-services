@@ -105,7 +105,7 @@ function canonical($tree, $element, $withcomments) {
     /* Create an array with namespace URIs as keys, and sort them */
     foreach ($arAtts AS $attnode) {
         if (array_key_exists($attnode->namespaceURI, $arNS) &&
-                ($arNS[$attnode->namespaceURI] == $attnode->prefix)) {
+            ($arNS[$attnode->namespaceURI] == $attnode->prefix)) {
             continue;
         }
         $prefix = $tree->lookupPrefix($attnode->namespaceURI);
@@ -336,9 +336,9 @@ class XMLSecurityKey {
     public function generateSessionKey() {
         $key = '';
         if (!empty($this->cryptParams['cipher']) && !empty($this->cryptParams['mode'])) {
-            $keysize = mcrypt_module_get_algo_key_size($this->cryptParams['cipher']);
+            $keysize = @mcrypt_module_get_algo_key_size($this->cryptParams['cipher']);
             /* Generating random key using iv generation routines */
-            if (($keysize > 0) && ($td = mcrypt_module_open(MCRYPT_RIJNDAEL_256, '', $this->cryptParams['mode'], ''))) {
+            if (($keysize > 0) && ($td = @mcrypt_module_open(MCRYPT_RIJNDAEL_256, '', $this->cryptParams['mode'], ''))) {
                 if ($this->cryptParams['cipher'] == MCRYPT_RIJNDAEL_128) {
                     $keysize = 16;
                     if ($this->type == XMLSecurityKey::AES256_CBC) {
@@ -348,9 +348,9 @@ class XMLSecurityKey {
                     }
                 }
                 while (strlen($key) < $keysize) {
-                    $key .= mcrypt_create_iv(mcrypt_enc_get_iv_size($td), MCRYPT_RAND);
+                    $key .= @mcrypt_create_iv(@mcrypt_enc_get_iv_size($td), MCRYPT_RAND);
                 }
-                mcrypt_module_close($td);
+                @mcrypt_module_close($td);
                 $key = substr($key, 0, $keysize);
                 $this->key = $key;
             }
@@ -428,32 +428,32 @@ class XMLSecurityKey {
     }
 
     private function encryptMcrypt($data) {
-        $td = mcrypt_module_open($this->cryptParams['cipher'], '', $this->cryptParams['mode'], '');
-        $this->iv = mcrypt_create_iv(mcrypt_enc_get_iv_size($td), MCRYPT_RAND);
-        mcrypt_generic_init($td, $this->key, $this->iv);
+        $td = @mcrypt_module_open($this->cryptParams['cipher'], '', $this->cryptParams['mode'], '');
+        $this->iv = @mcrypt_create_iv(@mcrypt_enc_get_iv_size($td), MCRYPT_RAND);
+        @mcrypt_generic_init($td, $this->key, $this->iv);
         if ($this->cryptParams['mode'] == MCRYPT_MODE_CBC) {
-            $bs = mcrypt_enc_get_block_size($td);
+            $bs = @mcrypt_enc_get_block_size($td);
             for ($datalen0 = $datalen = strlen($data); (($datalen % $bs) != ($bs - 1)); $datalen++)
                 $data.=chr(rand(1, 127));
             $data.=chr($datalen - $datalen0 + 1);
         }
-        $encrypted_data = $this->iv . mcrypt_generic($td, $data);
-        mcrypt_generic_deinit($td);
-        mcrypt_module_close($td);
+        $encrypted_data = $this->iv . @mcrypt_generic($td, $data);
+        @mcrypt_generic_deinit($td);
+        @mcrypt_module_close($td);
         return $encrypted_data;
     }
 
     private function decryptMcrypt($data) {
-        $td = mcrypt_module_open($this->cryptParams['cipher'], '', $this->cryptParams['mode'], '');
-        $iv_length = mcrypt_enc_get_iv_size($td);
+        $td = @mcrypt_module_open($this->cryptParams['cipher'], '', $this->cryptParams['mode'], '');
+        $iv_length = @mcrypt_enc_get_iv_size($td);
 
         $this->iv = substr($data, 0, $iv_length);
         $data = substr($data, $iv_length);
 
-        mcrypt_generic_init($td, $this->key, $this->iv);
+        @mcrypt_generic_init($td, $this->key, $this->iv);
         $decrypted_data = mdecrypt_generic($td, $data);
-        mcrypt_generic_deinit($td);
-        mcrypt_module_close($td);
+        @mcrypt_generic_deinit($td);
+        @mcrypt_module_close($td);
         if ($this->cryptParams['mode'] == MCRYPT_MODE_CBC) {
             $dataLen = strlen($decrypted_data);
             $paddingLength = substr($decrypted_data, $dataLen - 1, 1);
@@ -609,7 +609,7 @@ class XMLSecurityKey {
     }
 
     public function serializeKey($parent) {
-        
+
     }
 
     /**
@@ -691,10 +691,10 @@ class XMLSecurityDSig {
     static function generate_GUID($prefix = 'pfx') {
         $uuid = md5(uniqid(rand(), true));
         $guid = $prefix . substr($uuid, 0, 8) . "-" .
-                substr($uuid, 8, 4) . "-" .
-                substr($uuid, 12, 4) . "-" .
-                substr($uuid, 16, 4) . "-" .
-                substr($uuid, 20, 12);
+            substr($uuid, 8, 4) . "-" .
+            substr($uuid, 12, 4) . "-" .
+            substr($uuid, 16, 4) . "-" .
+            substr($uuid, 20, 12);
         return $guid;
     }
 
@@ -1084,8 +1084,8 @@ class XMLSecurityDSig {
                 $transNode = $this->createNewSignNode('Transform');
                 $transNodes->appendChild($transNode);
                 if (is_array($transform) &&
-                        (!empty($transform['http://www.w3.org/TR/1999/REC-xpath-19991116'])) &&
-                        (!empty($transform['http://www.w3.org/TR/1999/REC-xpath-19991116']['query']))) {
+                    (!empty($transform['http://www.w3.org/TR/1999/REC-xpath-19991116'])) &&
+                    (!empty($transform['http://www.w3.org/TR/1999/REC-xpath-19991116']['query']))) {
                     $transNode->setAttribute('Algorithm', 'http://www.w3.org/TR/1999/REC-xpath-19991116');
                     $XPathNode = $this->createNewSignNode('XPath', $transform['http://www.w3.org/TR/1999/REC-xpath-19991116']['query']);
                     $transNode->appendChild($XPathNode);
@@ -1251,7 +1251,7 @@ class XMLSecurityDSig {
     }
 
     public function appendCert() {
-        
+
     }
 
     public function appendKey($objKey, $parent = NULL) {
