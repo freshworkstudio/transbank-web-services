@@ -17,6 +17,12 @@ composer require freshwork/transbank
 # QuickStart
 
 
+## Webpay OneClick Demo Store
+Acá hay una tienda de prueba desarrollada en Laravel que ocupa OneClick. 
+Laravel Demo Store using Webpay OneClick
+
+[https://github.com/freshworkstudio/demo-store](https://github.com/freshworkstudio/demo-store)
+
 ## Webpay OneClick on Integration Environment
 Este ejemplo ejecuta el método `initInscription` de WebPayOneClick en el ambiente de integración.
 
