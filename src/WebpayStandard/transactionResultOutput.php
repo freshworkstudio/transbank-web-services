@@ -1,15 +1,43 @@
 <?php
 namespace Freshwork\Transbank\WebpayStandard;
 
+/**
+ * Class transactionResultOutput
+ * @package Freshwork\Transbank\WebpayStandard
+ */
 class transactionResultOutput
 
 {
-    var $accountingDate; //string
-    var $buyOrder; //string
-    var $cardDetail; //cardDetail
-    var $detailOutput; //wsTransactionDetailOutput
-    var $sessionId; //string
-    var $transactionDate; //dateTime
-    var $urlRedirection; //string
-    var $VCI; //string
+    /**
+     * @var string
+     */
+    var $accountingDate;
+    /**
+     * @var string
+     */
+    var $buyOrder;
+    /**
+     * @var cardDetail
+     */
+    var $cardDetail;
+    /**
+     * @var wsTransactionDetailOutput
+     */
+    var $detailOutput;
+    /**
+     * @var string
+     */
+    var $sessionId;
+    /**
+     * @var string
+     */
+    var $transactionDate;
+    /**
+     * @var string
+     */
+    var $urlRedirection;
+    /**
+     * @var string
+     */
+    var $VCI;
 }

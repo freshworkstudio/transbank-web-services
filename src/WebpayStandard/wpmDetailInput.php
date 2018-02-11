@@ -1,17 +1,51 @@
 <?php
 namespace Freshwork\Transbank\WebpayStandard;
 
+/**
+ * Class wpmDetailInput
+ * @package Freshwork\Transbank\WebpayStandard
+ */
 class wpmDetailInput
 
 {
-    var $serviceId; //string
-    var $cardHolderId; //string
-    var $cardHolderName; //string
-    var $cardHolderLastName1; //string
-    var $cardHolderLastName2; //string
-    var $cardHolderMail; //string
-    var $cellPhoneNumber; //string
-    var $expirationDate; //dateTime
-    var $commerceMail; //string
-    var $ufFlag; //boolean
+    /**
+     * @var string
+     */
+    var $serviceId;
+    /**
+     * @var string
+     */
+    var $cardHolderId;
+    /**
+     * @var string
+     */
+    var $cardHolderName;
+    /**
+     * @var string
+     */
+    var $cardHolderLastName1;
+    /**
+     * @var string
+     */
+    var $cardHolderLastName2;
+    /**
+     * @var string
+     */
+    var $cardHolderMail;
+    /**
+     * @var string
+     */
+    var $cellPhoneNumber;
+    /**
+     * @var string
+     */
+    var $expirationDate;
+    /**
+     * @var string
+     */
+    var $commerceMail;
+    /**
+     * @var boolean
+     */
+    var $ufFlag;
 }
