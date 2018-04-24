@@ -86,7 +86,7 @@ abstract class TransbankWebService
 
         if ($validation !== true)
         {
-        	$msg = 'The Transbank response fails on the certificate signature validation. Response doesn\t comes from Transbank';
+        	$msg = 'Transbank response fails on the certificate signature validation. Response does not comes from Transbank or the certificate expired.';
         	LogHandler::log($msg, LoggerInterface::LEVEL_ERROR);
 
             throw new InvalidCertificateException($msg);
