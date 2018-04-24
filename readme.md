@@ -10,6 +10,8 @@ Librería para la integración de Webpay Plus, Webpay OneClick y Webpay Patpass.
 composer require freshwork/transbank
 ```
 
+**Nota: La última versión incluye el nuvo certificado de transbank. Este reemplaza al anterior que expiró el 8 de Mayo de 2018.**
+
 # Index
 
 [Transacción Normal](#webservice-normal) | [Webpay OneClick](#one-click)  | [Webpay PatPass](#patpass) | [Logs](#logs)  | [CertificationBag](#certificationbag) | [Test Data / Datos de prueba](#test-data) 
