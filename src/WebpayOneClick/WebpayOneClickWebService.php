@@ -55,7 +55,7 @@ class WebpayOneClickWebService extends TransbankWebService
      * @param oneClickInscriptionInput $oneClickInscriptionInput
      * @return initInscriptionResponse
      */
-    function initInscription(oneClickInscriptionInput $oneClickInscriptionInput)
+    public function initInscription(oneClickInscriptionInput $oneClickInscriptionInput)
     {
         $initInscription = new initInscription();
         $initInscription->arg0 = $oneClickInscriptionInput;
@@ -69,7 +69,7 @@ class WebpayOneClickWebService extends TransbankWebService
      * @param oneClickFinishInscriptionInput $finishInscriptionInput
      * @return finishInscriptionResponse
      */
-    function finishInscription(oneClickFinishInscriptionInput $finishInscriptionInput)
+    public function finishInscription(oneClickFinishInscriptionInput $finishInscriptionInput)
     {
         $finishInscription = new finishInscription();
         $finishInscription->arg0 = $finishInscriptionInput;
@@ -84,7 +84,7 @@ class WebpayOneClickWebService extends TransbankWebService
      * @param \Freshwork\Transbank\WebpayOneClick\oneClickPayInput $authorizeInput
      * @return \Freshwork\Transbank\WebpayOneClick\authorizeResponse
      */
-    function authorize(oneClickPayInput $authorizeInput)
+    public function authorize(oneClickPayInput $authorizeInput)
     {
         $authorize = new authorize();
         $authorize->arg0 = $authorizeInput;
@@ -98,7 +98,7 @@ class WebpayOneClickWebService extends TransbankWebService
      * @param \Freshwork\Transbank\WebpayOneClick\oneClickReverseInput $codeReverseOneClickInput
      * @return \Freshwork\Transbank\WebpayOneClick\codeReverseOneClickResponse
      */
-    function codeReverseOneClick(oneClickReverseInput $codeReverseOneClickInput)
+    public function codeReverseOneClick(oneClickReverseInput $codeReverseOneClickInput)
     {
         $codeReverseOneClick = new codeReverseOneClick();
         $codeReverseOneClick->arg0 = $codeReverseOneClickInput;
@@ -112,14 +112,10 @@ class WebpayOneClickWebService extends TransbankWebService
      * @param \Freshwork\Transbank\WebpayOneClick\oneClickRemoveUserInput $removeUserInput
      * @return removeUserResponse
      */
-    function removeUser(oneClickRemoveUserInput $removeUserInput)
+    public function removeUser(oneClickRemoveUserInput $removeUserInput)
     {
         $removeUser = new removeUser();
         $removeUser->arg0 = $removeUserInput;
         return $this->callSoapMethod('removeUser', $removeUser);
     }
-
 }
-
-
-?>

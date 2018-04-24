@@ -1,29 +1,30 @@
 <?php
 namespace Freshwork\Transbank\WebpayStandard;
 
-class wsInitTransactionInput {
+class wsInitTransactionInput
+{
 
     /** @var string wsTransactionType */
-    var $wSTransactionType;
+    public $wSTransactionType;
 
     /** @var string */
-    var $commerceId;
+    public $commerceId;
 
     /** @var string */
-    var $buyOrder;
+    public $buyOrder;
 
     /** @var string */
-    var $sessionId;
+    public $sessionId;
 
     /** @var string anyURI */
-    var $returnURL;
+    public $returnURL;
 
     /** @var string anyURI */
-    var $finalURL;
+    public $finalURL;
 
     /** @var wsTransactionDetail */
-    var $transactionDetails;
+    public $transactionDetails;
 
     /** @var wpmDetailInput */
-    var $wPMDetail;
+    public $wPMDetail;
 }

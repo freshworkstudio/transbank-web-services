@@ -6,14 +6,13 @@ namespace Freshwork\Transbank\WebpayStandard;
  * @package Freshwork\Transbank\WebpayStandard
  */
 class cardDetail
-
 {
     /**
      * @var string
      */
-    var $cardNumber;
+    public $cardNumber;
     /**
      * @var string
      */
-    var $cardExpirationDate; //string
+    public $cardExpirationDate; //string
 }

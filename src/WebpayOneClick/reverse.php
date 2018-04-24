@@ -3,5 +3,5 @@ namespace Freshwork\Transbank\WebpayOneClick;
 
 class reverse
 {
-    var $arg0;//oneClickReverseInput
+    public $arg0;//oneClickReverseInput
 }

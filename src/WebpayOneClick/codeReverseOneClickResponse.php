@@ -10,5 +10,5 @@ class codeReverseOneClickResponse
     /**
      * @var oneClickReverseOutput
      */
-    var $return;
+    public $return;
 }

@@ -6,38 +6,37 @@ namespace Freshwork\Transbank\WebpayStandard;
  * @package Freshwork\Transbank\WebpayStandard
  */
 class transactionResultOutput
-
 {
     /**
      * @var string
      */
-    var $accountingDate;
+    public $accountingDate;
     /**
      * @var string
      */
-    var $buyOrder;
+    public $buyOrder;
     /**
      * @var cardDetail
      */
-    var $cardDetail;
+    public $cardDetail;
     /**
      * @var wsTransactionDetailOutput
      */
-    var $detailOutput;
+    public $detailOutput;
     /**
      * @var string
      */
-    var $sessionId;
+    public $sessionId;
     /**
      * @var string
      */
-    var $transactionDate;
+    public $transactionDate;
     /**
      * @var string
      */
-    var $urlRedirection;
+    public $urlRedirection;
     /**
      * @var string
      */
-    var $VCI;
+    public $VCI;
 }

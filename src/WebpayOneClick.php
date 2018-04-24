@@ -57,7 +57,9 @@ class WebpayOneClick extends TransbankService
      */
     public function finishInscription($token = null)
     {
-        if (!$token) $token = $_POST['TBK_TOKEN'];
+        if (!$token) {
+            $token = $_POST['TBK_TOKEN'];
+        }
 
         $finishInscriptionInput = new oneClickFinishInscriptionInput();
         $finishInscriptionInput->token = $token;

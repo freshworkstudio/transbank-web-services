@@ -1,7 +1,6 @@
 <?php
 namespace Freshwork\Transbank;
 
-
 /**
  * Class RedirectorHelper
  * @package Freshwork\Transbank
@@ -11,7 +10,7 @@ class RedirectorHelper
     /**
      * @var string
      */
-    static $title = 'Redireccionando a Webpay...';
+    public static $title = 'Redireccionando a Webpay...';
 
     /**
      * Get the basic form a script to redirect the user for one click
@@ -22,7 +21,9 @@ class RedirectorHelper
      */
     public static function redirectHTML($url, $token = '', $field_name = 'TBK_TOKEN')
     {
-        if (!$token) $token = $_POST['token_ws'];
+        if (!$token) {
+            $token = $_POST['token_ws'];
+        }
         return self::addHtmlWrapper(self::getForm($url, $token, $field_name));
     }
 

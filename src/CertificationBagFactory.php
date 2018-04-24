@@ -65,6 +65,4 @@ class CertificationBagFactory
     {
         return new CertificationBag($client_private_key, $client_certificate, $server_certificate, $environment);
     }
-
-
 }

@@ -3,6 +3,6 @@ namespace Freshwork\Transbank\WebpayOneClick;
 
 class oneClickReverseOutput
 {
-    var $reverseCode;//long
-    var $reversed;//boolean
+    public $reverseCode;//long
+    public $reversed;//boolean
 }

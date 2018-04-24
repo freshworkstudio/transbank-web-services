@@ -1,7 +1,6 @@
 <?php
 namespace Freshwork\Transbank;
 
-
 class WebpayMall extends WebpayWebService
 {
     public function init($returnURL, $finalURL, $buyOrder, $sessionId = null, $commerceCode = null)

@@ -6,26 +6,25 @@ namespace Freshwork\Transbank\WebpayStandard;
  * @package Freshwork\Transbank\WebpayStandard
  */
 class wsTransactionDetail
-
 {
     /**
      * @var float
      */
-    var $sharesAmount;
+    public $sharesAmount;
     /**
      * @var int
      */
-    var $sharesNumber;
+    public $sharesNumber;
     /**
      * @var float
      */
-    var $amount;
+    public $amount;
     /**
      * @var string
      */
-    var $commerceCode;
+    public $commerceCode;
     /**
      * @var string
      */
-    var $buyOrder;
+    public $buyOrder;
 }

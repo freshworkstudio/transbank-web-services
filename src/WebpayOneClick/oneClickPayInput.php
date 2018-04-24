@@ -5,14 +5,14 @@ class oneClickPayInput
 {
 
     /** @var int */
-    var $amount;
+    public $amount;
 
     /** @var int */
-    var $buyOrder;
+    public $buyOrder;
 
     /** @var string */
-    var $tbkUser;
+    public $tbkUser;
 
     /** @var string */
-    var $username;
+    public $username;
 }

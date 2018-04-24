@@ -1,7 +1,6 @@
 <?php
 namespace Freshwork\Transbank;
 
-
 class WebpayPatPass extends WebpayWebService
 {
     public function init($returnURL, $finalURL, $sessionId = null)

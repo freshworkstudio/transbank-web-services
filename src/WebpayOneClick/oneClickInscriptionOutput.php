@@ -4,8 +4,8 @@ namespace Freshwork\Transbank\WebpayOneClick;
 class oneClickInscriptionOutput
 {
     /** @var string */
-    var $token;
+    public $token;
 
     /** @var string */
-    var $urlWebpay;
+    public $urlWebpay;
 }

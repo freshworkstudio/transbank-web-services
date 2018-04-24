@@ -6,18 +6,17 @@ namespace Freshwork\Transbank\WebpayStandard;
  * @package Freshwork\Transbank\WebpayStandard
  */
 class wsTransactionDetailOutput
-
 {
     /**
      * @var string
      */
-    var $authorizationCode; //string
+    public $authorizationCode; //string
     /**
      * @var string
      */
-    var $paymentTypeCode; //string
+    public $paymentTypeCode; //string
     /**
      * @var integer
      */
-    var $responseCode; //int
+    public $responseCode; //int
 }

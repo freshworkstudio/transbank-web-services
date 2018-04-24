@@ -11,5 +11,5 @@ class finishInscriptionResponse
     /**
      * @var oneClickFinishInscriptionOutput
      */
-    var $return;
+    public $return;
 }

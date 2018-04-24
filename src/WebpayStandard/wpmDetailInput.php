@@ -6,46 +6,45 @@ namespace Freshwork\Transbank\WebpayStandard;
  * @package Freshwork\Transbank\WebpayStandard
  */
 class wpmDetailInput
-
 {
     /**
      * @var string
      */
-    var $serviceId;
+    public $serviceId;
     /**
      * @var string
      */
-    var $cardHolderId;
+    public $cardHolderId;
     /**
      * @var string
      */
-    var $cardHolderName;
+    public $cardHolderName;
     /**
      * @var string
      */
-    var $cardHolderLastName1;
+    public $cardHolderLastName1;
     /**
      * @var string
      */
-    var $cardHolderLastName2;
+    public $cardHolderLastName2;
     /**
      * @var string
      */
-    var $cardHolderMail;
+    public $cardHolderMail;
     /**
      * @var string
      */
-    var $cellPhoneNumber;
+    public $cellPhoneNumber;
     /**
      * @var string
      */
-    var $expirationDate;
+    public $expirationDate;
     /**
      * @var string
      */
-    var $commerceMail;
+    public $commerceMail;
     /**
      * @var boolean
      */
-    var $ufFlag;
+    public $ufFlag;
 }

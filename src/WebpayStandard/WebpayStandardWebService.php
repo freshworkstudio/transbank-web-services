@@ -44,7 +44,7 @@ class WebpayStandardWebService extends TransbankWebService
      * @param wsInitTransactionInput $initTransactionInput
      * @return initTransactionResponse
      */
-    function initTransaction(wsInitTransactionInput $initTransactionInput)
+    public function initTransaction(wsInitTransactionInput $initTransactionInput)
     {
         $initInscription = new initTransaction();
         $initInscription->wsInitTransactionInput = $initTransactionInput;
@@ -58,7 +58,7 @@ class WebpayStandardWebService extends TransbankWebService
      * @param string $token
      * @return getTransactionResultResponse
      */
-    function getTransactionResult($token)
+    public function getTransactionResult($token)
     {
         $getTransactionResult = new getTransactionResult();
         $getTransactionResult->tokenInput = $token;
@@ -72,7 +72,7 @@ class WebpayStandardWebService extends TransbankWebService
      * @param string $token
      * @return acknowledgeTransactionResponse
      */
-    function acknowledgeTransaction($token)
+    public function acknowledgeTransaction($token)
     {
         $acknowledgeTransactionInput = new acknowledgeTransaction();
         $acknowledgeTransactionInput->tokenInput = $token;
@@ -80,5 +80,3 @@ class WebpayStandardWebService extends TransbankWebService
         return $this->callSoapMethod('acknowledgeTransaction', $acknowledgeTransactionInput);
     }
 }
-
-?>

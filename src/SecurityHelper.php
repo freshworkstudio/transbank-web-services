@@ -1,7 +1,6 @@
 <?php
 namespace Freshwork\Transbank;
 
-
 class SecurityHelper
 {
     public static function getCommonName($X509Cert)

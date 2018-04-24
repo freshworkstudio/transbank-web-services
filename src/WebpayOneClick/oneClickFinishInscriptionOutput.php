@@ -5,17 +5,17 @@ class oneClickFinishInscriptionOutput
 {
 
     /** @var string */
-    var $authCode;
+    public $authCode;
 
     /** @var string creditCardType */
-    var $creditCardType;
+    public $creditCardType;
 
     /** @var string */
-    var $last4CardDigits;
+    public $last4CardDigits;
 
     /** @var int */
-    var $responseCode;
+    public $responseCode;
 
     /** @var string */
-    var $tbkUser;
+    public $tbkUser;
 }

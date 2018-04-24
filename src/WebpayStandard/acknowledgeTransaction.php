@@ -3,6 +3,6 @@ namespace Freshwork\Transbank\WebpayStandard;
 
 class acknowledgeTransaction
 {
-    /** @var  string */
-    var $tokenInput;
+    /** @var string */
+    public $tokenInput;
 }

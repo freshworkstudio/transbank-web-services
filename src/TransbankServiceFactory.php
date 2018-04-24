@@ -16,7 +16,7 @@ class TransbankServiceFactory
      * @param string|null $wsdlUrl
      * @return WebpayOneClick
      */
-    static public function oneclick(CertificationBag $certificationBag, $wsdlUrl = null)
+    public static function oneclick(CertificationBag $certificationBag, $wsdlUrl = null)
     {
         $service = new WebpayOneClickWebService($certificationBag, $wsdlUrl);
         return new WebpayOneClick($service);
@@ -27,7 +27,8 @@ class TransbankServiceFactory
      * @param CertificationBag $certificationBag
      * @return WebpayPatPass
      */
-    static public function patpass(CertificationBag $certificationBag, $wsdlUrl = null) {
+    public static function patpass(CertificationBag $certificationBag, $wsdlUrl = null)
+    {
         $service = new WebpayStandardWebService($certificationBag, $wsdlUrl);
         return new WebpayPatPass($service);
     }

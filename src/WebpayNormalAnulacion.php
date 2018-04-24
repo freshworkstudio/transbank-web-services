@@ -3,74 +3,65 @@ namespace Freshwork\Transbank;
 
 class nullify
 {
-    var $nullificationInput; //nullificationInput
+    public $nullificationInput; //nullificationInput
 }
 
 class nullificationInput
-
 {
-    var $commerceId; //long
-    var $buyOrder; //string
-    var $authorizedAmount; //decimal
-    var $authorizationCode; //string
-    var $nullifyAmount; //decimal
+    public $commerceId; //long
+    public $buyOrder; //string
+    public $authorizedAmount; //decimal
+    public $authorizationCode; //string
+    public $nullifyAmount; //decimal
 }
 
 class baseBean
-
 {
 }
 
 class nullifyResponse
-
 {
-    var $return; //nullificationOutput
+    public $return; //nullificationOutput
 }
 
 class nullificationOutput
-
 {
-    var $authorizationCode; //string
-    var $authorizationDate; //dateTime
-    var $balance; //decimal
-    var $nullifiedAmount; //decimal
-    var $token; //string
+    public $authorizationCode; //string
+    public $authorizationDate; //dateTime
+    public $balance; //decimal
+    public $nullifiedAmount; //decimal
+    public $token; //string
 }
 
 class capture
-
 {
-    var $captureInput; //captureInput
+    public $captureInput; //captureInput
 }
 
 class captureInput
-
 {
-    var $commerceId; //long
-    var $buyOrder; //string
-    var $authorizationCode; //string
-    var $captureAmount; //decimal
+    public $commerceId; //long
+    public $buyOrder; //string
+    public $authorizationCode; //string
+    public $captureAmount; //decimal
 }
 
 class captureResponse
-
 {
-    var $return; //captureOutput
+    public $return; //captureOutput
 }
 
 class captureOutput
-
 {
-    var $authorizationCode; //string
-    var $authorizationDate; //dateTime
-    var $capturedAmount; //decimal
-    var $token; //string
+    public $authorizationCode; //string
+    public $authorizationDate; //dateTime
+    public $capturedAmount; //decimal
+    public $token; //string
 }
 
 class WebpayNormalAnulacion
-
 {
-    var $soapClient;
+    public $soapClient;
     private static $classmap = array(
         'nullify' => 'nullify',
         'nullificationInput' => 'nullificationInput',
@@ -85,7 +76,7 @@ class WebpayNormalAnulacion
 
     const INTEGRATION_WSDL = 'https://tbk.orangepeople.cl/WSWebpayTransaction/cxf/WSCommerceIntegrationService?wsdl';
 
-    function __construct($url = self::INTEGRATION_WSDL)
+    public function __construct($url = self::INTEGRATION_WSDL)
     {
         $this->soapClient = new TransbankSoap($url, array(
             "classmap" => self::$classmap,
@@ -94,17 +85,15 @@ class WebpayNormalAnulacion
         ));
     }
 
-    function nullify($nullify)
+    public function nullify($nullify)
     {
         $nullifyResponse = $this->soapClient->nullify($nullify);
         return $nullifyResponse;
     }
 
-    function capture($capture)
+    public function capture($capture)
     {
         $captureResponse = $this->soapClient->capture($capture);
         return $captureResponse;
     }
 }
-
-?>

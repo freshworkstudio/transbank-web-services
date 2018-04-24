@@ -1,7 +1,6 @@
 <?php
 namespace Freshwork\Transbank;
 
-
 /**
  * Class CertificationBag
  * @package Freshwork\Transbank
@@ -45,8 +44,7 @@ class CertificationBag
      */
     public function __construct($client_private_key, $client_certificate, $server_certificate = null, $environment = self::INTEGRATION)
     {
-        if ($server_certificate === null)
-        {
+        if ($server_certificate === null) {
             $server_certificate = dirname(__FILE__) . '/certs/transbank.pem';
         }
         $this->client_private_key = $client_private_key;
@@ -119,6 +117,4 @@ class CertificationBag
     {
         $this->environment = $environment;
     }
-
-
 }

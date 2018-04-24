@@ -2,7 +2,6 @@
 
 namespace Freshwork\Transbank\Log;
 
-
 class TransbankCertificationLogger implements LoggerInterface
 {
     /**
@@ -19,13 +18,16 @@ class TransbankCertificationLogger implements LoggerInterface
     {
         $this->log_dir = rtrim($log_dir, '/');
 
-        if (!is_dir($this->log_dir))
+        if (!is_dir($this->log_dir)) {
             mkdir($this->log_dir, 0775, true);
+        }
     }
 
     public function log($data, $level = self::LEVEL_INFO, $type = null)
     {
-        if (!is_string($data)) $data = print_r($data, true);
+        if (!is_string($data)) {
+            $data = print_r($data, true);
+        }
 
         file_put_contents(
             $this->getLogDirectory() . '/' . $this->getLogFilname(),

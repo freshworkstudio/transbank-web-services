@@ -3,5 +3,5 @@ namespace Freshwork\Transbank\WebpayOneClick;
 
 class finishInscription
 {
-    var $arg0;//oneClickFinishInscriptionInput
+    public $arg0;//oneClickFinishInscriptionInput
 }

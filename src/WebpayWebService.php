@@ -1,7 +1,6 @@
 <?php
 namespace Freshwork\Transbank;
 
-
 use Freshwork\Transbank\Exceptions\EmptyTransactionException;
 use Freshwork\Transbank\WebpayStandard\acknowledgeTransactionResponse;
 use Freshwork\Transbank\WebpayStandard\WebpayStandardWebService;
@@ -135,7 +134,9 @@ class WebpayWebService extends TransbankService
      */
     public function getTransactionResult($token = null)
     {
-        if (!$token) $token = $_POST['token_ws'];
+        if (!$token) {
+            $token = $_POST['token_ws'];
+        }
 
         return $this->service->getTransactionResult($token)->return;
     }
@@ -148,7 +149,9 @@ class WebpayWebService extends TransbankService
      */
     public function acknowledgeTransaction($token = null)
     {
-        if (!$token) $token = $_POST['token_ws'];
+        if (!$token) {
+            $token = $_POST['token_ws'];
+        }
 
         return $this->service->acknowledgeTransaction($token);
     }

@@ -6,14 +6,13 @@ namespace Freshwork\Transbank\WebpayStandard;
  * @package Freshwork\Transbank\WebpayStandard
  */
 class wsInitTransactionOutput
-
 {
     /**
      * @var string
      */
-    var $token; //string
+    public $token; //string
     /**
      * @var string
      */
-    var $url; //string
+    public $url; //string
 }

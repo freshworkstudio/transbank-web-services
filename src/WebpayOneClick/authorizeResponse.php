@@ -10,5 +10,5 @@ class authorizeResponse
     /**
      * @var oneClickPayOutput
      */
-    var $return;
+    public $return;
 }

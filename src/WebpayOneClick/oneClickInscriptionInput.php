@@ -4,11 +4,11 @@ namespace Freshwork\Transbank\WebpayOneClick;
 class oneClickInscriptionInput
 {
     /** @var string */
-    var $email;
+    public $email;
 
     /** @var string */
-    var $responseURL;
+    public $responseURL;
 
     /** @var string */
-    var $username;
+    public $username;
 }
