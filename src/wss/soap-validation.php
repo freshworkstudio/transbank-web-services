@@ -130,11 +130,15 @@ class SoapValidation
 
         do {
             if (empty($objKey->key)) {
-                $handler = fopen($this->certServerPath, "r");
-                $x509cert = fread($handler, 8192);
-                fclose($handler);
+                if (is_file($this->certServerPath)) {
+                    $handler = fopen($this->certServerPath, "r");
+                    $x509cert = fread($handler, 8192);
+                    fclose($handler);
+                } else {
+                    $x509cert = $this->certServerPath;
+                }
 
-                $objKey->loadKey($x509cert, false, true);
+                $objKey->loadKey($x509cert, true);
                 break;
 
                 throw new Exception("Error loading key to handle Signature");

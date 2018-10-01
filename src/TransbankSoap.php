@@ -76,7 +76,7 @@ class TransbankSoap extends SoapClient
         $objWSSE = new WSSESoap($doc);
         $objKey = new XMLSecurityKey(XMLSecurityKey::RSA_SHA1, array('type' =>
             'private'));
-        $objKey->loadKey($this->getPrivateKey(), true);
+        $objKey->loadKey($this->getPrivateKey());
         $options = array("insertBefore" => true);
         $objWSSE->signSoapDoc($objKey, $options);
         $objWSSE->addIssuerSerial($this->getCertificate());
