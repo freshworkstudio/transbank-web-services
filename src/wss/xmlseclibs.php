@@ -477,9 +477,9 @@ class XMLSecurityKey
      * @param bool $isCert
      * @throws Exception
      */
-    public function loadKey($key, $isFile = false, $isCert = false)
+    public function loadKey($key, $isCert = false)
     {
-        if ($isFile) {
+        if (is_file($key)) {
             $this->key = file_get_contents($key);
         } else {
             $this->key = $key;
@@ -2026,7 +2026,7 @@ class XMLSecEnc
                                     $x509cert = $x509certNodes->item(0)->textContent;
                                     $x509cert = str_replace(array("\r", "\n"), "", $x509cert);
                                     $x509cert = "-----BEGIN CERTIFICATE-----\n" . chunk_split($x509cert, 64, "\n") . "-----END CERTIFICATE-----\n";
-                                    $objBaseKey->loadKey($x509cert, false, true);
+                                    $objBaseKey->loadKey($x509cert, true);
                                 }
                             }
                             break;
