@@ -6,7 +6,6 @@ namespace Freshwork\Transbank\WebpayStandard;
  * @package Freshwork\Transbank\WebpayStandard
  */
 class wsTransactionDetailOutput
-
 {
     /**
      * @var string
