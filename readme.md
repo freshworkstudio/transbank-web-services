@@ -16,6 +16,11 @@ composer require freshwork/transbank
 
 # QuickStart
 
+### UPDATE: Video tutorial | Implementar webpay plus
+[![image](https://user-images.githubusercontent.com/1103494/46308744-d6880100-c590-11e8-99d5-08cd67971d77.png)](https://www.youtube.com/watch?v=VavxN-a9SIk)
+[Ver screencast](https://www.youtube.com/watch?v=VavxN-a9SIk)
+
+
 
 ## Webpay OneClick Demo Store
 Acá hay una tienda de prueba desarrollada en Laravel que ocupa OneClick. 
