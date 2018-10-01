@@ -30,6 +30,9 @@ Laravel Demo Store using Webpay OneClick
 
 ## Webpay OneClick on Integration Environment
 Este ejemplo ejecuta el método `initInscription` de WebPayOneClick en el ambiente de integración.
+La idea de este método es asociar la tarjeta de crédito del usuario y dejarla guardada para poder cobrarle en el futuro
+sin necesidad de pasar por el flujo de pago. Una vez autorizada la asociación de la tarjeta, solo se debe ejecutar el método
+`authorize` en cualquier moment y el cobro se hará efectivo, sin necesidad de intervención del usuario.
 
 This method executes `initInscription` for WebpayOneClick
 ```php
@@ -56,6 +59,55 @@ $response = $oneClick->initInscription('username', 'gonzalo@freshworkstudio.com'
 //Esta clase toma el token y la url, y genera el html de un formulario POST que se envía inmediatamente por javascript. Puedes hacerlo tu, pero aquí lo tienes listo.
 echo RedirectorHelper::redirectHTML($response->urlWebpay, $response->token);
 ```
+Este proceso redirige al usuario a webpay para autorizar la asociación de la tarjeta de crédito. Cuando el flujo termine, 
+la respuesta llegará a `http://test.dev/tbkresponse`. Es en esa página en donde se debe continuar el flujo y guardar el token 
+que se genera y guardarlo en base de datos (o donde sea) asociado al usuario. Ese token es necesario posteriormente para ejecutar el metodo `authorize` y poder realizar cobros en el futuro. 
+
+### Procesar respuesta de la asociación
+```php
+
+$response = $oneclick->finishInscription();
+
+if($response->responseCode != 0)
+{
+    //La tarjeta ha sido rechazada
+    //return redirect()->route('checkout');
+    //Retornar al checkoout
+    exit;
+}
+
+//Si todo sale bien editar el usuario en base de datos y asociar el token y últimos digitos de la Tarjeta
+$user = $auth->user();
+$user->tbkToken = $response->tbkUser;
+$user->cc_final_numbers = $response->last4CardDigits;
+$user->save();
+flash()->success('Su tarjeta se ha inscrito satisfactoriamente');
+
+//Redirigir al checkout nuevamente. Esta vez la página de checkout revisará los datos del usuario y sabrá que solo debe cobrar y no autorizar la tarjeta. 
+return redirect()->route('checkout');
+}
+
+```
+
+### Autorizar cobro 
+Una vez que el usuario tiene el token asociado, cobrar es tan simple como:
+```
+$total = 1000; //$1.000 pesos
+$buyOrder = rand(1,1000); // Numero de orden de compra. Normalmente el ID de la transacción que creamos en nuestro sistema
+$user = getConnectedUser(); //Nuestro usuario logeado
+$email = $user->email; //Email del usuario. Debe ser el mismo que configuramos cuando asociamos al usuario en el paso anterior
+$token = $user->token; //Token que viene desde la base de datos asociado al usuario y que se generó en el paso anterior
+ 
+try {
+    $response = $this->oneclick->authorize($total, $buyOrder, $email, $token);
+}catch (\Exception $e) {
+    flash()->error('La transacción fue rechazada. Intenta asociar otra tarjeta. (' . $e->getMessage() . ')');
+    return redirect()->route('checkout.failed', ['txid' => $transaction->id]);
+}
+
+echo 'La transacción fue aceptada'
+``` 
+
 ### In production
 Just change this line
 
