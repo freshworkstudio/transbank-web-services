@@ -1,4 +1,9 @@
 <?php
+namespace Freshwork\Transbank\Transbank;
+use DOMDocument;
+use DOMXPath;
+use Exception;
+use XMLSecurityDSig;
 
 /**
  * soap-validation.php
@@ -60,6 +65,11 @@ class SoapValidation
     public $signAllHeaders = false;
     public $errorMessage = null;
 
+    /**
+     * SoapValidation constructor.
+     * @param $xmlSoap
+     * @param $certServerPath
+     */
     public function __construct($xmlSoap, $certServerPath)
     {
         $doc = new DOMDocument("1.0");

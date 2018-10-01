@@ -3,7 +3,7 @@ namespace Freshwork\Transbank;
 
 use Freshwork\Transbank\Exceptions\InvalidCertificateException;
 use Freshwork\Transbank\Log\LogHandler;
-use SoapValidation;
+use Freshwork\Transbank\Transbank\SoapValidation;
 use Freshwork\Transbank\Log\LoggerInterface;
 
 /**

@@ -17,7 +17,7 @@
         ]
     },
     "require": {
-
+        "ext-dom": "*"
     },
     "minimum-stability": "dev"
 
