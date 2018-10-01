@@ -28,98 +28,6 @@ Laravel Demo Store using Webpay OneClick
 
 [https://github.com/freshworkstudio/demo-store](https://github.com/freshworkstudio/demo-store)
 
-## Webpay OneClick on Integration Environment
-Este ejemplo ejecuta el método `initInscription` de WebPayOneClick en el ambiente de integración.
-La idea de este método es asociar la tarjeta de crédito del usuario y dejarla guardada para poder cobrarle en el futuro
-sin necesidad de pasar por el flujo de pago. Una vez autorizada la asociación de la tarjeta, solo se debe ejecutar el método
-`authorize` en cualquier moment y el cobro se hará efectivo, sin necesidad de intervención del usuario.
-
-This method executes `initInscription` for WebpayOneClick
-```php
-<?php
-
-use Freshwork\Transbank\CertificationBagFactory;
-use Freshwork\Transbank\TransbankServiceFactory;
-use Freshwork\Transbank\RedirectorHelper;
-
-include 'vendor/autoload.php';
-
-//You always need to create a certificationBag where you put your private_key and certificate. This lines uses the integration certificates for OneClick that comes bundled into the package.
-//Siempre necesitas un certificationBag, que es como una bolsa donde colocas los certificados necesarios (private key, certificado comercio, certificado tbk y defines el ambiente)
-$certificationBag = CertificationBagFactory::integrationOneClick();
-
-//OneClick Instance
-$oneClick = TransbankServiceFactory::oneclick($certificationBag);
-
-//Response from Transbank (token & url to redirect the user)
-//Si todo sale bien, respuesta de transbank trae token y url a donde dirigir al usuario.
-$response = $oneClick->initInscription('username', 'gonzalo@freshworkstudio.com', 'http://test.dev/tbkresponse');
-
-//Generates a HTML Form and a script tag that sends the form immediately. You need to pass the url and the token.
-//Esta clase toma el token y la url, y genera el html de un formulario POST que se envía inmediatamente por javascript. Puedes hacerlo tu, pero aquí lo tienes listo.
-echo RedirectorHelper::redirectHTML($response->urlWebpay, $response->token);
-```
-Este proceso redirige al usuario a webpay para autorizar la asociación de la tarjeta de crédito. Cuando el flujo termine, 
-la respuesta llegará a `http://test.dev/tbkresponse`. Es en esa página en donde se debe continuar el flujo y guardar el token 
-que se genera y guardarlo en base de datos (o donde sea) asociado al usuario. Ese token es necesario posteriormente para ejecutar el metodo `authorize` y poder realizar cobros en el futuro. 
-
-### Procesar respuesta de la asociación
-```php
-
-$response = $oneclick->finishInscription();
-
-if($response->responseCode != 0)
-{
-    //La tarjeta ha sido rechazada
-    //return redirect()->route('checkout');
-    //Retornar al checkoout
-    exit;
-}
-
-//Si todo sale bien editar el usuario en base de datos y asociar el token y últimos digitos de la Tarjeta
-$user = $auth->user();
-$user->tbkToken = $response->tbkUser;
-$user->cc_final_numbers = $response->last4CardDigits;
-$user->save();
-flash()->success('Su tarjeta se ha inscrito satisfactoriamente');
-
-//Redirigir al checkout nuevamente. Esta vez la página de checkout revisará los datos del usuario y sabrá que solo debe cobrar y no autorizar la tarjeta. 
-return redirect()->route('checkout');
-}
-
-```
-
-### Autorizar cobro 
-Una vez que el usuario tiene el token asociado, cobrar es tan simple como:
-```
-$total = 1000; //$1.000 pesos
-$buyOrder = rand(1,1000); // Numero de orden de compra. Normalmente el ID de la transacción que creamos en nuestro sistema
-$user = getConnectedUser(); //Nuestro usuario logeado
-$email = $user->email; //Email del usuario. Debe ser el mismo que configuramos cuando asociamos al usuario en el paso anterior
-$token = $user->token; //Token que viene desde la base de datos asociado al usuario y que se generó en el paso anterior
- 
-try {
-    $response = $this->oneclick->authorize($total, $buyOrder, $email, $token);
-}catch (\Exception $e) {
-    flash()->error('La transacción fue rechazada. Intenta asociar otra tarjeta. (' . $e->getMessage() . ')');
-    return redirect()->route('checkout.failed', ['txid' => $transaction->id]);
-}
-
-echo 'La transacción fue aceptada'
-``` 
-
-### In production
-Just change this line
-
-Para que funcione en producción en vez de integración, solo debes cambiar esta línea
-``` php
-$certificationBag = CertificationBagFactory::production('/path/to/private.key', '/path/to/certificate.crt');
-
-//OR
-$certificationBag = new CertificationBag('/path/to/private.key', '/path/to/certificate.crt', null, CertificationBag::PRODUCTION);
-```
-If the `CertificationBag` is setted on `CertificationBag::PRODUCTION`, the underlying classes (`WebpayNormal`, `WebpayOneClick`, etc) uses the production url endpoints of the WebService automatically.
-
 ## WebService Normal
 Transacción normal con Webpay. (Pago tarjeta de crédito y débito)
 
@@ -264,6 +172,99 @@ $response = $oneClick->codeReverseOneClick($buyOrder);
 ...
 $response = $oneClick->removeUser($userToken, $username);
 ```
+
+## Webpay OneClick
+Este ejemplo ejecuta el método `initInscription` de WebPayOneClick en el ambiente de integración.
+La idea de este método es asociar la tarjeta de crédito del usuario y dejarla guardada para poder cobrarle en el futuro
+sin necesidad de pasar por el flujo de pago. Una vez autorizada la asociación de la tarjeta, solo se debe ejecutar el método
+`authorize` en cualquier moment y el cobro se hará efectivo, sin necesidad de intervención del usuario.
+
+This method executes `initInscription` for WebpayOneClick
+```php
+<?php
+
+use Freshwork\Transbank\CertificationBagFactory;
+use Freshwork\Transbank\TransbankServiceFactory;
+use Freshwork\Transbank\RedirectorHelper;
+
+include 'vendor/autoload.php';
+
+//You always need to create a certificationBag where you put your private_key and certificate. This lines uses the integration certificates for OneClick that comes bundled into the package.
+//Siempre necesitas un certificationBag, que es como una bolsa donde colocas los certificados necesarios (private key, certificado comercio, certificado tbk y defines el ambiente)
+$certificationBag = CertificationBagFactory::integrationOneClick();
+
+//OneClick Instance
+$oneClick = TransbankServiceFactory::oneclick($certificationBag);
+
+//Response from Transbank (token & url to redirect the user)
+//Si todo sale bien, respuesta de transbank trae token y url a donde dirigir al usuario.
+$response = $oneClick->initInscription('username', 'gonzalo@freshworkstudio.com', 'http://test.dev/tbkresponse');
+
+//Generates a HTML Form and a script tag that sends the form immediately. You need to pass the url and the token.
+//Esta clase toma el token y la url, y genera el html de un formulario POST que se envía inmediatamente por javascript. Puedes hacerlo tu, pero aquí lo tienes listo.
+echo RedirectorHelper::redirectHTML($response->urlWebpay, $response->token);
+```
+Este proceso redirige al usuario a webpay para autorizar la asociación de la tarjeta de crédito. Cuando el flujo termine, 
+la respuesta llegará a `http://test.dev/tbkresponse`. Es en esa página en donde se debe continuar el flujo y guardar el token 
+que se genera y guardarlo en base de datos (o donde sea) asociado al usuario. Ese token es necesario posteriormente para ejecutar el metodo `authorize` y poder realizar cobros en el futuro. 
+
+### Procesar respuesta de la asociación
+```php
+
+$response = $oneclick->finishInscription();
+
+if($response->responseCode != 0)
+{
+    //La tarjeta ha sido rechazada
+    //return redirect()->route('checkout');
+    //Retornar al checkoout
+    exit;
+}
+
+//Si todo sale bien editar el usuario en base de datos y asociar el token y últimos digitos de la Tarjeta
+$user = $auth->user();
+$user->tbkToken = $response->tbkUser;
+$user->cc_final_numbers = $response->last4CardDigits;
+$user->save();
+flash()->success('Su tarjeta se ha inscrito satisfactoriamente');
+
+//Redirigir al checkout nuevamente. Esta vez la página de checkout revisará los datos del usuario y sabrá que solo debe cobrar y no autorizar la tarjeta. 
+return redirect()->route('checkout');
+}
+
+```
+
+### Autorizar cobro 
+Una vez que el usuario tiene el token asociado, cobrar es tan simple como:
+```
+$total = 1000; //$1.000 pesos
+$buyOrder = rand(1,1000); // Numero de orden de compra. Normalmente el ID de la transacción que creamos en nuestro sistema
+$user = getConnectedUser(); //Nuestro usuario logeado
+$email = $user->email; //Email del usuario. Debe ser el mismo que configuramos cuando asociamos al usuario en el paso anterior
+$token = $user->token; //Token que viene desde la base de datos asociado al usuario y que se generó en el paso anterior
+ 
+try {
+    $response = $this->oneclick->authorize($total, $buyOrder, $email, $token);
+}catch (\Exception $e) {
+    flash()->error('La transacción fue rechazada. Intenta asociar otra tarjeta. (' . $e->getMessage() . ')');
+    return redirect()->route('checkout.failed', ['txid' => $transaction->id]);
+}
+
+echo 'La transacción fue aceptada'
+``` 
+
+### In production
+Just change this line
+
+Para que funcione en producción en vez de integración, solo debes cambiar esta línea
+``` php
+$certificationBag = CertificationBagFactory::production('/path/to/private.key', '/path/to/certificate.crt');
+
+//OR
+$certificationBag = new CertificationBag('/path/to/private.key', '/path/to/certificate.crt', null, CertificationBag::PRODUCTION);
+```
+If the `CertificationBag` is setted on `CertificationBag::PRODUCTION`, the underlying classes (`WebpayNormal`, `WebpayOneClick`, etc) uses the production url endpoints of the WebService automatically.
+
 
 # PatPass
 Una transacción de autorización de PatPass by Webpay corresponde a una solicitud de inscripción de pago recurrente con tarjetas de crédito, en donde el primer pago se resuelve al instante, y los subsiguientes quedan programados para ser ejecutados mes a mes. PatPass by Webpay cuenta con fecha de caducidad o termino, la cual debe ser proporcionada junto a otros datos para esta transacción. La transacción puede ser realizada en Dólares y Pesos, para este último caso es posible enviar el monto en UF y Webpay realizará la conversión a pesos al momento de realizar el cargo al tarjetahabiente.
