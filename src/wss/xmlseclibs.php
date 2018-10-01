@@ -155,9 +155,13 @@ function canonical($tree, $element, $withcomments)
 
 function getIssuerName($X509Cert)
 {
-    $handler = fopen($X509Cert, "r");
-    $cert = fread($handler, 8192);
-    fclose($handler);
+    if (is_file($X509Cert)) {
+        $handler = fopen($X509Cert, "r");
+        $cert = fread($handler, 8192);
+        fclose($handler);
+    } else {
+        $cert = $X509Cert;
+    }
     $cert_as_array = openssl_x509_parse($cert);
     $name = $cert_as_array['name'];
     $name = str_replace("/", ",", $name);
@@ -174,9 +178,13 @@ function getIssuerName($X509Cert)
 
 function getSerialNumber($X509Cert)
 {
-    $handler = fopen($X509Cert, "r");
-    $cert = fread($handler, 8192);
-    fclose($handler);
+    if (is_file($X509Cert)) {
+        $handler = fopen($X509Cert, "r");
+        $cert = fread($handler, 8192);
+        fclose($handler);
+    } else {
+        $cert = $X509Cert;
+    }
     $cert_as_array = openssl_x509_parse($cert);
     $serialNumber = $cert_as_array['serialNumber'];
     return $serialNumber;

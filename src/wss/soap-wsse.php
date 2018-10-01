@@ -468,12 +468,10 @@ class WSSESoap
     public function decryptSoapDoc($doc, $options)
     {
         $privKey = null;
-        $privKey_isFile = false;
         $privKey_isCert = false;
 
         if (is_array($options)) {
             $privKey = (!empty($options["keys"]["private"]["key"]) ? $options["keys"]["private"]["key"] : null);
-            $privKey_isFile = (!empty($options["keys"]["private"]["isFile"]) ? true : false);
             $privKey_isCert = (!empty($options["keys"]["private"]["isCert"]) ? true : false);
         }
 
@@ -498,7 +496,7 @@ class WSSESoap
             XMLSecEnc::staticLocateKeyInfo($objKey, $node);
             if ($objKey && $objKey->isEncrypted) {
                 $objencKey = $objKey->encryptedCtx;
-                $objKey->loadKey($privKey, $privKey_isFile, $privKey_isCert);
+                $objKey->loadKey($privKey, $privKey_isCert);
                 $key = $objencKey->decryptKey($objKey);
                 $objKey->loadKey($key);
             }
