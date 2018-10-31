@@ -11,14 +11,11 @@
     "autoload": {
         "psr-4": {
             "Freshwork\\Transbank\\": "src/"
-        },
-        "classmap": [
-            "src/wss"
-        ]
+        }
     },
     "require": {
+        "luisurrutia/transbank-soap": "^0.0.1",
         "ext-dom": "*"
     },
     "minimum-stability": "dev"
-
 }

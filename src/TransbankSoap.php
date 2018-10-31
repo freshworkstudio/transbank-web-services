@@ -5,9 +5,7 @@ use DOMDocument;
 use Freshwork\Transbank\Log\LoggerInterface;
 use Freshwork\Transbank\Log\LogHandler;
 use SoapClient;
-use WSSESoap;
-use XMLSecurityKey;
-
+use LuisUrrutia\TransbankSoap\Process;
 /**
  * Class TransbankSoap
  * @package Freshwork\Transbank
@@ -71,31 +69,25 @@ class TransbankSoap extends SoapClient
     {
         LogHandler::log(['location' => $location, 'xml' => $request], LoggerInterface::LEVEL_INFO, 'unsigned_request_raw');
 
-        $doc = new DOMDocument('1.0');
-        $doc->loadXML($request);
-        $objWSSE = new WSSESoap($doc);
-        $objKey = new XMLSecurityKey(XMLSecurityKey::RSA_SHA1, array('type' =>
-            'private'));
-        $objKey->loadKey($this->getPrivateKey());
-        $options = array("insertBefore" => true);
-        $objWSSE->signSoapDoc($objKey, $options);
-        $objWSSE->addIssuerSerial($this->getCertificate());
-        $objKey = new XMLSecurityKey(XMLSecurityKey::AES256_CBC);
-        $objKey->generateSessionKey();
+        $process = new Process($request);
+        $process->sign($this->getPrivateKey());
+        $process->addIssuer($this->getCertificate());
+        $signedRequest = $process->getXML();
 
-        $signed_request = $objWSSE->saveXML();
-        LogHandler::log(['location' => $location, 'xml' => $signed_request], LoggerInterface::LEVEL_INFO, 'signed_request_raw');
+        LogHandler::log(['location' => $location, 'xml' => $signedRequest], LoggerInterface::LEVEL_INFO, 'signed_request_raw');
 
         $retVal = parent::__doRequest(
-            $signed_request,
+            $signedRequest,
             $location,
             $saction,
             $version,
             $one_way
         );
+
         $doc = new DOMDocument();
         $doc->loadXML($retVal);
         LogHandler::log(['location' => $location, 'xml' => $retVal], LoggerInterface::LEVEL_INFO, 'response_raw');
+
         return $doc->saveXML();
     }
 }

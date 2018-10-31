@@ -3,8 +3,8 @@ namespace Freshwork\Transbank;
 
 use Freshwork\Transbank\Exceptions\InvalidCertificateException;
 use Freshwork\Transbank\Log\LogHandler;
-use Freshwork\Transbank\Transbank\SoapValidation;
 use Freshwork\Transbank\Log\LoggerInterface;
+use LuisUrrutia\TransbankSoap\Validation;
 
 /**
  * Class TransbankWebService
@@ -80,8 +80,8 @@ abstract class TransbankWebService
     {
         $xmlResponse = $this->getLastRawResponse();
 
-        $soapValidation = new SoapValidation($xmlResponse, $this->certificationBag->getServerCertificate());
-        $validation =  $soapValidation->getValidationResult(); //Esto valida si el mensaje está firmado por Transbank
+        $soapValidation = new Validation($xmlResponse, $this->certificationBag->getServerCertificate());
+        $validation =  $soapValidation->isValid(); //Esto valida si el mensaje está firmado por Transbank
 
         if ($validation !== true) {
             $msg = 'Transbank response fails on the certificate signature validation. Response does not comes from Transbank or the certificate expired.';
