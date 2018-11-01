@@ -2,10 +2,10 @@
 namespace Freshwork\Transbank\WebpayStandard;
 
 /**
- * Class wpmDetailInput
+ * Class DetailInput
  * @package Freshwork\Transbank\WebpayStandard
  */
-class wpmDetailInput
+class DetailInput
 {
     /**
      * @var string

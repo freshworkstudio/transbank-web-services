@@ -61,8 +61,12 @@ class CertificationBagFactory
      * @param int $environment
      * @return CertificationBag
      */
-    public static function create($client_private_key, $client_certificate, $server_certificate = null, $environment = CertificationBag::INTEGRATION)
-    {
+    public static function create(
+        $client_private_key,
+        $client_certificate,
+        $server_certificate = null,
+        $environment = CertificationBag::INTEGRATION
+    ) {
         return new CertificationBag($client_private_key, $client_certificate, $server_certificate, $environment);
     }
 }

@@ -2,10 +2,10 @@
 namespace Freshwork\Transbank\WebpayStandard;
 
 /**
- * Class wsTransactionDetail
+ * Class TransactionDetail
  * @package Freshwork\Transbank\WebpayStandard
  */
-class wsTransactionDetail
+class TransactionDetail
 {
     /**
      * @var float

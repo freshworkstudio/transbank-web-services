@@ -69,7 +69,10 @@ class TransbankSoap extends SoapClient
      */
     public function __doRequest($request, $location, $saction, $version, $one_way = null)
     {
-        LogHandler::log(['location' => $location, 'xml' => $request], LoggerInterface::LEVEL_INFO, 'unsigned_request_raw');
+        LogHandler::log([
+            'location' => $location,
+            'xml' => $request
+        ], LoggerInterface::LEVEL_INFO, 'unsigned_request_raw');
 
         $doc = new DOMDocument('1.0');
         $doc->loadXML($request);
@@ -84,7 +87,10 @@ class TransbankSoap extends SoapClient
         $objKey->generateSessionKey();
 
         $signed_request = $objWSSE->saveXML();
-        LogHandler::log(['location' => $location, 'xml' => $signed_request], LoggerInterface::LEVEL_INFO, 'signed_request_raw');
+        LogHandler::log([
+            'location' => $location,
+            'xml' => $signed_request
+        ], LoggerInterface::LEVEL_INFO, 'signed_request_raw');
 
         $retVal = parent::__doRequest(
             $signed_request,
@@ -95,7 +101,10 @@ class TransbankSoap extends SoapClient
         );
         $doc = new DOMDocument();
         $doc->loadXML($retVal);
-        LogHandler::log(['location' => $location, 'xml' => $retVal], LoggerInterface::LEVEL_INFO, 'response_raw');
+        LogHandler::log([
+            'location' => $location,
+            'xml' => $retVal
+        ], LoggerInterface::LEVEL_INFO, 'response_raw');
         return $doc->saveXML();
     }
 }

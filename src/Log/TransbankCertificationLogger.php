@@ -49,6 +49,8 @@ class TransbankCertificationLogger implements LoggerInterface
     protected function getLogMessage($data, $level, $type)
     {
         $time = date('d/m/Y H:i:s');
-        return "\n=================================\n$time - " . strtoupper($level) . " ($type):\n=================================\n$data";
+        return "\n=================================\n$time - "
+            . strtoupper($level)
+            . " ($type):\n=================================\n$data";
     }
 }
