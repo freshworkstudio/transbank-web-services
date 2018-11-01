@@ -42,8 +42,12 @@ class CertificationBag
      * @param null|string $server_certificate Transbank's server public certificate
      * @param int $environment The environment of the certification bag
      */
-    public function __construct($client_private_key, $client_certificate, $server_certificate = null, $environment = self::INTEGRATION)
-    {
+    public function __construct(
+        $client_private_key,
+        $client_certificate,
+        $server_certificate = null,
+        $environment = self::INTEGRATION
+    ) {
         if ($server_certificate === null) {
             $server_certificate = dirname(__FILE__) . '/certs/transbank.pem';
         }

@@ -2,13 +2,13 @@
 namespace Freshwork\Transbank\WebpayStandard;
 
 /**
- * Class initTransaction
+ * Class InitTransaction
  * @package Freshwork\Transbank\WebpayStandard
  */
-class initTransaction
+class InitTransaction
 {
     /**
-     * @var wsInitTransactionInput
+     * @var InitTransactionInput
      */
-    public $wsInitTransactionInput; //wsInitTransactionInput
+    public $wsInitTransactionInput;
 }

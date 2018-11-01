@@ -1,8 +1,8 @@
 <?php
 namespace Freshwork\Transbank\WebpayStandard;
 
-class acknowledgeTransaction
+class TransactionResult
 {
-    /** @var string */
+    /** @var  string */
     public $tokenInput;
 }

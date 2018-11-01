@@ -23,30 +23,32 @@ class WebpayStandardWebService extends TransbankWebService
      * @var array
      */
     protected static $classmap = [
-        'getTransactionResult' => getTransactionResult::class,
-        'getTransactionResultResponse' => getTransactionResultResponse::class,
-        'transactionResultOutput' => transactionResultOutput::class,
-        'cardDetail' => cardDetail::class,
-        'wsTransactionDetailOutput' => wsTransactionDetailOutput::class,
-        'wsTransactionDetail' => wsTransactionDetail::class,
-        'acknowledgeTransaction' => acknowledgeTransaction::class,
-        'acknowledgeTransactionResponse' => acknowledgeTransactionResponse::class,
-        'initTransaction' => initTransaction::class,
-        'wsInitTransactionInput' => wsInitTransactionInput::class,
-        'wpmDetailInput' => wpmDetailInput::class,
-        'initTransactionResponse' => initTransactionResponse::class,
-        'wsInitTransactionOutput' => wsInitTransactionOutput::class
+        'initTransaction' => InitTransaction::class,
+        'initTransactionResponse' => InitTransactionResponse::class,
+        'wsInitTransactionInput' => InitTransactionInput::class,
+        'wsInitTransactionOutput' => InitTransactionOutput::class,
+        'wpmDetailInput' => DetailInput::class,
+
+        'getTransactionResult' => TransactionResult::class,
+        'getTransactionResultResponse' => TransactionResultResponse::class,
+        'transactionResultOutput' => TransactionResultOutput::class,
+        'cardDetail' => CardDetail::class,
+
+        'wsTransactionDetailOutput' => TransactionDetailOutput::class,
+        'wsTransactionDetail' => TransactionDetail::class,
+        'acknowledgeTransaction' => AcknowledgeTransaction::class,
+        'acknowledgeTransactionResponse' => AcknowledgeTransactionResponse::class,
     ];
 
     /**
      * Método que permite iniciar una transacción de pago Webpay.
      *
-     * @param wsInitTransactionInput $initTransactionInput
-     * @return initTransactionResponse
+     * @param InitTransactionInput $initTransactionInput
+     * @return InitTransactionResponse
      */
-    public function initTransaction(wsInitTransactionInput $initTransactionInput)
+    public function initTransaction(InitTransactionInput $initTransactionInput)
     {
-        $initInscription = new initTransaction();
+        $initInscription = new InitTransaction();
         $initInscription->wsInitTransactionInput = $initTransactionInput;
 
         return $this->callSoapMethod('initTransaction', $initInscription);
@@ -56,25 +58,25 @@ class WebpayStandardWebService extends TransbankWebService
      * Método que permite obtener el resultado de la transacción y los datos de la misma.
      *
      * @param string $token
-     * @return getTransactionResultResponse
+     * @return TransactionResultResponse
      */
     public function getTransactionResult($token)
     {
-        $getTransactionResult = new getTransactionResult();
-        $getTransactionResult->tokenInput = $token;
+        $transactionResult = new TransactionResult();
+        $transactionResult->tokenInput = $token;
 
-        return $this->callSoapMethod('getTransactionResult', $getTransactionResult);
+        return $this->callSoapMethod('getTransactionResult', $transactionResult);
     }
 
     /**
      * Método que permite informar a Webpay la correcta recepción del resultado de la transacción.
      *
      * @param string $token
-     * @return acknowledgeTransactionResponse
+     * @return AcknowledgeTransactionResponse
      */
     public function acknowledgeTransaction($token)
     {
-        $acknowledgeTransactionInput = new acknowledgeTransaction();
+        $acknowledgeTransactionInput = new AcknowledgeTransaction();
         $acknowledgeTransactionInput->tokenInput = $token;
 
         return $this->callSoapMethod('acknowledgeTransaction', $acknowledgeTransactionInput);

@@ -41,20 +41,21 @@ class RedirectorHelper
     public static function addHtmlWrapper($formHtml)
     {
         return
-'<html>
-    <head>
-        <title>' . self::$title . '</title>
-    </head>
-    <body>
-        ' . $formHtml . '
-    </body>
-
-</html>';
+        '<html>
+            <head>
+                <title>' . self::$title . '</title>
+            </head>
+            <body>
+                ' . $formHtml . '
+            </body>
+        
+        </html>';
     }
 
     /**
-     * @param string $urlWebpay
+     * @param string $url
      * @param string $token
+     * @param string $field_name
      * @return string
      */
     public static function getForm($url, $token, $field_name)

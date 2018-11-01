@@ -2,10 +2,10 @@
 namespace Freshwork\Transbank\WebpayStandard;
 
 /**
- * Class transactionResultOutput
+ * Class TransactionResultOutput
  * @package Freshwork\Transbank\WebpayStandard
  */
-class transactionResultOutput
+class TransactionResultOutput
 {
     /**
      * @var string

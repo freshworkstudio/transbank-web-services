@@ -1,10 +1,10 @@
 <?php
 namespace Freshwork\Transbank\WebpayStandard;
 
-class wsInitTransactionInput
+class InitTransactionInput
 {
 
-    /** @var string wsTransactionType */
+    /** @var string */
     public $wSTransactionType;
 
     /** @var string */
@@ -25,6 +25,6 @@ class wsInitTransactionInput
     /** @var wsTransactionDetail */
     public $transactionDetails;
 
-    /** @var wpmDetailInput */
+    /** @var DetailInput */
     public $wPMDetail;
 }
