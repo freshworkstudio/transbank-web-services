@@ -1,7 +1,7 @@
 <?php
 namespace Freshwork\Transbank\WebpayOneClick;
 
-class oneClickFinishInscriptionInput
+class OneClickFinishInscriptionInput
 {
     /** @var  string */
     public $token;

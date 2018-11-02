@@ -1,7 +1,7 @@
 <?php
 namespace Freshwork\Transbank\WebpayOneClick;
 
-class removeUser
+class RemoveUser
 {
-    public $arg0;//oneClickRemoveUserInput
+    public $arg0; // OneClickRemoveUserInput
 }

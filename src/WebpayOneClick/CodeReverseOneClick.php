@@ -1,7 +1,7 @@
 <?php
 namespace Freshwork\Transbank\WebpayOneClick;
 
-class codeReverseOneClick
+class CodeReverseOneClick
 {
-    public $arg0;//oneClickReverseInput
+    public $arg0; // OneClickReverseInput
 }

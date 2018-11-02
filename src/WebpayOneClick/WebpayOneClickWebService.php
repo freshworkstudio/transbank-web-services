@@ -23,84 +23,90 @@ class WebpayOneClickWebService extends TransbankWebService
      * @var array
      */
     protected static $classmap = array(
-        'removeUser' => removeUser::class,
-        'oneClickRemoveUserInput' => oneClickRemoveUserInput::class,
-        'baseBean' => baseBean::class,
-        'removeUserResponse' => removeUserResponse::class,
-        'initInscription' => initInscription::class,
-        'oneClickInscriptionInput' => oneClickInscriptionInput::class,
-        'initInscriptionResponse' => initInscriptionResponse::class,
-        'oneClickInscriptionOutput' => oneClickInscriptionOutput::class,
-        'finishInscription' => finishInscription::class,
-        'oneClickFinishInscriptionInput' => oneClickFinishInscriptionInput::class,
-        'finishInscriptionResponse' => finishInscriptionResponse::class,
-        'oneClickFinishInscriptionOutput' => oneClickFinishInscriptionOutput::class,
-        'codeReverseOneClick' => codeReverseOneClick::class,
-        'oneClickReverseInput' => oneClickReverseInput::class,
-        'codeReverseOneClickResponse' => codeReverseOneClickResponse::class,
-        'oneClickReverseOutput' => oneClickReverseOutput::class,
-        'authorize' => authorize::class,
-        'oneClickPayInput' => oneClickPayInput::class,
-        'authorizeResponse' => authorizeResponse::class,
-        'oneClickPayOutput' => oneClickPayOutput::class,
-        'reverse' => reverse::class,
-        'reverseResponse' => reverseResponse::class
+        'removeUser' => RemoveUser::class,
+        'oneClickRemoveUserInput' => OneClickRemoveUserInput::class,
+        'baseBean' => BaseBean::class,
+        'removeUserResponse' => RemoveUserResponse::class,
+        'initInscription' => InitInscription::class,
+        'oneClickInscriptionInput' => OneClickInscriptionInput::class,
+        'initInscriptionResponse' => InitInscriptionResponse::class,
+        'oneClickInscriptionOutput' => OneClickInscriptionOutput::class,
+        'finishInscription' => FinishInscription::class,
+        'oneClickFinishInscriptionInput' => OneClickFinishInscriptionInput::class,
+        'finishInscriptionResponse' => FinishInscriptionResponse::class,
+        'oneClickFinishInscriptionOutput' => OneClickFinishInscriptionOutput::class,
+        'codeReverseOneClick' => CodeReverseOneClick::class,
+        'oneClickReverseInput' => OneClickReverseInput::class,
+        'codeReverseOneClickResponse' => CodeReverseOneClickResponse::class,
+        'oneClickReverseOutput' => OneClickReverseOutput::class,
+        'authorize' => Authorize::class,
+        'oneClickPayInput' => OneClickPayInput::class,
+        'authorizeResponse' => AuthorizeResponse::class,
+        'oneClickPayOutput' => OneClickPayOutput::class,
+        'reverse' => Reverse::class,
+        'reverseResponse' => ReverseResponse::class
     );
 
 
     /**
-     * Permite realizar la inscripción del tarjetahabiente e información de su tarjeta de crédito. Retorna como respuesta un token que representa la transacción de inscripción y una URL (UrlWebpay), que corresponde a la URL de inscripción de One Click.
-     * Una vez que se llama a este servicio Web, el usuario debe ser redireccionado vía POST a urlWebpay con parámetro TBK_TOKEN igual al token obtenido.
+     * Permite realizar la inscripción del tarjetahabiente e información de su tarjeta de crédito.
+     * Retorna como respuesta un token que representa la transacción de inscripción y una URL (UrlWebpay),
+     * que corresponde a la URL de inscripción de One Click.
+     * Una vez que se llama a este servicio Web, el usuario debe ser redireccionado vía POST a urlWebpay
+     * con parámetro TBK_TOKEN igual al token obtenido.
      *
-     * @param oneClickInscriptionInput $oneClickInscriptionInput
-     * @return initInscriptionResponse
+     * @param OneClickInscriptionInput $oneClickInscriptionInput
+     * @return InitInscriptionResponse
      */
     public function initInscription(oneClickInscriptionInput $oneClickInscriptionInput)
     {
-        $initInscription = new initInscription();
+        $initInscription = new InitInscription();
         $initInscription->arg0 = $oneClickInscriptionInput;
         return $this->callSoapMethod('initInscription', $initInscription);
     }
 
     /**
-     * Permite finalizar el proceso de inscripción del tarjetahabiente en Oneclick. Entre otras cosas, retorna el identificador del usuario en Oneclick, el cual será utilizado para realizar las transacciones de pago.
-     * Una vez terminado el flujo de inscripción en Transbank el usuario es enviado a la URL de fin de inscripción que definió el comercio. En ese instante el comercio debe llamar a finishInscription.
+     * Permite finalizar el proceso de inscripción del tarjetahabiente en Oneclick.
+     * Entre otras cosas, retorna el identificador del usuario en Oneclick, el cual será utilizado
+     * para realizar las transacciones de pago.
+     * Una vez terminado el flujo de inscripción en Transbank el usuario es enviado a la URL de fin de inscripción
+     * que definió el comercio. En ese instante el comercio debe llamar a finishInscription.
      *
-     * @param oneClickFinishInscriptionInput $finishInscriptionInput
-     * @return finishInscriptionResponse
+     * @param OneClickFinishInscriptionInput $finishInscriptionInput
+     * @return FinishInscriptionResponse
      */
-    public function finishInscription(oneClickFinishInscriptionInput $finishInscriptionInput)
+    public function finishInscription(OneClickFinishInscriptionInput $finishInscriptionInput)
     {
-        $finishInscription = new finishInscription();
+        $finishInscription = new FinishInscription();
         $finishInscription->arg0 = $finishInscriptionInput;
 
         return $this->callSoapMethod('finishInscription', $finishInscription);
     }
 
     /**
-     * Permite realizar transacciones de pago. Retorna el resultado de la autorización. Este método que debe ser ejecutado, cada vez que el
-     * usuario selecciona pagar con Oneclick.
+     * Permite realizar transacciones de pago. Retorna el resultado de la autorización.
+     * Este método que debe ser ejecutado, cada vez que el usuario selecciona pagar con Oneclick.
      *
-     * @param \Freshwork\Transbank\WebpayOneClick\oneClickPayInput $authorizeInput
-     * @return \Freshwork\Transbank\WebpayOneClick\authorizeResponse
+     * @param \Freshwork\Transbank\WebpayOneClick\OneClickPayInput $authorizeInput
+     * @return \Freshwork\Transbank\WebpayOneClick\AuthorizeResponse
      */
-    public function authorize(oneClickPayInput $authorizeInput)
+    public function authorize(OneClickPayInput $authorizeInput)
     {
-        $authorize = new authorize();
+        $authorize = new Authorize();
         $authorize->arg0 = $authorizeInput;
         return $this->callSoapMethod('authorize', $authorize);
     }
 
     /**
-     * Permite reversar una transacción de venta autorizada con anterioridad. Este método retorna como respuesta un identificador único de la
-     * transacción de reversa.
+     * Permite reversar una transacción de venta autorizada con anterioridad.
+     * Este método retorna como respuesta un identificador único de la transacción de reversa.
      *
-     * @param \Freshwork\Transbank\WebpayOneClick\oneClickReverseInput $codeReverseOneClickInput
-     * @return \Freshwork\Transbank\WebpayOneClick\codeReverseOneClickResponse
+     * @param \Freshwork\Transbank\WebpayOneClick\OneClickReverseInput $codeReverseOneClickInput
+     * @return \Freshwork\Transbank\WebpayOneClick\CodeReverseOneClickResponse
      */
-    public function codeReverseOneClick(oneClickReverseInput $codeReverseOneClickInput)
+    public function codeReverseOneClick(OneClickReverseInput $codeReverseOneClickInput)
     {
-        $codeReverseOneClick = new codeReverseOneClick();
+        $codeReverseOneClick = new CodeReverseOneClick();
         $codeReverseOneClick->arg0 = $codeReverseOneClickInput;
 
         return $this->callSoapMethod('codeReverseOneClick', $codeReverseOneClick);
@@ -109,12 +115,12 @@ class WebpayOneClickWebService extends TransbankWebService
     /**
      * Permite eliminar una inscripción de usuario en Transbank
      *
-     * @param \Freshwork\Transbank\WebpayOneClick\oneClickRemoveUserInput $removeUserInput
+     * @param \Freshwork\Transbank\WebpayOneClick\OneClickRemoveUserInput $removeUserInput
      * @return removeUserResponse
      */
-    public function removeUser(oneClickRemoveUserInput $removeUserInput)
+    public function removeUser(OneClickRemoveUserInput $removeUserInput)
     {
-        $removeUser = new removeUser();
+        $removeUser = new RemoveUser();
         $removeUser->arg0 = $removeUserInput;
         return $this->callSoapMethod('removeUser', $removeUser);
     }

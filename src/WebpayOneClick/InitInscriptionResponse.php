@@ -1,8 +1,8 @@
 <?php
 namespace Freshwork\Transbank\WebpayOneClick;
 
-class initInscriptionResponse
+class InitInscriptionResponse
 {
-    /** @var oneClickInscriptionOutput */
+    /** @var OneClickInscriptionOutput */
     public $return;
 }

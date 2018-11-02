@@ -1,7 +1,7 @@
 <?php
 namespace Freshwork\Transbank\WebpayOneClick;
 
-class oneClickInscriptionInput
+class OneClickInscriptionInput
 {
     /** @var string */
     public $email;

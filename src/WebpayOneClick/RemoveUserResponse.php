@@ -1,7 +1,7 @@
 <?php
 namespace Freshwork\Transbank\WebpayOneClick;
 
-class removeUserResponse
+class RemoveUserResponse
 {
     /** @var boolean */
     public $return;

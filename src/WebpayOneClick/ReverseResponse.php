@@ -1,7 +1,7 @@
 <?php
 namespace Freshwork\Transbank\WebpayOneClick;
 
-class reverseResponse
+class ReverseResponse
 {
-    public $return;//boolean
+    public $return; // boolean
 }
