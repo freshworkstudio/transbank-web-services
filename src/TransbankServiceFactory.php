@@ -94,5 +94,4 @@ class TransbankServiceFactory
         $service = new WebpayCaptureNullifyWebService($certificationBag, $wsdlUrl);
         return new WebpayCaptureNullify($service);
     }
-
 }
