@@ -56,6 +56,18 @@ class CertificationBagFactory
     }
 
     /**
+     * @return CertificationBag
+     */
+    public static function integrationWebpayDeferred()
+    {
+        $private_key = dirname(__FILE__) . '/certs/webpay-deferred-integration/597044444404.key';
+        $client_certificate = dirname(__FILE__) . '/certs/webpay-deferred-integration/597044444404.crt';
+        $server_certificate = dirname(__FILE__) . '/certs/webpay-deferred-integration/transbank.pem';
+
+        return new CertificationBag($private_key, $client_certificate, $server_certificate, CertificationBag::INTEGRATION);
+    }
+
+    /**
      * Create a production instance of keys and certificates
      *
      * @param string $client_private_key Content or path of client private key

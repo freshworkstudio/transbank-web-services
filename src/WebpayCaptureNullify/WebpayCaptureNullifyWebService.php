@@ -20,7 +20,7 @@ use Freshwork\Transbank\TransbankWebService;
 class WebpayCaptureNullifyWebService extends TransbankWebService
 {
     /** @const INTEGRATION_WSDL Development WSDL URL */
-    const INTEGRATION_WSDL  = 'https://tbk.orangepeople.cl/WSWebpayTransaction/cxf/WSCommerceIntegrationService?wsdl';
+    const INTEGRATION_WSDL  = 'https://webpay3gint.transbank.cl/WSWebpayTransaction/cxf/WSCommerceIntegrationService?wsdl';
 
     /** @const PRODUCTION_WSDL Production WSDL URL */
     const PRODUCTION_WSDL   = 'https://webpay3g.transbank.cl/WSWebpayTransaction/cxf/WSCommerceIntegrationService?wsdl';
