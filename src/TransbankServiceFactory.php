@@ -9,6 +9,7 @@
 
 namespace Freshwork\Transbank;
 
+use Freshwork\Transbank\WebpayCaptureNullify\WebpayCaptureNullifyWebService;
 use Freshwork\Transbank\WebpayStandard\WebpayStandardWebService;
 use Freshwork\Transbank\WebpayOneClick\WebpayOneClickWebService;
 
@@ -71,4 +72,27 @@ class TransbankServiceFactory
         $service = new WebpayStandardWebService($certificationBag, $wsdlUrl);
         return new WebpayMall($service);
     }
+
+    /**
+     * @param CertificationBag $certificationBag
+     * @param null $wsdlUrl
+     * @return WebpayNormal
+     */
+    public static function deferred(CertificationBag $certificationBag, $wsdlUrl = null)
+    {
+        $service = new WebpayStandardWebService($certificationBag, $wsdlUrl);
+        return new WebpayNormal($service);
+    }
+
+    /**
+     * @param CertificationBag $certificationBag
+     * @param null $wsdlUrl
+     * @return WebpayCaptureNullify
+     */
+    public static function captureNullify(CertificationBag $certificationBag, $wsdlUrl = null)
+    {
+        $service = new WebpayCaptureNullifyWebService($certificationBag, $wsdlUrl);
+        return new WebpayCaptureNullify($service);
+    }
+
 }
