@@ -46,7 +46,7 @@ class WebpayCaptureNullifyWebService extends TransbankWebService
         $nullify = new Nullify();
         $nullify->nullificationInput = $nullificationInput;
 
-        return $this->callSoapMethod('nullify', $initInscription);
+        return $this->callSoapMethod('nullify', $nullify);
     }
 
     /**
@@ -61,6 +61,6 @@ class WebpayCaptureNullifyWebService extends TransbankWebService
         $capture = new Capture();
         $capture->captureInput = $captureInput;
 
-        return $this->callSoapMethod('capture', $initInscription);
+        return $this->callSoapMethod('capture', $capture);
     }
 }
