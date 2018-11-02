@@ -1,8 +1,8 @@
 <?php
 namespace Freshwork\Transbank\WebpayStandard;
 
-class InitTransactionResponse
+class TransactionResultResponse
 {
-    /** @var  InitTransactionOutput */
+    /** @var  transactionResultOutput */
     public $return;
 }

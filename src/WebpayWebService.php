@@ -2,11 +2,11 @@
 namespace Freshwork\Transbank;
 
 use Freshwork\Transbank\Exceptions\EmptyTransactionException;
-use Freshwork\Transbank\WebpayStandard\acknowledgeTransactionResponse;
+use Freshwork\Transbank\WebpayStandard\AcknowledgeTransactionResponse;
 use Freshwork\Transbank\WebpayStandard\WebpayStandardWebService;
-use Freshwork\Transbank\WebpayStandard\wpmDetailInput;
-use Freshwork\Transbank\WebpayStandard\wsInitTransactionInput;
-use Freshwork\Transbank\WebpayStandard\wsTransactionDetail;
+use Freshwork\Transbank\WebpayStandard\DetailInput;
+use Freshwork\Transbank\WebpayStandard\InitTransactionInput;
+use Freshwork\Transbank\WebpayStandard\TransactionDetail;
 
 /**
  * Class WebpayPlus
@@ -26,11 +26,11 @@ class WebpayWebService extends TransbankService
     protected $service;
 
     /**
-     * @var wsTransactionDetail[]
+     * @var TransactionDetail[]
      */
     protected $transactionDetails = [];
 
-    /** @var  wpmDetailInput */
+    /** @var  DetailInput */
     protected $inscriptionInformation;
 
     /**
@@ -51,10 +51,12 @@ class WebpayWebService extends TransbankService
      */
     public function addTransactionDetail($amount, $buyOrder, $commerceCode = null)
     {
-        $detail = new wsTransactionDetail();
+        $detail = new TransactionDetail();
         $detail->amount = $amount;
         $detail->buyOrder = $buyOrder;
-        $detail->commerceCode = $commerceCode ? $commerceCode : SecurityHelper::getCommonName($this->service->getCertificationBag()->getClientCertificate());
+        $detail->commerceCode = $commerceCode ? $commerceCode : SecurityHelper::getCommonName(
+            $this->service->getCertificationBag()->getClientCertificate()
+        );
         $this->transactionDetails[] = $detail;
 
         return $this;
@@ -74,9 +76,19 @@ class WebpayWebService extends TransbankService
      *
      * @return $this
      */
-    public function addInscriptionInfo($serviceId, $rut, $firstName, $lastName1, $lastName2, $clientEmail, $phoneNumber, $expirationDate, $commerceMail, $uf = false)
-    {
-        $detail = new wpmDetailInput();
+    public function addInscriptionInfo(
+        $serviceId,
+        $rut,
+        $firstName,
+        $lastName1,
+        $lastName2,
+        $clientEmail,
+        $phoneNumber,
+        $expirationDate,
+        $commerceMail,
+        $uf = false
+    ) {
+        $detail = new DetailInput();
         $detail->serviceId = $serviceId;
         $detail->cardHolderId = $rut;
         $detail->cardHolderName = $firstName;
@@ -107,11 +119,17 @@ class WebpayWebService extends TransbankService
      * @return WebpayStandard\wsInitTransactionOutput
      * @throws EmptyTransactionException
      */
-    public function initTransaction($returnURL, $finalURL, $sessionId = null, $transactionType = self::TIENDA_NORMAL, $buyOrder = null, $commerceCode = null)
-    {
+    public function initTransaction(
+        $returnURL,
+        $finalURL,
+        $sessionId = null,
+        $transactionType = self::TIENDA_NORMAL,
+        $buyOrder = null,
+        $commerceCode = null
+    ) {
         $this->validateTransactionDetails();
 
-        $input = new wsInitTransactionInput();
+        $input = new InitTransactionInput();
 
         $this->validateParametersBasedOnTransactionType($transactionType, $buyOrder, $commerceCode, $input);
 
@@ -164,7 +182,9 @@ class WebpayWebService extends TransbankService
     protected function validateTransactionDetails()
     {
         if (count($this->transactionDetails) <= 0) {
-            throw new EmptyTransactionException('You have to add at least one detail to the transaction with ->addDetail(...)');
+            throw new EmptyTransactionException(
+                'You have to add at least one detail to the transaction with ->addDetail(...)'
+            );
         }
     }
 
@@ -180,10 +200,15 @@ class WebpayWebService extends TransbankService
     {
         if ($transactionType == self::TIENDA_MALL) {
             if (!$commerceCode) {
-                $commerceCode = SecurityHelper::getCommonName($this->service->getCertificationBag()->getClientCertificate());
+                $commerceCode = SecurityHelper::getCommonName(
+                    $this->service->getCertificationBag()->getClientCertificate()
+                );
             }
             if (!$buyOrder) {
-                throw new \InvalidArgumentException('Mall transactions needs a buyOrder defined for the transaction itself and a buyOrder per transactionDetail. Please add a buyOrder on initTransaction()');
+                throw new \InvalidArgumentException(
+                    'Mall transactions needs a buyOrder defined for the transaction itself 
+                    and a buyOrder per transactionDetail. Please add a buyOrder on initTransaction()'
+                );
             }
 
             $input->buyOrder = $buyOrder;
@@ -192,7 +217,10 @@ class WebpayWebService extends TransbankService
 
         if ($transactionType == self::PATPASS) {
             if (!$this->inscriptionInformation) {
-                throw new \InvalidArgumentException('Patpass transactions needs inscriptionInformation to perform the contract with the user. You need to call ->addInscriptionInfo(..) before ->initInscription().');
+                throw new \InvalidArgumentException(
+                    'Patpass transactions needs inscriptionInformation to perform the contract with the user. 
+                    You need to call ->addInscriptionInfo(..) before ->initInscription().'
+                );
             }
 
             $input->wPMDetail = $this->inscriptionInformation;

@@ -84,7 +84,8 @@ abstract class TransbankWebService
         $validation =  $soapValidation->isValid(); //Esto valida si el mensaje está firmado por Transbank
 
         if ($validation !== true) {
-            $msg = 'Transbank response fails on the certificate signature validation. Response does not comes from Transbank or the certificate expired.';
+            $msg = 'Transbank response fails on the certificate signature validation. 
+            Response does not comes from Transbank or the certificate expired.';
             LogHandler::log($msg, LoggerInterface::LEVEL_ERROR);
 
             throw new InvalidCertificateException($msg);
@@ -109,14 +110,22 @@ abstract class TransbankWebService
             $response = call_user_func_array([$this->getSoapClient(), $method], $args);
             LogHandler::log($response, LoggerInterface::LEVEL_INFO, 'response_object');
         } catch (\SoapFault $e) {
-            LogHandler::log('SOAP ERROR (' . $e->faultcode . '): ' . $e->getMessage(), LoggerInterface::LEVEL_ERROR, 'error');
+            LogHandler::log(
+                'SOAP ERROR (' . $e->faultcode . '): ' . $e->getMessage(),
+                LoggerInterface::LEVEL_ERROR,
+                'error'
+            );
             throw new \SoapFault($e->faultcode, $e->faultstring);
         }
 
         //Validate the signature of the response
         $this->validateResponseCertificate();
 
-        LogHandler::log("Response certificate validated successfully", LoggerInterface::LEVEL_INFO, 'response_certificate_validated');
+        LogHandler::log(
+            "Response certificate validated successfully",
+            LoggerInterface::LEVEL_INFO,
+            'response_certificate_validated'
+        );
 
         return $response;
     }
