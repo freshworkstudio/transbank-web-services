@@ -26,11 +26,11 @@ class WebpayWebService extends TransbankService
     protected $service;
 
     /**
-     * @var wsTransactionDetail[]
+     * @var TransactionDetail[]
      */
     protected $transactionDetails = [];
 
-    /** @var  wpmDetailInput */
+    /** @var  DetailInput */
     protected $inscriptionInformation;
 
     /**
