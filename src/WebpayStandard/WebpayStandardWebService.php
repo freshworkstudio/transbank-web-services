@@ -28,12 +28,10 @@ class WebpayStandardWebService extends TransbankWebService
         'wsInitTransactionInput' => InitTransactionInput::class,
         'wsInitTransactionOutput' => InitTransactionOutput::class,
         'wpmDetailInput' => DetailInput::class,
-
         'getTransactionResult' => TransactionResult::class,
         'getTransactionResultResponse' => TransactionResultResponse::class,
         'transactionResultOutput' => TransactionResultOutput::class,
         'cardDetail' => CardDetail::class,
-
         'wsTransactionDetailOutput' => TransactionDetailOutput::class,
         'wsTransactionDetail' => TransactionDetail::class,
         'acknowledgeTransaction' => AcknowledgeTransaction::class,
