@@ -1,8 +1,8 @@
 <?php
 namespace Freshwork\Transbank\WebpayOneClick;
 
-class authorize
+class Authorize
 {
-    /** @var oneClickPayInput */
+    /** @var OneClickPayInput */
     public $arg0;
 }

@@ -1,11 +1,11 @@
 <?php
 namespace Freshwork\Transbank\WebpayOneClick;
 
-class oneClickPayOutput
+class OneClickPayOutput
 {
-    public $authorizationCode;//string
-    public $creditCardType;//creditCardType
-    public $last4CardDigits;//string
-    public $responseCode;//int
-    public $transactionId;//long
+    public $authorizationCode; // string
+    public $creditCardType; // CreditCardType
+    public $last4CardDigits; // string
+    public $responseCode; // int
+    public $transactionId; // long
 }

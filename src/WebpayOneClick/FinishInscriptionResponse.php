@@ -2,14 +2,14 @@
 namespace Freshwork\Transbank\WebpayOneClick;
 
 /**
- * Class finishInscriptionResponse
+ * Class FinishInscriptionResponse
  * @package Freshwork\Transbank\WebpayOneClick
  */
-class finishInscriptionResponse
+class FinishInscriptionResponse
 {
 
     /**
-     * @var oneClickFinishInscriptionOutput
+     * @var OneClickFinishInscriptionOutput
      */
     public $return;
 }

@@ -1,7 +1,7 @@
 <?php
 namespace Freshwork\Transbank\WebpayOneClick;
 
-class oneClickReverseInput
+class OneClickReverseInput
 {
-    public $buyorder;//long
+    public $buyorder; // long
 }

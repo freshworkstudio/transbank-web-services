@@ -1,13 +1,13 @@
 <?php
 namespace Freshwork\Transbank\WebpayOneClick;
 
-class oneClickFinishInscriptionOutput
+class OneClickFinishInscriptionOutput
 {
 
     /** @var string */
     public $authCode;
 
-    /** @var string creditCardType */
+    /** @var string CreditCardType */
     public $creditCardType;
 
     /** @var string */

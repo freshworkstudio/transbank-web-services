@@ -2,13 +2,13 @@
 namespace Freshwork\Transbank\WebpayOneClick;
 
 /**
- * Class authorizeResponse
+ * Class AuthorizeResponse
  * @package Freshwork\Transbank\WebpayOneClick
  */
-class authorizeResponse
+class AuthorizeResponse
 {
     /**
-     * @var oneClickPayOutput
+     * @var OneClickPayOutput
      */
     public $return;
 }

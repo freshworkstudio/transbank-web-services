@@ -2,13 +2,13 @@
 namespace Freshwork\Transbank\WebpayOneClick;
 
 /**
- * Class codeReverseOneClickResponse
+ * Class CodeReverseOneClickResponse
  * @package Freshwork\Transbank\WebpayOneClick
  */
-class codeReverseOneClickResponse
+class CodeReverseOneClickResponse
 {
     /**
-     * @var oneClickReverseOutput
+     * @var OneClickReverseOutput
      */
     public $return;
 }
