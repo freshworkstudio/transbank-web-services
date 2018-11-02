@@ -64,7 +64,12 @@ class CertificationBagFactory
         $client_certificate = dirname(__FILE__) . '/certs/webpay-deferred-integration/597044444404.crt';
         $server_certificate = dirname(__FILE__) . '/certs/webpay-deferred-integration/transbank.pem';
 
-        return new CertificationBag($private_key, $client_certificate, $server_certificate, CertificationBag::INTEGRATION);
+        return new CertificationBag(
+            $private_key,
+            $client_certificate,
+            $server_certificate,
+            CertificationBag::INTEGRATION
+        );
     }
 
     /**
