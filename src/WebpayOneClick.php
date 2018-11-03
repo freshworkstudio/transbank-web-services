@@ -1,4 +1,12 @@
 <?php
+/**
+ * Clase WebpayOneClick
+ *
+ * @package Freshwork\Transbank
+ * @author Gonzalo De Spirito <gonzunigad@gmail.com>
+ * @version 0.1 (06/07/2016)
+ */
+
 namespace Freshwork\Transbank;
 
 use Freshwork\Transbank\WebpayOneClick\oneClickFinishInscriptionInput;
@@ -9,19 +17,20 @@ use Freshwork\Transbank\WebpayOneClick\oneClickReverseInput;
 use Freshwork\Transbank\WebpayOneClick\WebpayOneClickWebService;
 
 /**
- * Class WebpayOneClick
+ * Clase WebpayOneClick
  * @package Freshwork\Transbank
  */
 class WebpayOneClick extends TransbankService
 {
     /**
-     * @var WebpayOneClickWebService
+     * @var WebpayOneClickWebService Cliente SOAP involucrado en la comunicación de OneClick
      */
     private $service;
 
     /**
-     * WebpayOneClick constructor.
-     * @param WebpayOneClickWebService $service
+     * WebpayOneClick constructor
+     *
+     * @param WebpayOneClickWebService $service Instancia del cliente SOAP de OneClick
      */
     public function __construct(WebpayOneClickWebService $service)
     {
@@ -29,15 +38,14 @@ class WebpayOneClick extends TransbankService
     }
 
     /**
-     * Permite realizar la inscripción del tarjetahabiente e información de su tarjeta de crédito.
-     * Retorna como respuesta un token que representa la transacción de inscripción y una URL (UrlWebpay),
-     * que corresponde a la URL de inscripción de One Click.
-     * Una vez que se llama a este servicio Web, el usuario debe ser redireccionado vía POST a urlWebpay
-     * con parámetro TBK_TOKEN igual al token obtenido.
+     * Permite realizar la inscripción del tarjetahabiente e información de su tarjeta de crédito
      *
-     * @param string $username Username
-     * @param string $email User Email
-     * @param string $responseURL Any Url
+     * Retorna como respuesta un objeto que contiene un token que representa la transacción de inscripción
+     * y una URL que corresponde a la URL de inscripción de OneClick.
+     *
+     * @param string $username Nombre de usuario del cliente
+     * @param string $email Correo electrónico del cliente
+     * @param string $responseURL URL del comercio a la cual Webpay redireccionará posterior al proceso de inscripción
      *
      * @return WebpayOneClick\OneClickInscriptionOutput
      */
@@ -51,13 +59,12 @@ class WebpayOneClick extends TransbankService
     }
 
     /**
-     * Permite finalizar el proceso de inscripción del tarjetahabiente en Oneclick.
-     * Entre otras cosas, retorna el identificador del usuario en Oneclick, el cual será utilizado
-     * para realizar las transacciones de pago.
-     * Una vez terminado el flujo de inscripción en Transbank el usuario es enviado a la URL de fin de
-     * inscripción que definió el comercio. En ese instante el comercio debe llamar a finishInscription.
+     * Finaliza el proceso de inscripción del tarjetahabiente en Oneclick.
      *
-     * @param string $token Token received on the responseURL defined on initInscription
+     * Retorna un objeto que contiene, entre otras cosas, el token del usuario en Oneclick que deberá ser utilizado
+     * para realizar las transacciones de pago.
+     *
+     * @param string $token Token recibido luego de la inscripción del cliente
      *
      * @return WebpayOneClick\OneClickFinishInscriptionOutput
      */
@@ -74,13 +81,15 @@ class WebpayOneClick extends TransbankService
     }
 
     /**
-     * Permite realizar transacciones de pago. Retorna el resultado de la autorización.
-     * Este método que debe ser ejecutado, cada vez que el usuario selecciona pagar con Oneclick.
+     * Reliza transacciones de pago.
      *
-     * @param int $amount
-     * @param string $buyOrder
-     * @param string $username
-     * @param string $userToken
+     * Retorna un objeto que contiene el resultado de la autorización y debe ser ejecutado cada vez que el
+     * usuario selecciona pagar con Oneclick.
+     *
+     * @param int $amount Monto del pago en pesos
+     * @param string $buyOrder Orden de compra de la tienda
+     * @param string $username Nombre de usuario del cliente
+     * @param string $userToken Token de OneClick asociado al cliente
      *
      * @return WebpayOneClick\OneClickPayOutput
      */
@@ -95,12 +104,14 @@ class WebpayOneClick extends TransbankService
         return $this->service->authorize($authorizeInput)->return;
     }
 
+
     /**
-     * Permite reversar una transacción de venta autorizada con anterioridad.
-     * Este método retorna como respuesta un identificador único de la transacción de reversa.
+     * Reversa una transacción de venta autorizada con anterioridad
      *
-     * @param string $buyOrder
-     * @return WebpayOneClick\oneClickReverseOutput
+     * Retorna un objeto que contiene un identificador único de la transacción de reversa
+     *
+     * @param string $buyOrder Orden de compra de la tienda
+     * @return WebpayOneClick\OneClickReverseOutput
      */
     public function codeReverseOneClick($buyOrder)
     {
@@ -111,11 +122,10 @@ class WebpayOneClick extends TransbankService
     }
 
     /**
-     * Permite eliminar una inscripción de usuario en Transbank
+     * Elimina una inscripción de usuario en Transbank
      *
-     * @param string $userToken
-     * @param string $username
-     *
+     * @param string $userToken Token de OneClick asociado al cliente
+     * @param string $username Nombre de usuario del cliente
      * @return bool
      */
     public function removeUser($userToken, $username)
