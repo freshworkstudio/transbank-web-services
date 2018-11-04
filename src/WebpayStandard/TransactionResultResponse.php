@@ -10,6 +10,11 @@
 
 namespace Freshwork\Transbank\WebpayStandard;
 
+/**
+ * Clase TransactionResultResponse
+ *
+ * @package Freshwork\Transbank\WebpayStandard
+ */
 class TransactionResultResponse
 {
     /** @var TransactionResultOutput Detalle del resultado de la transacción */
