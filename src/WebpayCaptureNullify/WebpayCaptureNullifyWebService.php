@@ -1,27 +1,31 @@
 <?php
+/**
+ * Clase WebpayCaptureNullifyWebService
+ *
+ * @package Freshwork\Transbank
+ * @subpackage WebpayCaptureNullify
+ * @author Luis Urrutia <luis@urrutia.me>
+ * @version 1.1.0
+ */
+
 namespace Freshwork\Transbank\WebpayCaptureNullify;
 
 use Freshwork\Transbank\TransbankWebService;
 
 /**
- * Class WebpayCaptureNullifyWebService
+ * Clase WebpayCaptureNullifyWebService
+ *
  * @package Freshwork\Transbank\WebpayCaptureNullify
  */
 class WebpayCaptureNullifyWebService extends TransbankWebService
 {
-    /**
-     * Integration URL
-     */
+    /** @const INTEGRATION_WSDL URL del WSDL de integración */
     const INTEGRATION_WSDL  = 'https://tbk.orangepeople.cl/WSWebpayTransaction/cxf/WSCommerceIntegrationService?wsdl';
 
-    /**
-     * Production URL
-     */
+    /** @const PRODUCTION_WSDL URL del WSDL de producción */
     const PRODUCTION_WSDL   = 'https://webpay3g.transbank.cl/WSWebpayTransaction/cxf/WSCommerceIntegrationService?wsdl';
 
-    /**
-     * @var array
-     */
+    /** @var array $classmap Listado de asociaciones de tipos del WSDL a clases */
     private static $classmap = array(
         'nullify' => Nullify::class,
         'nullificationInput' => NullificationInput::class,
@@ -35,7 +39,7 @@ class WebpayCaptureNullifyWebService extends TransbankWebService
     );
 
     /**
-     * Método que permite anular una venta normal
+     * Anular una venta normal
      *
      * @param NullificationInput $nullificationInput
      * @return mixed
@@ -50,7 +54,7 @@ class WebpayCaptureNullifyWebService extends TransbankWebService
     }
 
     /**
-     * Método que permite realizar una única captura por autorización
+     * Realiza una única captura por autorización
      *
      * @param CaptureInput $captureInput
      * @return mixed
