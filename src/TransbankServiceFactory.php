@@ -1,19 +1,29 @@
 <?php
+/**
+ * Clase TransbankServiceFactory
+ *
+ * @package Freshwork\Transbank
+ * @author Gonzalo De Spirito <gonzunigad@gmail.com>
+ * @version 0.1 (06/07/2016)
+ */
+
 namespace Freshwork\Transbank;
 
 use Freshwork\Transbank\WebpayStandard\WebpayStandardWebService;
 use Freshwork\Transbank\WebpayOneClick\WebpayOneClickWebService;
 
 /**
- * Class TransbankServiceFactory
+ * Clase TransbankServiceFactory
  * @package Freshwork\Transbank
  */
 class TransbankServiceFactory
 {
 
     /**
-     * @param CertificationBag $certificationBag
-     * @param string|null $wsdlUrl
+     * Genera instancia de WebpayOneClick
+     *
+     * @param CertificationBag $certificationBag Instancia con certificados y llaves
+     * @param string|null $wsdlUrl URL del WSDL
      * @return WebpayOneClick
      */
     public static function oneclick(CertificationBag $certificationBag, $wsdlUrl = null)
@@ -24,7 +34,10 @@ class TransbankServiceFactory
 
 
     /**
-     * @param CertificationBag $certificationBag
+     * Genera una instancia de WebpayPatPass
+     *
+     * @param CertificationBag $certificationBag Instancia con certificados y llaves
+     * @param string|null $wsdlUrl URL del WSDL
      * @return WebpayPatPass
      */
     public static function patpass(CertificationBag $certificationBag, $wsdlUrl = null)
@@ -34,8 +47,10 @@ class TransbankServiceFactory
     }
 
     /**
-     * @param CertificationBag $certificationBag
-     * @param null $wsdlUrl
+     * Genera una instancia de WebpayNormal
+     *
+     * @param CertificationBag $certificationBag Instancia con certificados y llaves
+     * @param string|null $wsdlUrl URL del WSDL
      * @return WebpayNormal
      */
     public static function normal(CertificationBag $certificationBag, $wsdlUrl = null)
@@ -45,8 +60,10 @@ class TransbankServiceFactory
     }
 
     /**
-     * @param CertificationBag $certificationBag
-     * @param null $wsdlUrl
+     * Genera una instancia de WebpayMall
+     *
+     * @param CertificationBag $certificationBag Instancia con certificados y llaves
+     * @param string|null $wsdlUrl URL del WSDL
      * @return WebpayMall
      */
     public static function mall(CertificationBag $certificationBag, $wsdlUrl = null)

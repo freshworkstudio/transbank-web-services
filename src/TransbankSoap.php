@@ -1,4 +1,12 @@
 <?php
+/**
+ * Clase TransbankSoap
+ *
+ * @package Freshwork\Transbank
+ * @author Gonzalo De Spirito <gonzunigad@gmail.com>
+ * @version 0.1 (06/07/2016)
+ */
+
 namespace Freshwork\Transbank;
 
 use DOMDocument;
@@ -9,25 +17,22 @@ use WSSESoap;
 use XMLSecurityKey;
 
 /**
- * Class TransbankSoap
+ * Clase TransbankSoap
+ *
  * @package Freshwork\Transbank
  */
 class TransbankSoap extends SoapClient
 {
-    /**
-     * Client's private key
-     * @var string
-     */
+    /** @var string $privateKey Ruta o contenido de la llave privada del cliente */
     protected $privateKey;
 
-    /**
-     * Client's public certificate
-     * @var string
-     */
+    /** @var string $certificate Ruta o contenido del certificado público del cliente */
     protected $certificate;
 
     /**
-     * @return mixed
+     * Obtiene la ruta o contenido de la llave privada del cliente
+     *
+     * @return string
      */
     public function getPrivateKey()
     {
@@ -35,7 +40,9 @@ class TransbankSoap extends SoapClient
     }
 
     /**
-     * @param mixed $privateKey
+     * Establece la ruta o contenido de la llave privada del cliente
+     *
+     * @param string $privateKey
      */
     public function setPrivateKey($privateKey)
     {
@@ -43,7 +50,9 @@ class TransbankSoap extends SoapClient
     }
 
     /**
-     * @return mixed
+     * Obtiene la ruta o contenido del certificado público del cliente
+     *
+     * @return string
      */
     public function getCertificate()
     {
@@ -51,7 +60,9 @@ class TransbankSoap extends SoapClient
     }
 
     /**
-     * @param mixed $certificate
+     * Establece la ruta o contenido del certificado público del cliente
+     *
+     * @param string $certificate
      */
     public function setCertificate($certificate)
     {
@@ -59,15 +70,17 @@ class TransbankSoap extends SoapClient
     }
 
     /**
-     * @param string $request
-     * @param string $location
-     * @param string $saction
-     * @param int $version
-     * @param null $one_way
+     * Realiza una petición SOAP
+     *
+     * @param string $request XML de la petición
+     * @param string $location URL donde realizar la petición
+     * @param string $action Acción del SOAP
+     * @param int $version Versión del SOAP
+     * @param int $oneWay Establece si existirá un retorno
      * @return string
      * @throws \Exception
      */
-    public function __doRequest($request, $location, $saction, $version, $one_way = null)
+    public function __doRequest($request, $location, $action, $version, $oneWay = 0)
     {
         LogHandler::log([
             'location' => $location,
@@ -95,9 +108,9 @@ class TransbankSoap extends SoapClient
         $retVal = parent::__doRequest(
             $signed_request,
             $location,
-            $saction,
+            $action,
             $version,
-            $one_way
+            $oneWay
         );
         $doc = new DOMDocument();
         $doc->loadXML($retVal);
