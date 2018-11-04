@@ -89,7 +89,7 @@ class WebpayWebService extends TransbankService
      * @param string $phoneNumber Teléfono del cliente
      * @param string $expirationDate Fecha de expiración de la suscripción
      * @param string $commerceMail Correo electrónico del comercio
-     * @param bool $uf Idica si el cobro es realizado en UF
+     * @param bool $uf Indica si el cobro es realizado en UF
      * @return $this
      */
     public function addInscriptionInfo(
@@ -127,7 +127,7 @@ class WebpayWebService extends TransbankService
      * @param string $returnURL URL del comercio, a la cual Webpay redireccionará posterior al proceso de autorización
      * @param string $finalURL URL del comercio a la cual Webpay redireccionará posterior al voucher de éxito de Webpay
      * @param string|null $sessionId Identificador de sesión, uso interno de comercio
-     * @param string $transactionType Indica el tipo de transacción
+     * @param string $transactionType Tipo de transacción
      * @param string|null $buyOrder Orden de compra de la tienda
      * @param string|null $commerceCode Código del comercio
      *

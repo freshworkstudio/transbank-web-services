@@ -17,6 +17,8 @@ namespace Freshwork\Transbank;
 class SecurityHelper
 {
     /**
+     * Obtiene el CN del certificado
+     *
      * @param string $X509Cert Ruta o contenido del certificado público
      * @return string
      */
