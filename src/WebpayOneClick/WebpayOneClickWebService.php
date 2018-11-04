@@ -1,27 +1,31 @@
 <?php
+/**
+ * Clase WebpayOneClickWebService
+ *
+ * @package Freshwork\Transbank
+ * @subpackage WebpayOneClick
+ * @author Gonzalo De Spirito <gonzunigad@gmail.com>
+ * @version 0.1 (06/07/2016)
+ */
+
 namespace Freshwork\Transbank\WebpayOneClick;
 
 use Freshwork\Transbank\TransbankWebService;
 
 /**
- * Class WebpayOneClick
+ * Clase WebpayOneClickWebService
+ *
  * @package Freshwork\Transbank\WebpayOneClick
  */
 class WebpayOneClickWebService extends TransbankWebService
 {
-    /**
-     * Integration URL
-     */
+    /** @const INTEGRATION_WSDL URL del WSDL de integración */
     const INTEGRATION_WSDL = 'https://webpay3gint.transbank.cl/webpayserver/wswebpay/OneClickPaymentService?wsdl';
 
-    /**
-     * Production URL
-     */
+    /** @const PRODUCTION_WSDL URL del WSDL de producción */
     const PRODUCTION_WSDL = 'https://webpay3g.transbank.cl/webpayserver/wswebpay/OneClickPaymentService?wsdl';
 
-    /**
-     * @var array
-     */
+    /** @var array $classmap Listado de asociaciones de tipos del WSDL a clases */
     protected static $classmap = array(
         'removeUser' => RemoveUser::class,
         'oneClickRemoveUserInput' => OneClickRemoveUserInput::class,
@@ -49,14 +53,14 @@ class WebpayOneClickWebService extends TransbankWebService
 
 
     /**
-     * Permite realizar la inscripción del tarjetahabiente e información de su tarjeta de crédito.
-     * Retorna como respuesta un token que representa la transacción de inscripción y una URL (UrlWebpay),
-     * que corresponde a la URL de inscripción de One Click.
-     * Una vez que se llama a este servicio Web, el usuario debe ser redireccionado vía POST a urlWebpay
-     * con parámetro TBK_TOKEN igual al token obtenido.
+     * Realiza la inscripción del tarjetahabiente e información de su tarjeta de crédito
      *
-     * @param OneClickInscriptionInput $oneClickInscriptionInput
-     * @return InitInscriptionResponse
+     * Retorna como respuesta un token de inscripción y una URL, que corresponde a la URL de inscripción de One Click.
+     *
+     * @param oneClickInscriptionInput $oneClickInscriptionInput Detalles de la inscripción
+     * @return mixed
+     * @throws \Freshwork\Transbank\Exceptions\InvalidCertificateException
+     * @throws \SoapFault
      */
     public function initInscription(oneClickInscriptionInput $oneClickInscriptionInput)
     {
@@ -66,14 +70,14 @@ class WebpayOneClickWebService extends TransbankWebService
     }
 
     /**
-     * Permite finalizar el proceso de inscripción del tarjetahabiente en Oneclick.
-     * Entre otras cosas, retorna el identificador del usuario en Oneclick, el cual será utilizado
-     * para realizar las transacciones de pago.
-     * Una vez terminado el flujo de inscripción en Transbank el usuario es enviado a la URL de fin de inscripción
-     * que definió el comercio. En ese instante el comercio debe llamar a finishInscription.
+     * Finaliza el proceso de inscripción del tarjetahabiente en Oneclick
      *
-     * @param OneClickFinishInscriptionInput $finishInscriptionInput
-     * @return FinishInscriptionResponse
+     * Retorna el identificador del usuario en Oneclick, el cual será utilizado para realizar las transacciones de pago.
+     *
+     * @param OneClickFinishInscriptionInput $finishInscriptionInput Detalles para la finalización de inscripción
+     * @return mixed
+     * @throws \Freshwork\Transbank\Exceptions\InvalidCertificateException
+     * @throws \SoapFault
      */
     public function finishInscription(OneClickFinishInscriptionInput $finishInscriptionInput)
     {
@@ -84,11 +88,15 @@ class WebpayOneClickWebService extends TransbankWebService
     }
 
     /**
-     * Permite realizar transacciones de pago. Retorna el resultado de la autorización.
-     * Este método que debe ser ejecutado, cada vez que el usuario selecciona pagar con Oneclick.
+     * Reliza transacciones de pago.
      *
-     * @param \Freshwork\Transbank\WebpayOneClick\OneClickPayInput $authorizeInput
-     * @return \Freshwork\Transbank\WebpayOneClick\AuthorizeResponse
+     * Retorna un objeto que contiene el resultado de la autorización y debe ser ejecutado cada vez que el
+     * usuario selecciona pagar con Oneclick.
+     *
+     * @param OneClickPayInput $authorizeInput Detalles de la transacción a autorizar
+     * @return mixed
+     * @throws \Freshwork\Transbank\Exceptions\InvalidCertificateException
+     * @throws \SoapFault
      */
     public function authorize(OneClickPayInput $authorizeInput)
     {
@@ -98,11 +106,14 @@ class WebpayOneClickWebService extends TransbankWebService
     }
 
     /**
-     * Permite reversar una transacción de venta autorizada con anterioridad.
-     * Este método retorna como respuesta un identificador único de la transacción de reversa.
+     * Reversa una transacción de venta autorizada con anterioridad
      *
-     * @param \Freshwork\Transbank\WebpayOneClick\OneClickReverseInput $codeReverseOneClickInput
-     * @return \Freshwork\Transbank\WebpayOneClick\CodeReverseOneClickResponse
+     * Retorna un objeto que contiene un identificador único de la transacción de reversa
+     *
+     * @param OneClickReverseInput $codeReverseOneClickInput Detalles de la reversa a realizar
+     * @return mixed
+     * @throws \Freshwork\Transbank\Exceptions\InvalidCertificateException
+     * @throws \SoapFault
      */
     public function codeReverseOneClick(OneClickReverseInput $codeReverseOneClickInput)
     {
@@ -113,10 +124,12 @@ class WebpayOneClickWebService extends TransbankWebService
     }
 
     /**
-     * Permite eliminar una inscripción de usuario en Transbank
+     * Elimina una inscripción de usuario en Transbank
      *
-     * @param \Freshwork\Transbank\WebpayOneClick\OneClickRemoveUserInput $removeUserInput
-     * @return removeUserResponse
+     * @param OneClickRemoveUserInput $removeUserInput Detalles del usuario a eliminar
+     * @return mixed
+     * @throws \Freshwork\Transbank\Exceptions\InvalidCertificateException
+     * @throws \SoapFault
      */
     public function removeUser(OneClickRemoveUserInput $removeUserInput)
     {
