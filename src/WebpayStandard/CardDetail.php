@@ -1,18 +1,25 @@
 <?php
+/**
+ * Clase CardDetail
+ *
+ * @package Freshwork\Transbank
+ * @subpackage WebpayStandard
+ * @author Gonzalo De Spirito <gonzunigad@gmail.com>
+ * @version 0.1 (06/07/2016)
+ */
+
 namespace Freshwork\Transbank\WebpayStandard;
 
 /**
- * Class CardDetail
+ * Clase CardDetail
+ *
  * @package Freshwork\Transbank\WebpayStandard
  */
 class CardDetail
 {
-    /**
-     * @var string
-     */
+    /** @var string $cardNumber Últimos 4 dígitos o numeración completa de la tarjeta */
     public $cardNumber;
-    /**
-     * @var string
-     */
-    public $cardExpirationDate; //string
+
+    /** @var string $cardExpirationDate Fecha de expiración de la tarjeta */
+    public $cardExpirationDate;
 }

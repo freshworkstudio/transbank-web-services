@@ -1,50 +1,49 @@
 <?php
+/**
+ * Clase DetailInput
+ *
+ * @package Freshwork\Transbank
+ * @subpackage WebpayStandard
+ * @author Gonzalo De Spirito <gonzunigad@gmail.com>
+ * @version 0.1 (06/07/2016)
+ */
+
 namespace Freshwork\Transbank\WebpayStandard;
 
 /**
- * Class DetailInput
+ * Clase DetailInput
+ *
  * @package Freshwork\Transbank\WebpayStandard
  */
 class DetailInput
 {
-    /**
-     * @var string
-     */
+    /** @var string $serviceId Identificador del servicio */
     public $serviceId;
-    /**
-     * @var string
-     */
+
+    /** @var string $cardHolderId RUT del cliente */
     public $cardHolderId;
-    /**
-     * @var string
-     */
+
+    /** @var string $cardHolderName Nombres del cliente */
     public $cardHolderName;
-    /**
-     * @var string
-     */
+
+    /** @var string $cardHolderLastName1 Apellido paterno del cliente */
     public $cardHolderLastName1;
-    /**
-     * @var string
-     */
+
+    /** @var string $cardHolderLastName2 Apellido materno del cliente */
     public $cardHolderLastName2;
-    /**
-     * @var string
-     */
+
+    /** @var string $cardHolderMail Correo electrónico del cliente */
     public $cardHolderMail;
-    /**
-     * @var string
-     */
+
+    /** @var string $cellPhoneNumber Teléfono del cliente */
     public $cellPhoneNumber;
-    /**
-     * @var string
-     */
+
+    /** @var string $expirationDate Fecha de expiración de la suscripción */
     public $expirationDate;
-    /**
-     * @var string
-     */
+
+    /** @var string $commerceMail Correo electrónico del comercio */
     public $commerceMail;
-    /**
-     * @var boolean
-     */
+
+    /** @var string $ufFlag Indica si el cobro es realizado en UF */
     public $ufFlag;
 }
