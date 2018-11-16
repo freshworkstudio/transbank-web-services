@@ -62,7 +62,7 @@ class RedirectorHelper
                 <title>' . self::$title . '</title>
             </head>
             <body>
-                ' . $formHtml . '
+                ' . $form_html . '
             </body>
         
         </html>';
@@ -82,7 +82,7 @@ class RedirectorHelper
 
         return '
         <form action="' . $url . '" id="webpay-form-' . $rand . '" method="POST">
-            <input type="hidden" name="' . $fieldName . '" value="' . $token . '" />
+            <input type="hidden" name="' . $field_name . '" value="' . $token . '" />
         </form>
 
         <script>document.getElementById("webpay-form-' . $rand . '").submit();</script>';
