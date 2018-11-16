@@ -19,6 +19,9 @@
     "require": {
         "ext-dom": "*"
     },
+    "require-dev": {
+      "phpdocumentor/phpdocumentor": "^2.9"
+    },
     "minimum-stability": "dev"
 
 }
