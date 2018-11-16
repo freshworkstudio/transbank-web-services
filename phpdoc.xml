@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdoc>
+    <title><![CDATA[Documentación de Transbank WebServices SDK]]></title>
+    <parser>
+        <target>.build/phpdoc.cache</target>
+    </parser>
+    <transformer>
+        <target>./docs</target>
+    </transformer>
+    <transformations>
+        <template name="new-black"/>
+    </transformations>
+    <files>
+        <directory>./src</directory>
+
+        <ignore>wss/*</ignore>
+        <ignore>Transbank/*</ignore>
+    </files>
+</phpdoc>
