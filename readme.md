@@ -390,7 +390,7 @@ use Freshwork\Transbank\WebpayOneClickWebService;
 
 $bag = new CertificationBag(
     '/path/to/597020000000.key',
-	'/path/to/597020000000.crt'
+    '/path/to/597020000000.crt'
 );
 $bag->setEnvironment(CertificationBag::INTEGRATION);
 
