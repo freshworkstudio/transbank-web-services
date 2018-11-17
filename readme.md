@@ -6,19 +6,40 @@ Librería para la integración de Webpay Plus, Webpay OneClick y Webpay Patpass.
 ![Freshwork Studio's Transbank SDK](https://cloud.githubusercontent.com/assets/1103494/16623124/b0082046-436a-11e6-870a-2e5f6dbd9ef8.jpg)
 <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square" alt="Software License"></img></a>
 
+# Índice
+
+* [Instalación](#instalación)
+* [Inicio rápido](#inicio-rápido)
+  * [Video Tutorial | Implementar Webpay Plus Normal](#video-tutorial--implementar-webpay-plus-normal)
+  * [Tienda de ejemplo usando Webpay OneClick](#tienda-de-ejemplo-webpay-oneclick)
+* [Implemetación de distintos servicios](#implemetación-de-distintos-servicios)
+  * [Webpay Plus Normal](#webpay-plus-normal)
+    * [Inicio de la transacción](#inicio-de-la-transacción)
+    * [Retorno a URL intermedia](#retorno-a-url-intermedia)
+    * [Retorno a URL final](#retorno-a-url-final)
+  * [OneClick](#oneclick)
+    * [Inscripción del cliente](#inscripción-del-cliente)
+    * [Finalizar la inscripción](#finalizar-la-inscripción)
+    * [Realizar cargo a la tarjeta de crédito](#realizar-cargo-a-la-tarjeta-de-crédito)
+    * [Reversar un cargo](#reversar-un-cargo)
+    * [Desuscribir tarjeta](#desuscribir-tarjeta)
+  * [PatPass](#patpass)
+    * [init](#init)
+    * [response](#response)
+* [Logs](#logs)
+* [CertificationBag](#certificationbag)
+* [Datos de prueba](#datos-de-prueba)
+  * [Tarjeta de crédito VISA (Será aprobada)](#tarjeta-de-crédito-visa-será-aprobada)·
+  * [Tarjeta de crédito MASTERCARD (Será rechazada)](#tarjeta-de-crédito-mastercard-será-rechazada)
+  * [Tarjeta de débito](#tarjeta-de-débito)
+  * [Credenciales del banco](#credenciales-del-banco)
+* [Licencia](#licencia)
+
 
 # Instalación
 ```bash
 composer require freshwork/transbank
 ```
-
-
-# Índice
-
-* [Inicio rápido](#inicio-rapido)
-  * [Video Tutorial | Implementar Webpay Plus Normal](#video-tutorial--implementar-webpay-plus-normal)
-  * [Tienda de ejemplo usando Webpay OneClick](#tienda-de-ejemplo-webpay-oneclick)
-* 
 
 
 # Inicio rápido
@@ -382,21 +403,27 @@ Estos son los datos de tarjetas para que puedas probar en el ambiente de integra
 ![image](https://cloud.githubusercontent.com/assets/1103494/16890030/f125835c-4ab8-11e6-8bf9-847c847085a7.png)
 
 ##### TARJETA DE CRÉDITO VISA (SERÁ APROBADA)
-**Número:** 4051885600446623
-**CVV:** 123
-**Fecha de expiración:** cualquiera
+> **Número:** 4051885600446623
+
+> **CVV:** 123
+
+> **Fecha de expiración:** cualquiera
 
 ##### TARJETA DE CRÉDITO MASTERCARD (SERÁ RECHAZADA)
-**Número:** 5186059559590568
-**CVV:** 123
-**Fecha de expiración:** cualquiera
+> **Número:** 5186059559590568
+
+> **CVV:** 123
+
+> **Fecha de expiración:** cualquiera
+
 
 ##### TARJETA DE DÉBITO
-**Número**: cualquiera
+> **Número**: cualquiera
 
 #### CREDENCIALES DEL BANCO
-**RUT:** 11.111.111-1
-**Contraseña:** 123
+> **RUT:** 11.111.111-1
+
+> **Contraseña:** 123
 
 ![captura de pantalla 2016-07-15 a las 6 28 41 p m](https://cloud.githubusercontent.com/assets/1103494/16890148/fdcf065e-4ab9-11e6-8d1a-83b9f8537c5c.png)
 
@@ -404,5 +431,5 @@ Estos son los datos de tarjetas para que puedas probar en el ambiente de integra
 Biblioteca desarrollada por [Simplepay](https://simplepay.cl)
 Powered by [Freshwork Studio](https://freshworkstudio.com)
 
-# License
+# Licencia
 Freshwork Transbank está licenciada bajo [La licencia MIT (MIT)](LICENSE).
