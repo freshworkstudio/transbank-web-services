@@ -44,7 +44,7 @@ En esta documentación podrás encontrar detalles sobre:
 ## Webpay Plus Normal
 Transacción normal con Webpay. (Pago tarjeta de crédito y débito)
 
-### Inicio de la transacción
+### Inicio de la transacción
 Para comenzar con el flujo de pago, debes informar a Transbank cuanto y qué pagará tu cliente, así como también la URL de retorno intermedia que se utilizará para que puedas validar que el pago se hizo correctamente y la URL final, que se utilizará para que puedas mostrar los detalles del pago y orden.
 
 Luego de informarle a Transbank de esta transacción, te entregará un **TOKEN** y una **URL**. Con estos datos deberás redireccionar al usuario a dicha URL (Webpay) a través de una petición **HTTP POST** (Es obligación que sea a través de POST) lo cual puedes hacer a través de un formulario HTML.
@@ -113,7 +113,6 @@ En esta página deberás mostrar la mayor cantidad de información que fue obten
 
 
 ## OneClick
-
 Permite al tarjetahabiente realizar pagos en el comercio sin la necesidad de ingresar cada vez información de la tarjeta de crédito al momento de realizar la compra.
 
 ### Inscripción del cliente
