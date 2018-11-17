@@ -48,7 +48,8 @@ composer require freshwork/transbank
 [Ver screencast](https://www.youtube.com/watch?v=VavxN-a9SIk)
 
 ### Tienda de ejemplo Webpay OneClick
-Tienda de prueba desarrollada en Laravel que ocupa OneClick. 
+Tienda de prueba desarrollada en Laravel que ocupa OneClick.
+
 [https://github.com/freshworkstudio/demo-store](https://github.com/freshworkstudio/demo-store)
 
 
@@ -429,6 +430,7 @@ Estos son los datos de tarjetas para que puedas probar en el ambiente de integra
 
 
 Biblioteca desarrollada por [Simplepay](https://simplepay.cl)
+
 Powered by [Freshwork Studio](https://freshworkstudio.com)
 
 # Licencia
