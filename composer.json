@@ -17,10 +17,12 @@
         ]
     },
     "require": {
-        "ext-dom": "*"
+        "ext-dom": "*",
+        "ext-soap": "*",
+        "ext-openssl": "*"
     },
     "require-dev": {
-      "phpdocumentor/phpdocumentor": "^2.9"
+        "phpdocumentor/phpdocumentor": "dev-master"
     },
     "minimum-stability": "dev"
 
