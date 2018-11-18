@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase InitTransactionOutput
+ * Class InitTransactionOutput
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayStandard
@@ -11,15 +11,15 @@
 namespace Freshwork\Transbank\WebpayStandard;
 
 /**
- * Clase InitTransactionOutput
+ * Class InitTransactionOutput
  *
  * @package Freshwork\Transbank\WebpayStandard
  */
 class InitTransactionOutput
 {
-    /** @var string $token Token provisto por Webpay para la transacción */
+    /** @var string $token Webpay token */
     public $token;
 
-    /** @var string $url URL para redireccionar al cliente hacia Webpay */
+    /** @var string $url URL to redirect the client to Webpay */
     public $url;
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase OneClickPayInput
+ * Class OneClickPayInput
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayOneClick
@@ -11,22 +11,22 @@
 namespace Freshwork\Transbank\WebpayOneClick;
 
 /**
- * Clase OneClickPayInput
+ * Class OneClickPayInput
  *
  * @package Freshwork\Transbank\WebpayOneClick
  */
 class OneClickPayInput
 {
 
-    /** @var int|float $amount Monto del pago en pesos */
+    /** @var int|float $amount Amount */
     public $amount;
 
-    /** @var int $buyOrder Identificador de la compra. Timestamp [yyyymmddhhMMss] + correlativo de tres dígitos */
+    /** @var int $buyOrder Order identifier. Timestamp [yyyymmddhhMMss] + three-digit correlative */
     public $buyOrder;
 
-    /** @var string $tbkUser Identificador único de la inscripción del cliente  */
+    /** @var string $tbkUser Unique customer inscription identifier  */
     public $tbkUser;
 
-    /** @var string $username Identificador único del cliente en el comercio */
+    /** @var string $username Customer username */
     public $username;
 }

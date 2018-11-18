@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase RedirectorHelper
+ * Class RedirectorHelper
  *
  * @package Freshwork\Transbank
  * @author Gonzalo De Spirito <gonzunigad@gmail.com>
@@ -10,21 +10,21 @@
 namespace Freshwork\Transbank;
 
 /**
- * Clase RedirectorHelper
+ * Class RedirectorHelper
  *
  * @package Freshwork\Transbank
  */
 class RedirectorHelper
 {
-    /** @var string $title Titulo de la página generada */
+    /** @var string $title Title of the generated page */
     public static $title = 'Redireccionando a Webpay...';
 
     /**
-     * Redirigir a Webpay
+     * Redirect to Webpay
      *
-     * @param string $url URL entregada por Webpay donde realizar la redirección
-     * @param string $token Token entregado por Webpay
-     * @param string $field_name Nombre del campo del Token
+     * @param string $url Webpay URL
+     * @param string $token Webpay token
+     * @param string $field_name Webpay token field name
      * @return string
      */
     public static function redirectHTML($url, $token = '', $field_name = 'TBK_TOKEN')
@@ -36,11 +36,11 @@ class RedirectorHelper
     }
 
     /**
-     * Redirigir al voucher de éxito de Webpay
+     * Redirect to Webpay voucher
      *
-     * @param string $url URL entregada por Webpay donde realizar la redirección
-     * @param string $token Token entregado por Webpay
-     * @param string $field_name Nombre del campo del Token
+     * @param string $url Webpay URL
+     * @param string $token Webpay token
+     * @param string $field_name Webpay token field name
      * @return string
      */
     public static function redirectBackNormal($url, $token = '', $field_name = 'token_ws')
@@ -49,9 +49,9 @@ class RedirectorHelper
     }
 
     /**
-     * Genera esqueleto HTML que envolverá al formulario
+     * Create HTML base to wrap the form
      *
-     * @param string $form_html HTML del formulario
+     * @param string $form_html Form HTML
      * @return string
      */
     public static function addHtmlWrapper($form_html)
@@ -69,11 +69,11 @@ class RedirectorHelper
     }
 
     /**
-     * Genera HTML del formulario
+     * Create a HTML form
      *
-     * @param string $url URL entregada por Webpay donde realizar la redirección
-     * @param string $token Token entregado por Webpay
-     * @param string $field_name Nombre del campo del Token
+     * @param string $url Webpay URL
+     * @param string $token Webpay token
+     * @param string $field_name Webpay token field name
      * @return string
      */
     public static function getForm($url, $token, $field_name)

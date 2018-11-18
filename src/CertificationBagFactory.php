@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase CertificationBagFactory
+ * Class CertificationBagFactory
  *
  * @package Freshwork\Transbank
  * @author Gonzalo De Spirito <gonzunigad@gmail.com>
@@ -10,14 +10,14 @@
 namespace Freshwork\Transbank;
 
 /**
- * Clase CertificationBagFactory
+ * Class CertificationBagFactory
  *
  * @package Freshwork\Transbank
  */
 class CertificationBagFactory
 {
     /**
-     * Generar instancia de llaves y certificados para Webpay OneClick
+     * Create an instance of Webpay OneClick keys and certificates
      *
      * @return CertificationBag
      */
@@ -30,7 +30,7 @@ class CertificationBagFactory
     }
 
     /**
-     * Generar instancia de llaves y certificados para Webpay Normal
+     * Create an instance of Webpay Normal keys and certificates
      *
      * @return CertificationBag
      */
@@ -43,7 +43,7 @@ class CertificationBagFactory
     }
 
     /**
-     * Generar instancia de llaves y certificados para Webpay PatPass
+     * Create an instance of Webpay PatPass keys and certificates
      *
      * @return CertificationBag
      */
@@ -56,11 +56,11 @@ class CertificationBagFactory
     }
 
     /**
-     * Generador instancia para llaves y certificados productivos
+     * Create a production instance of keys and certificates
      *
-     * @param string $client_private_key Ruta o contenido de la llave privada del cliente
-     * @param string $client_certificate Ruta o contenido del certificado público del cliente
-     * @param string|null $server_certificate Ruta o contenido del certificado de Transbank
+     * @param string $client_private_key Content or path of client private key
+     * @param string $client_certificate Content or path of client public certificate
+     * @param string|null $server_certificate Content or path of Transbank public certificate
      * @return CertificationBag
      */
     public static function production($client_private_key, $client_certificate, $server_certificate = null)
@@ -70,12 +70,12 @@ class CertificationBagFactory
     }
 
     /**
-     * Generador de instnacia de llaves y certificados
+     * Create a generic instance of keys and certificates
      *
-     * @param string $client_private_key Ruta o contenido de la llave privada del cliente
-     * @param string $client_certificate Ruta o contenido del certificado público del cliente
-     * @param string|null $server_certificate Ruta o contenido del certificado de Transbank
-     * @param string $environment Tipo de ambiente que se está utilizando
+     * @param string $client_private_key Content or path of client private key
+     * @param string $client_certificate Content or path of client public certificate
+     * @param string|null $server_certificate Content or path of Transbank public certificate
+     * @param string $environment Environment
      * @return CertificationBag
      */
     public static function create(

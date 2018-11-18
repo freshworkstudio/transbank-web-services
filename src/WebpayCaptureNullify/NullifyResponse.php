@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase NullifyResponse
+ * Class NullifyResponse
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayCaptureNullify
@@ -11,12 +11,12 @@
 namespace Freshwork\Transbank\WebpayCaptureNullify;
 
 /**
- * Clase NullifyResponse
+ * Class NullifyResponse
  *
  * @package Freshwork\Transbank\WebpayCaptureNullify
  */
 class NullifyResponse
 {
-    /** @var NullificationOutput $return Detalles del resultado de la anulación */
+    /** @var NullificationOutput $return Nullify response details */
     public $return;
 }

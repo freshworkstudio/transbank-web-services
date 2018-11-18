@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase CaptureOutput
+ * Class CaptureOutput
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayCaptureNullify
@@ -11,21 +11,21 @@
 namespace Freshwork\Transbank\WebpayCaptureNullify;
 
 /**
- * Clase CaptureOutput
+ * Class CaptureOutput
  *
  * @package Freshwork\Transbank\WebpayCaptureNullify
  */
 class CaptureOutput
 {
-    /** @var string $authorizationCode Código de autorización de la captura diferida  */
+    /** @var string $authorizationCode Capture authorization code */
     public $authorizationCode;
 
-    /** @var string $authorizationDate Fecha y hora de la autorización */
+    /** @var string $authorizationDate Date and time of capture authorization */
     public $authorizationDate;
 
-    /** @var int|float $capturedAmount Monto capturado */
+    /** @var int|float $capturedAmount Captured amount */
     public $capturedAmount;
 
-    /** @var string $token Token de la transacción */
+    /** @var string $token Webpay token */
     public $token;
 }

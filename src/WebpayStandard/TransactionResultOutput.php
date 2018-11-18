@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase TransactionResultOutput
+ * Class TransactionResultOutput
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayStandard
@@ -11,33 +11,33 @@
 namespace Freshwork\Transbank\WebpayStandard;
 
 /**
- * Clase TransactionResultOutput
+ * Class TransactionResultOutput
  *
  * @package Freshwork\Transbank\WebpayStandard
  */
 class TransactionResultOutput
 {
-    /** @var string $accountingDate Fecha de la autorización */
+    /** @var string $accountingDate Authorization date */
     public $accountingDate;
 
-    /** @var string $buyOrder Orden de compra de la tienda */
+    /** @var string $buyOrder Order identifier */
     public $buyOrder;
 
-    /** @var CardDetail Datos de la tarjeta de crédito del tarjeta habiente */
+    /** @var CardDetail Customer's credit card details */
     public $cardDetail;
 
-    /** @var TransactionDetailOutput $detailOutput Resultado de cada TransactionDetail */
+    /** @var TransactionDetailOutput $detailOutput Result of every TransactionDetail */
     public $detailOutput;
 
-    /** @var string $sessionId Identificador de sesión */
+    /** @var string $sessionId Session identifier */
     public $sessionId;
 
-    /** @var string $transactionDate Fecha y hora de la autorización */
+    /** @var string $transactionDate Date and time of authorization */
     public $transactionDate;
 
-    /** @var string $urlRedirection URL de redirección para visualización de voucher */
+    /** @var string $urlRedirection URL redirection for Webpay voucher */
     public $urlRedirection;
 
-    /** @var string $VCI Resultado de la autenticación del tarjetahabiente */
+    /** @var string $VCI Result of customer authentication */
     public $VCI;
 }

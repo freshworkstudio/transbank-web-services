@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase TransactionResult
+ * Class TransactionResult
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayStandard
@@ -11,12 +11,12 @@
 namespace Freshwork\Transbank\WebpayStandard;
 
 /**
- * Clase TransactionResult
+ * Class TransactionResult
  *
  * @package Freshwork\Transbank\WebpayStandard
  */
 class TransactionResult
 {
-    /** @var string $tokenInput Token de la transacción */
+    /** @var string $tokenInput Webpay token */
     public $tokenInput;
 }

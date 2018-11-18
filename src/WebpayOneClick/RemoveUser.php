@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase RemoveUser
+ * Class RemoveUser
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayOneClick
@@ -11,12 +11,12 @@
 namespace Freshwork\Transbank\WebpayOneClick;
 
 /**
- * Clase RemoveUser
+ * Class RemoveUser
  *
  * @package Freshwork\Transbank\WebpayOneClick
  */
 class RemoveUser
 {
-    /** @var OneClickRemoveUserInput $arg0 Detalles del usuario a eliminar  */
+    /** @var OneClickRemoveUserInput $arg0 Customer information  */
     public $arg0;
 }

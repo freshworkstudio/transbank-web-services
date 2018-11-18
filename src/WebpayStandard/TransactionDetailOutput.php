@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase TransactionDetailOutput
+ * Class TransactionDetailOutput
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayStandard
@@ -11,30 +11,30 @@
 namespace Freshwork\Transbank\WebpayStandard;
 
 /**
- * Clase TransactionDetailOutput
+ * Class TransactionDetailOutput
  *
  * @package Freshwork\Transbank\WebpayStandard
  */
 class TransactionDetailOutput
 {
-    /** @var string $authorizationCode Código de autorización de la transacción */
+    /** @var string $authorizationCode Transaction authorization code */
     public $authorizationCode;
 
-    /** @var string $paymentTypeCode Tipo de pago de la transacción */
+    /** @var string $paymentTypeCode Payment type */
     public $paymentTypeCode;
 
-    /** @var int $responseCode Código de respuesta de la autorización */
+    /** @var int $responseCode Authorization response code */
     public $responseCode;
 
-    /** @var int $sharesNumber Cantidad de cuotas */
+    /** @var int $sharesNumber Shares number */
     public $sharesNumber;
 
-    /** @var int|float $amount Monto de la transacción */
+    /** @var int|float $amount Transaction amount */
     public $amount;
 
-    /** @var string $commerceCode Identificador del comercio */
+    /** @var string $commerceCode Commerce's code */
     public $commerceCode;
 
-    /** @var string $buyOrder Orden de compra de la tienda */
+    /** @var string $buyOrder Order identifier */
     public $buyOrder;
 }

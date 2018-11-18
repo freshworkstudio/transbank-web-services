@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase OneClickReverseOutput
+ * Class OneClickReverseOutput
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayOneClick
@@ -11,15 +11,15 @@
 namespace Freshwork\Transbank\WebpayOneClick;
 
 /**
- * Clase OneClickReverseOutput
+ * Class OneClickReverseOutput
  *
  * @package Freshwork\Transbank\WebpayOneClick
  */
 class OneClickReverseOutput
 {
-    /** @var int $reverseCode Identificador único de la transacción de reversa */
+    /** @var int $reverseCode Unique identifier of reverse */
     public $reverseCode;
 
-    /** @var bool $reversed Indica si tuvo éxito la reversa */
+    /** @var bool $reversed Reverse result */
     public $reversed;
 }

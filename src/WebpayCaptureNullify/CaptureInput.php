@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase Capture
+ * Class Capture
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayCaptureNullify
@@ -11,21 +11,21 @@
 namespace Freshwork\Transbank\WebpayCaptureNullify;
 
 /**
- * Clase CaptureInput
+ * Class CaptureInput
  *
  * @package Freshwork\Transbank\WebpayCaptureNullify
  */
 class CaptureInput
 {
-    /** @var int $commerceId Código de comercio o tienda mall que realizó la transacción */
+    /** @var int $commerceId Commerce's code */
     public $commerceId;
 
-    /** @var string $buyOrder Orden de compra de la transacción que se requiere capturar */
+    /** @var string $buyOrder Order identifier */
     public $buyOrder;
 
-    /** @var string $authorizationCode Código de autorización de la transacción que se requiere capturar */
+    /** @var string $authorizationCode Transaction authorization code */
     public $authorizationCode;
 
-    /** @var int|float $captureAmount Monto que se desea capturar */
+    /** @var int|float $captureAmount Amount */
     public $captureAmount;
 }

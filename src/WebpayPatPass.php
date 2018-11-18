@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase WebpayPatPass
+ * Class WebpayPatPass
  *
  * @package Freshwork\Transbank
  * @author Gonzalo De Spirito <gonzunigad@gmail.com>
@@ -10,21 +10,23 @@
 namespace Freshwork\Transbank;
 
 /**
- * Implementación de servicios PatPass
+ * Implements PatPass services
  *
- * Clase WebpayPatPass
+ * Class WebpayPatPass
  * @package Freshwork\Transbank
  */
 class WebpayPatPass extends WebpayWebService
 {
     /**
-     * Inicializa una transacción de suscripción de pago
+     * Initializes a paid subscription transaction
      *
-     * @param string $returnURL URL del comercio, a la cual Webpay redireccionará posterior al proceso de autorización
-     * @param string $finalURL URL del comercio a la cual Webpay redireccionará posterior al voucher de éxito de Webpay
-     * @param string|null $sessionId Identificador de sesión, uso interno de comercio
+     * @param string $returnURL URL of the commerce, to which Webpay will redirect after the authorization process
+     * @param string $finalURL URL of the commerce, to which Webpay will redirect subsequent to Webpay's success voucher
+     * @param string|null $sessionId Session identifier, internal use of commerce
      * @return WebpayStandard\InitTransactionOutput
      * @throws Exceptions\EmptyTransactionException
+     * @throws Exceptions\InvalidCertificateException
+     * @throws \SoapFault
      */
     public function initTransaction($returnURL, $finalURL, $sessionId = null)
     {

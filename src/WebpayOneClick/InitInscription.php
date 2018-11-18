@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase InitInscription
+ * Class InitInscription
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayOneClick
@@ -11,11 +11,11 @@
 namespace Freshwork\Transbank\WebpayOneClick;
 
 /**
- * Clase InitInscription
+ * Class InitInscription
  * @package Freshwork\Transbank\WebpayOneClick
  */
 class InitInscription
 {
-    /** @var OneClickInscriptionInput $arg0 Detalles de la inscripción del cliente */
+    /** @var OneClickInscriptionInput $arg0 Details of customer inscription */
     public $arg0;
 }

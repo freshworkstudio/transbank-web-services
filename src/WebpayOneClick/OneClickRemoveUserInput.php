@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase OneClickRemoveUserInput
+ * Class OneClickRemoveUserInput
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayOneClick
@@ -11,15 +11,15 @@
 namespace Freshwork\Transbank\WebpayOneClick;
 
 /**
- * Clase OneClickRemoveUserInput
+ * Class OneClickRemoveUserInput
  *
  * @package Freshwork\Transbank\WebpayOneClick
  */
 class OneClickRemoveUserInput
 {
-    /** @var string $tbkUser Identificador único de la inscripción del cliente	 */
+    /** @var string $tbkUser Unique customer inscription identifier */
     public $tbkUser;
 
-    /** @var string $username Identificador único del cliente en el comercio */
+    /** @var string $username Customer username */
     public $username;
 }

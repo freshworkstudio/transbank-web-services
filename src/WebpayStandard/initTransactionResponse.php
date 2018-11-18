@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase InitTransactionResponse
+ * Class InitTransactionResponse
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayStandard
@@ -11,11 +11,11 @@
 namespace Freshwork\Transbank\WebpayStandard;
 
 /**
- * Clase InitTransactionResponse
+ * Class InitTransactionResponse
  * @package Freshwork\Transbank\WebpayStandard
  */
 class InitTransactionResponse
 {
-    /** @var InitTransactionOutput $return Detalles para la redirección hacia Webpay */
+    /** @var InitTransactionOutput $return Details for Webpay redirection */
     public $return;
 }

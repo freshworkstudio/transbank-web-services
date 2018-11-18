@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase WebpayWebService
+ * Class WebpayWebService
  *
  * @package Freshwork\Transbank
  * @author Gonzalo De Spirito <gonzunigad@gmail.com>
@@ -17,39 +17,39 @@ use Freshwork\Transbank\WebpayStandard\InitTransactionInput;
 use Freshwork\Transbank\WebpayStandard\TransactionDetail;
 
 /**
- * Base para implementar servicios basados en Webpay Plus
+ * Base to implement services based on Webpay Plus
  *
- * Clase WebpayWebService
+ * Class WebpayWebService
  * @package Freshwork\Transbank
  */
 class WebpayWebService extends TransbankService
 {
-    /** @const TIENDA_NORMAL Identifica una transacción normal */
+    /** @const TIENDA_NORMAL Identifies a normal transaction */
     const TIENDA_NORMAL = 'TR_NORMAL_WS';
 
-    /** @const TIENDA_MALL Identifica una trasacción de tipo Mall */
+    /** @const TIENDA_MALL Identifies a Mall transaction */
     const TIENDA_MALL = 'TR_MALL_WS';
 
-    /** @const PATPASS Indentifica una transacción PatPass */
+    /** @const PATPASS Identifies a PatPass transaction */
     const PATPASS = 'TR_NORMAL_WS_WPM';
 
     /**
-     * @var WebpayStandardWebService $service Cliente SOAP involucrado en el servicio implementado
+     * @var WebpayStandardWebService $service SOAP Client used in the implemented service
      */
     protected $service;
 
     /**
-     * @var TransactionDetail[] $transactionDetails Listado con los detalles de la transacción a realizar
+     * @var TransactionDetail[] $transactionDetails Details of the transaction
      */
     protected $transactionDetails = [];
 
-    /** @var  DetailInput $inscriptionInformation Detalles del cliente que se está suscribiendo */
+    /** @var  DetailInput $inscriptionInformation Details of the customer who is subscribing */
     protected $inscriptionInformation;
 
     /**
      * WebpayWebService constructor
      *
-     * @param WebpayStandardWebService $service Instancia del cliente SOAP
+     * @param WebpayStandardWebService $service SOAP Client instance
      */
     public function __construct(WebpayStandardWebService $service)
     {
@@ -57,11 +57,11 @@ class WebpayWebService extends TransbankService
     }
 
     /**
-     * Añade detalles de la transacción a relizar
+     * Add transactions details
      *
-     * @param $amount Monto de la transacción
-     * @param $buyOrder Número de orden de compra
-     * @param null $commerceCode Código de comercio
+     * @param float|int $amount Transaction amount
+     * @param string $buyOrder Order identifier
+     * @param string $commerceCode Commerce's code
      * @return $this
      */
     public function addTransactionDetail($amount, $buyOrder, $commerceCode = null)
@@ -78,18 +78,18 @@ class WebpayWebService extends TransbankService
     }
 
     /**
-     * Añade información del cliente y de la suscripción
+     * Add customer and subscription information
      *
-     * @param string $serviceId Identificador del servicio
-     * @param string $rut RUT del cliente
-     * @param string $firstName Nombres del cliente
-     * @param string $lastName1 Apellido paterno del cliente
-     * @param string $lastName2 Apellido materno del cliente
-     * @param string $clientEmail Correo electrónico del cliente
-     * @param string $phoneNumber Teléfono del cliente
-     * @param string $expirationDate Fecha de expiración de la suscripción
-     * @param string $commerceMail Correo electrónico del comercio
-     * @param bool $uf Indica si el cobro es realizado en UF
+     * @param string $serviceId Service identifier
+     * @param string $rut Customer's national identifier number
+     * @param string $firstName Customer's names
+     * @param string $lastName1 Customer's paternal surname
+     * @param string $lastName2 Customer's maternal surname
+     * @param string $clientEmail Customer's e-mail
+     * @param string $phoneNumber Customer's phone number
+     * @param string $expirationDate Expiry date of the subscription
+     * @param string $commerceMail Commerce e-mail
+     * @param bool $uf Indicates if the payment is made in UF
      * @return $this
      */
     public function addInscriptionInfo(
@@ -122,17 +122,19 @@ class WebpayWebService extends TransbankService
     }
 
     /**
-     * Inicializa una transacción en Webpay
+     * Initialize a Webpay transaction
      *
-     * @param string $returnURL URL del comercio, a la cual Webpay redireccionará posterior al proceso de autorización
-     * @param string $finalURL URL del comercio a la cual Webpay redireccionará posterior al voucher de éxito de Webpay
-     * @param string|null $sessionId Identificador de sesión, uso interno de comercio
-     * @param string $transactionType Tipo de transacción
-     * @param string|null $buyOrder Orden de compra de la tienda
-     * @param string|null $commerceCode Código del comercio
+     * @param string $returnURL URL of the commerce, to which Webpay will redirect after the authorization process
+     * @param string $finalURL URL of the commerce, to which Webpay will redirect subsequent to Webpay's voucher
+     * @param string|null $sessionId Session identifier, internal use of commerce
+     * @param string $transactionType Type of transaction
+     * @param string|null $buyOrder Order identifier
+     * @param string|null $commerceCode Commerce's code
      *
      * @return WebpayStandard\InitTransactionOutput
      * @throws EmptyTransactionException
+     * @throws Exceptions\InvalidCertificateException
+     * @throws \SoapFault
      */
     public function initTransaction(
         $returnURL,
@@ -159,10 +161,12 @@ class WebpayWebService extends TransbankService
     }
 
     /**
-     * Obtiene el resultado de la transacción una vez que Webpay ha resuelto su autorización financiera.
+     * Get the transaction result once Webpay has resolved the financial authorization
      *
-     * @param string|null $token Token de la transacción
+     * @param string|null $token Webpay token
      * @return WebpayStandard\transactionResultOutput
+     * @throws Exceptions\InvalidCertificateException
+     * @throws \SoapFault
      */
     public function getTransactionResult($token = null)
     {
@@ -174,10 +178,12 @@ class WebpayWebService extends TransbankService
     }
 
     /**
-     * Indica a Webpay que se ha recibido conforme el resultado de la transacción.
+     * Indicates to Webpay that the transaction result was received
      *
-     * @param string|null $token Token de la transacción
+     * @param string|null $token Webpay token
      * @return AcknowledgeTransactionResponse
+     * @throws Exceptions\InvalidCertificateException
+     * @throws \SoapFault
      */
     public function acknowledgeTransaction($token = null)
     {
@@ -189,7 +195,7 @@ class WebpayWebService extends TransbankService
     }
 
     /**
-     * Valida que la transacción tenga al menos un detalle
+     * Validates that the transaction has at least one detail
      *
      * @throws EmptyTransactionException
      */
@@ -203,12 +209,12 @@ class WebpayWebService extends TransbankService
     }
 
     /**
-     * Valida los parámetros basado en el tipo de transacción
+     * Validates parameters based on transaction type
      *
-     * @param string $transactionType Tipo de transacción
-     * @param string $buyOrder Orden de compra de la tienda
-     * @param string $commerceCode Código de comercio
-     * @param InitTransactionInput $input Detalles del inicio de la transacción
+     * @param string $transactionType Transaction type
+     * @param string $buyOrder Order identifier
+     * @param string $commerceCode Commerce's code
+     * @param InitTransactionInput $input Details of the transaction initialization
      */
     public function validateParametersBasedOnTransactionType($transactionType, $buyOrder, $commerceCode, $input)
     {
@@ -221,7 +227,7 @@ class WebpayWebService extends TransbankService
             if (!$buyOrder) {
                 throw new \InvalidArgumentException(
                     'Mall transactions needs a buyOrder defined for the transaction itself 
-                    and a buyOrder per transactionDetail. Please add a buyOrder on initTransaction()'
+                    and a buyOrder per transactionDetail. Please add a buyOrder on ->initTransaction()'
                 );
             }
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase BaseBean
+ * Class BaseBean
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayOneClick
@@ -11,7 +11,7 @@
 namespace Freshwork\Transbank\WebpayOneClick;
 
 /**
- * Clase BaseBean
+ * Class BaseBean
  *
  * @package Freshwork\Transbank\WebpayOneClick
  */

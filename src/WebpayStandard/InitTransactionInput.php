@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase InitTransactionInput
+ * Class InitTransactionInput
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayStandard
@@ -11,34 +11,34 @@
 namespace Freshwork\Transbank\WebpayStandard;
 
 /**
- * Clase InitTransactionInput
+ * Class InitTransactionInput
  *
  * @package Freshwork\Transbank\WebpayStandard
  */
 class InitTransactionInput
 {
 
-    /** @var string $wSTransactionType Tipo de transacción */
+    /** @var string $wSTransactionType Transaction type */
     public $wSTransactionType;
 
-    /** @var string $commerceId Identificador del comercio */
+    /** @var string $commerceId Commerce's code */
     public $commerceId;
 
-    /** @var string $buyOrder Orden de compra de la tienda */
+    /** @var string $buyOrder Order identifier */
     public $buyOrder;
 
-    /** @var string $sessionId Identificador de sesión, uso interno de comercio */
+    /** @var string $sessionId Session identifier, internal use of commerce */
     public $sessionId;
 
-    /** @var string $returnURL URL del comercio, a la cual Webpay redireccionará posterior al proceso de autorización */
+    /** @var string $returnURL URL of the commerce, to which Webpay will redirect after the authorization process */
     public $returnURL;
 
-    /** @var string $finalURL URL del comercio a la cual Webpay redireccionará posterior al voucher de éxito de Webpay */
+    /** @var string $finalURL URL of the commerce, to which Webpay will redirect subsequent to Webpay's voucher */
     public $finalURL;
 
-    /** @var TransactionDetail[] Listado con los detalles de la transacción a realizar */
+    /** @var TransactionDetail[] List of transaction details */
     public $transactionDetails;
 
-    /** @var DetailInput $wPMDetail Detalles del cliente que se está suscribiendo */
+    /** @var DetailInput $wPMDetail Subscribing customer details */
     public $wPMDetail;
 }

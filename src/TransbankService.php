@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase TransbankService
+ * Class TransbankService
  *
  * @package Freshwork\Transbank
  * @author Gonzalo De Spirito <gonzunigad@gmail.com>
@@ -12,14 +12,14 @@ namespace Freshwork\Transbank;
 use Freshwork\Transbank\Log\LoggerInterface;
 
 /**
- * Clase TransbankService
+ * Class TransbankService
  *
  * @package Freshwork\Transbank
  */
 abstract class TransbankService
 {
     /**
-     * Permite establecer una instancia personalizada de registro de eventos
+     * Set a custom logger instance
      *
      * @param LoggerInterface|null $logger
      */

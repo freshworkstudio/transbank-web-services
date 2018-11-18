@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase WebpayOneClickWebService
+ * Class WebpayOneClickWebService
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayOneClick
@@ -13,19 +13,19 @@ namespace Freshwork\Transbank\WebpayOneClick;
 use Freshwork\Transbank\TransbankWebService;
 
 /**
- * Clase WebpayOneClickWebService
+ * Class WebpayOneClickWebService
  *
  * @package Freshwork\Transbank\WebpayOneClick
  */
 class WebpayOneClickWebService extends TransbankWebService
 {
-    /** @const INTEGRATION_WSDL URL del WSDL de integración */
+    /** @const INTEGRATION_WSDL Development WSDL URL */
     const INTEGRATION_WSDL = 'https://webpay3gint.transbank.cl/webpayserver/wswebpay/OneClickPaymentService?wsdl';
 
-    /** @const PRODUCTION_WSDL URL del WSDL de producción */
+    /** @const PRODUCTION_WSDL Production WSDL URL */
     const PRODUCTION_WSDL = 'https://webpay3g.transbank.cl/webpayserver/wswebpay/OneClickPaymentService?wsdl';
 
-    /** @var array $classmap Listado de asociaciones de tipos del WSDL a clases */
+    /** @var array $classmap Association of WSDL types to classes */
     protected static $classmap = array(
         'removeUser' => RemoveUser::class,
         'oneClickRemoveUserInput' => OneClickRemoveUserInput::class,
@@ -53,11 +53,9 @@ class WebpayOneClickWebService extends TransbankWebService
 
 
     /**
-     * Realiza la inscripción del tarjetahabiente e información de su tarjeta de crédito
+     * Inscribe a customer and his/her credit card
      *
-     * Retorna como respuesta un token de inscripción y una URL, que corresponde a la URL de inscripción de One Click.
-     *
-     * @param oneClickInscriptionInput $oneClickInscriptionInput Detalles de la inscripción
+     * @param oneClickInscriptionInput $oneClickInscriptionInput Inscription information
      * @return mixed
      * @throws \Freshwork\Transbank\Exceptions\InvalidCertificateException
      * @throws \SoapFault
@@ -70,11 +68,9 @@ class WebpayOneClickWebService extends TransbankWebService
     }
 
     /**
-     * Finaliza el proceso de inscripción del tarjetahabiente en Oneclick
+     * Finish the inscription of the customer on OneClick
      *
-     * Retorna el identificador del usuario en Oneclick, el cual será utilizado para realizar las transacciones de pago.
-     *
-     * @param OneClickFinishInscriptionInput $finishInscriptionInput Detalles para la finalización de inscripción
+     * @param OneClickFinishInscriptionInput $finishInscriptionInput Finish inscription details
      * @return mixed
      * @throws \Freshwork\Transbank\Exceptions\InvalidCertificateException
      * @throws \SoapFault
@@ -88,12 +84,9 @@ class WebpayOneClickWebService extends TransbankWebService
     }
 
     /**
-     * Reliza transacciones de pago.
+     * Authorize a payment
      *
-     * Retorna un objeto que contiene el resultado de la autorización y debe ser ejecutado cada vez que el
-     * usuario selecciona pagar con Oneclick.
-     *
-     * @param OneClickPayInput $authorizeInput Detalles de la transacción a autorizar
+     * @param OneClickPayInput $authorizeInput Payment details to authorize
      * @return mixed
      * @throws \Freshwork\Transbank\Exceptions\InvalidCertificateException
      * @throws \SoapFault
@@ -106,11 +99,9 @@ class WebpayOneClickWebService extends TransbankWebService
     }
 
     /**
-     * Reversa una transacción de venta autorizada con anterioridad
+     * Reverse a previous payment
      *
-     * Retorna un objeto que contiene un identificador único de la transacción de reversa
-     *
-     * @param OneClickReverseInput $codeReverseOneClickInput Detalles de la reversa a realizar
+     * @param OneClickReverseInput $codeReverseOneClickInput Reverse information
      * @return mixed
      * @throws \Freshwork\Transbank\Exceptions\InvalidCertificateException
      * @throws \SoapFault
@@ -124,9 +115,9 @@ class WebpayOneClickWebService extends TransbankWebService
     }
 
     /**
-     * Elimina una inscripción de usuario en Transbank
+     * Deletes a customer inscription
      *
-     * @param OneClickRemoveUserInput $removeUserInput Detalles del usuario a eliminar
+     * @param OneClickRemoveUserInput $removeUserInput Customer details to remove
      * @return mixed
      * @throws \Freshwork\Transbank\Exceptions\InvalidCertificateException
      * @throws \SoapFault

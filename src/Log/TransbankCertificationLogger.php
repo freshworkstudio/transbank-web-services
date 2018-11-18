@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase TransbankCertificationLogger
+ * Class TransbankCertificationLogger
  *
  * @package Freshwork\Transbank
  * @subpackage Log
@@ -11,19 +11,19 @@
 namespace Freshwork\Transbank\Log;
 
 /**
- * Clase TransbankCertificationLogger
+ * Class TransbankCertificationLogger
  *
  * @package Freshwork\Transbank\Log
  */
 class TransbankCertificationLogger implements LoggerInterface
 {
-    /** @var string $log_dir Ruta para escribir los registros */
+    /** @var string $log_dir Path to write logs */
     private $log_dir;
 
     /**
      * Constructor de TransbankCertificationLogger
      *
-     * @param string $log_dir Ruta para escribir los registros
+     * @param string $log_dir Path to write logs
      */
     public function __construct($log_dir = '')
     {
@@ -35,11 +35,11 @@ class TransbankCertificationLogger implements LoggerInterface
     }
 
     /**
-     * Escribe o muestra un registro
+     * Write or print a log
      *
-     * @param mixed $data Información a registrar o mostrar
-     * @param string $level Tipo de evento
-     * @param mixed $type Identificador adicional
+     * @param mixed $data Data to log
+     * @param string $level Event type
+     * @param mixed $type Additional identifier
      * @return mixed|void
      */
     public function log($data, $level = self::LEVEL_INFO, $type = null)
@@ -56,7 +56,7 @@ class TransbankCertificationLogger implements LoggerInterface
     }
 
     /**
-     * Obtiene la ruta para escribir los registros
+     * Get path to write logs
      *
      * @return string
      */
@@ -66,7 +66,7 @@ class TransbankCertificationLogger implements LoggerInterface
     }
 
     /**
-     * Obtiene el nombre de archivo a utilizar para escribir los registros
+     * Get filename to write logs
      *
      * @return string
      */
@@ -76,11 +76,11 @@ class TransbankCertificationLogger implements LoggerInterface
     }
 
     /**
-     * Obtiene registro con formato
+     * Get the formatted log
      *
-     * @param string $data Información a registrar
-     * @param string $level Tipo de evento
-     * @param string $type Identificador adicional
+     * @param string $data Data to log
+     * @param string $level Event type
+     * @param string $type Additional identifier
      * @return string
      */
     protected function getLogMessage($data, $level, $type)

@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase ReverseResponse
+ * Class ReverseResponse
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayOneClick
@@ -11,12 +11,12 @@
 namespace Freshwork\Transbank\WebpayOneClick;
 
 /**
- * Clase ReverseResponse
+ * Class ReverseResponse
  *
  * @package Freshwork\Transbank\WebpayOneClick
  */
 class ReverseResponse
 {
-    /** @var mixed $return Resultado la reversa  */
+    /** @var mixed $return Reverse result */
     public $return;
 }

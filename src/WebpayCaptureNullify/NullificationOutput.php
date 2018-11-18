@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase NullificationOutput
+ * Class NullificationOutput
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayCaptureNullify
@@ -11,24 +11,24 @@
 namespace Freshwork\Transbank\WebpayCaptureNullify;
 
 /**
- * Clase NullificationOutput
+ * Class NullificationOutput
  *
  * @package Freshwork\Transbank\WebpayCaptureNullify
  */
 class NullificationOutput
 {
-    /** @var string $authorizationCode Código de autorización de la anulación */
+    /** @var string $authorizationCode Nullification authorization code */
     public $authorizationCode;
 
-    /** @var string $authorizationDate Fecha y hora de la autorización */
+    /** @var string $authorizationDate Date and time of authorization */
     public $authorizationDate;
 
-    /** @var int|float $balance Saldo actualizado de la transacción */
+    /** @var int|float $balance Remaining balance */
     public $balance;
 
-    /** @var int|float $nullifiedAmount Monto anulado */
+    /** @var int|float $nullifiedAmount Nullified amount */
     public $nullifiedAmount;
 
-    /** @var string $token Token de la transacción */
+    /** @var string $token Webpay token */
     public $token;
 }

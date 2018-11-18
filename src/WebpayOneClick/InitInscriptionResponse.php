@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase InitInscriptionResponse
+ * Class InitInscriptionResponse
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayOneClick
@@ -11,12 +11,12 @@
 namespace Freshwork\Transbank\WebpayOneClick;
 
 /**
- * Clase InitInscriptionResponse
+ * Class InitInscriptionResponse
  *
  * @package Freshwork\Transbank\WebpayOneClick
  */
 class InitInscriptionResponse
 {
-    /** @var OneClickInscriptionOutput $return Detalles del resultado de la inscripción */
+    /** @var OneClickInscriptionOutput $return Details of inscription result */
     public $return;
 }

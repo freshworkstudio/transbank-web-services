@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase TransbankWebService
+ * Class TransbankWebService
  *
  * @package Freshwork\Transbank
  * @author Gonzalo De Spirito <gonzunigad@gmail.com>
@@ -15,32 +15,32 @@ use Freshwork\Transbank\Transbank\SoapValidation;
 use Freshwork\Transbank\Log\LoggerInterface;
 
 /**
- * Clase TransbankWebService
+ * Class TransbankWebService
  *
  * @package Freshwork\Transbank
  */
 abstract class TransbankWebService
 {
     /**
-     * @var TransbankSoap $soapClient Cliente SOAP
+     * @var TransbankSoap $soapClient SOAP client
      */
     protected $soapClient;
 
     /**
-     * @var CertificationBag $certificationBag Instancia con certificados y llaves
+     * @var CertificationBag $certificationBag Keys and certificates instance
      */
     protected $certificationBag;
 
     /**
-     * @var array $classmap Asociación de tipos WSDL a clases
+     * @var array $classmap Association of WSDL types to classes
      */
     protected static $classmap = [];
 
     /**
      * TransbankWebService constructor
      *
-     * @param CertificationBag $certificationBag Instancia con certificados y llaves
-     * @param string|null $url URL del WSDL
+     * @param CertificationBag $certificationBag Keys and certificates instance
+     * @param string|null $url WSDL URL
      */
     public function __construct(CertificationBag $certificationBag, $url = null)
     {
@@ -59,7 +59,7 @@ abstract class TransbankWebService
     }
 
     /**
-     * Obtiene la instancia de certificados y llaves utilizada
+     * Get the instance of keys and certificates
      *
      * @return CertificationBag
      */
@@ -69,9 +69,9 @@ abstract class TransbankWebService
     }
 
     /**
-     * Establece instancia de certificados y llaves a utilizar
+     * Set the instance of keys and certificates
      *
-     * @param CertificationBag $certificationBag Instancia con certificados y llaves
+     * @param CertificationBag $certificationBag Keys and certificates instance
      */
     public function setCertificationBag(CertificationBag $certificationBag)
     {
@@ -79,7 +79,7 @@ abstract class TransbankWebService
     }
 
     /**
-     * Obtiene la instancia del cliente SOAP
+     * Get SOAP client instance
      *
      * @return TransbankSoap
      */
@@ -89,7 +89,7 @@ abstract class TransbankWebService
     }
 
     /**
-     * Verifica la autenticidad de la última respuesta del cliente SOAP
+     * Verifies the authenticity of the last SOAP response
      *
      * @throws InvalidCertificateException
      */
@@ -98,7 +98,7 @@ abstract class TransbankWebService
         $xmlResponse = $this->getLastRawResponse();
 
         $soapValidation = new SoapValidation($xmlResponse, $this->certificationBag->getServerCertificate());
-        $validation =  $soapValidation->getValidationResult(); //Esto valida si el mensaje está firmado por Transbank
+        $validation =  $soapValidation->getValidationResult(); // Validates if the message is signed by Transbank
 
         if ($validation !== true) {
             $msg = 'Transbank response fails on the certificate signature validation. 
@@ -110,9 +110,9 @@ abstract class TransbankWebService
     }
 
     /**
-     * Realiza llamadas a métodos del cliente SOAP y valida su respuesta
+     * Call to SOAP client methods and validate their response
      *
-     * @param string $method Nombre del método a ejecutar
+     * @param string $method Method name
      * @return mixed
      * @throws InvalidCertificateException
      * @throws \SoapFault
@@ -148,22 +148,22 @@ abstract class TransbankWebService
     }
 
     /**
-     * Permite ejecutar dinamicamente métodos del cliente SOAP
+     * Dynamically executes methods from the SOAP client
      *
-     * @param string $name Nombre del método a ejecutar
+     * @param string $name Method to execute
      * @param array $arguments
      * @return mixed
      */
-    public function __call(string $name, array $arguments)
+    public function __call($name, array $arguments)
     {
         array_unshift($arguments, $name);
         return call_user_func_array([$this, 'callSoapMethod'], $arguments);
     }
 
     /**
-     * Obtiene la última respuesta del cliente SOAP
+     * Get the last response from the SOAP client
      *
-     * @return string XML con la respuesta
+     * @return string Raw XML
      */
     protected function getLastRawResponse()
     {
@@ -172,10 +172,10 @@ abstract class TransbankWebService
     }
 
     /**
-     * Obtiene la URL del WSDL utilizado
+     * Get the WSDL URL
      *
-     * @param CertificationBag $certificationBag Instancia con certificados y llaves
-     * @param string|null $url URL del WSDL
+     * @param CertificationBag $certificationBag Keys and certificates instance
+     * @param string|null $url WSDL URL
      * @return string
      */
     public function getWsdlUrl(CertificationBag $certificationBag, $url = null)

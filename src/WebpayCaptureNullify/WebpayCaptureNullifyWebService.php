@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase WebpayCaptureNullifyWebService
+ * Class WebpayCaptureNullifyWebService
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayCaptureNullify
@@ -13,19 +13,19 @@ namespace Freshwork\Transbank\WebpayCaptureNullify;
 use Freshwork\Transbank\TransbankWebService;
 
 /**
- * Clase WebpayCaptureNullifyWebService
+ * Class WebpayCaptureNullifyWebService
  *
  * @package Freshwork\Transbank\WebpayCaptureNullify
  */
 class WebpayCaptureNullifyWebService extends TransbankWebService
 {
-    /** @const INTEGRATION_WSDL URL del WSDL de integración */
+    /** @const INTEGRATION_WSDL Development WSDL URL */
     const INTEGRATION_WSDL  = 'https://tbk.orangepeople.cl/WSWebpayTransaction/cxf/WSCommerceIntegrationService?wsdl';
 
-    /** @const PRODUCTION_WSDL URL del WSDL de producción */
+    /** @const PRODUCTION_WSDL Production WSDL URL */
     const PRODUCTION_WSDL   = 'https://webpay3g.transbank.cl/WSWebpayTransaction/cxf/WSCommerceIntegrationService?wsdl';
 
-    /** @var array $classmap Listado de asociaciones de tipos del WSDL a clases */
+    /** @var array $classmap Association of WSDL types to classes */
     private static $classmap = array(
         'nullify' => Nullify::class,
         'nullificationInput' => NullificationInput::class,
@@ -39,10 +39,11 @@ class WebpayCaptureNullifyWebService extends TransbankWebService
     );
 
     /**
-     * Anular una venta normal
+     * Nullify a normal transaction
      *
      * @param NullificationInput $nullificationInput
      * @return mixed
+     * @throws \Freshwork\Transbank\Exceptions\InvalidCertificateException
      * @throws \SoapFault
      */
     public function nullify(NullificationInput $nullificationInput)
@@ -54,10 +55,11 @@ class WebpayCaptureNullifyWebService extends TransbankWebService
     }
 
     /**
-     * Realiza una única captura por autorización
+     * Capture amount
      *
      * @param CaptureInput $captureInput
      * @return mixed
+     * @throws \Freshwork\Transbank\Exceptions\InvalidCertificateException
      * @throws \SoapFault
      */
     public function capture(CaptureInput $captureInput)

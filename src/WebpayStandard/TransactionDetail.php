@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase TransactionDetail
+ * Class TransactionDetail
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayStandard
@@ -11,24 +11,24 @@
 namespace Freshwork\Transbank\WebpayStandard;
 
 /**
- * Clase TransactionDetail
+ * Class TransactionDetail
  *
  * @package Freshwork\Transbank\WebpayStandard
  */
 class TransactionDetail
 {
-    /** @var float $sharesAmount Monto de las cuotas */
+    /** @var float $sharesAmount Shares amount */
     public $sharesAmount;
 
-    /** @var int $sharesNumber Cantidad de cuotas */
+    /** @var int $sharesNumber Shares number */
     public $sharesNumber;
 
-    /** @var int|float $amount Monto de la transacción */
+    /** @var int|float $amount Amount */
     public $amount;
 
-    /** @var string $commerceCode Identificador del comercio */
+    /** @var string $commerceCode Commerce's code */
     public $commerceCode;
 
-    /** @var string $buyOrder Orden de compra de la tienda */
+    /** @var string $buyOrder Order identifier */
     public $buyOrder;
 }

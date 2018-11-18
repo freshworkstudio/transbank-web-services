@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase WebpayStandardWebService
+ * Class WebpayStandardWebService
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayStandard
@@ -13,20 +13,20 @@ namespace Freshwork\Transbank\WebpayStandard;
 use Freshwork\Transbank\TransbankWebService;
 
 /**
- * Clase WebpayStandardWebService
+ * Class WebpayStandardWebService
  *
  * @package Freshwork\Transbank\WebpayStandard
  */
 class WebpayStandardWebService extends TransbankWebService
 {
 
-    /** @const INTEGRATION_WSDL URL del WSDL de integración */
+    /** @const INTEGRATION_WSDL Development WSDL URL */
     const INTEGRATION_WSDL  = 'https://webpay3gint.transbank.cl/WSWebpayTransaction/cxf/WSWebpayService?wsdl';
 
-    /** @const PRODUCTION_WSDL URL del WSDL de producción */
+    /** @const PRODUCTION_WSDL Production WSDL URL */
     const PRODUCTION_WSDL   = 'https://webpay3g.transbank.cl/WSWebpayTransaction/cxf/WSWebpayService?wsdl';
 
-    /** @var array $classmap Listado de asociaciones de tipos del WSDL a clases */
+    /** @var array $classmap Association of WSDL types to classes */
     protected static $classmap = [
         'initTransaction' => InitTransaction::class,
         'initTransactionResponse' => InitTransactionResponse::class,
@@ -44,9 +44,9 @@ class WebpayStandardWebService extends TransbankWebService
     ];
 
     /**
-     * Permite inicializar una transacción en Webpay
+     * Initialize a Webpay transaction
      *
-     * @param InitTransactionInput $initTransactionInput Datos de la transacción
+     * @param InitTransactionInput $initTransactionInput Transaction information
      * @return mixed
      * @throws \Freshwork\Transbank\Exceptions\InvalidCertificateException
      * @throws \SoapFault
@@ -60,9 +60,9 @@ class WebpayStandardWebService extends TransbankWebService
     }
 
     /**
-     * Obtiene el resultado de la transacción una vez que Webpay ha resuelto su autorización financiera
+     * Get the transaction result once Webpay has resolved the financial authorization
      *
-     * @param string $token Token de la transacción
+     * @param string $token Webpay token
      * @return mixed
      * @throws \Freshwork\Transbank\Exceptions\InvalidCertificateException
      * @throws \SoapFault
@@ -76,9 +76,9 @@ class WebpayStandardWebService extends TransbankWebService
     }
 
     /**
-     * Indica a Webpay que se ha recibido conforme el resultado de la transacción
+     * Indicates to Webpay that the transaction result was received
      *
-     * @param string $token Token de la transacción
+     * @param string $token Webpay token
      * @return mixed
      * @throws \Freshwork\Transbank\Exceptions\InvalidCertificateException
      * @throws \SoapFault
