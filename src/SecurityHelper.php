@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase SecurityHelper
+ * Class SecurityHelper
  *
  * @package Freshwork\Transbank
  * @author Gonzalo De Spirito <gonzunigad@gmail.com>
@@ -10,16 +10,16 @@
 namespace Freshwork\Transbank;
 
 /**
- * Clase SecurityHelper
+ * Class SecurityHelper
  *
  * @package Freshwork\Transbank
  */
 class SecurityHelper
 {
     /**
-     * Obtiene el CN del certificado
+     * Get the common name of the certificate
      *
-     * @param string $X509Cert Ruta o contenido del certificado público
+     * @param string $X509Cert Content or path of client public certificate
      * @return string
      */
     public static function getCommonName($X509Cert)

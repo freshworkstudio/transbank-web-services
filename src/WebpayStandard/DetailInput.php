@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase DetailInput
+ * Class DetailInput
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayStandard
@@ -11,39 +11,39 @@
 namespace Freshwork\Transbank\WebpayStandard;
 
 /**
- * Clase DetailInput
+ * Class DetailInput
  *
  * @package Freshwork\Transbank\WebpayStandard
  */
 class DetailInput
 {
-    /** @var string $serviceId Identificador del servicio */
+    /** @var string $serviceId Service identifier */
     public $serviceId;
 
-    /** @var string $cardHolderId RUT del cliente */
+    /** @var string $cardHolderId Customer's national identifier number */
     public $cardHolderId;
 
-    /** @var string $cardHolderName Nombres del cliente */
+    /** @var string $cardHolderName Customer's names */
     public $cardHolderName;
 
-    /** @var string $cardHolderLastName1 Apellido paterno del cliente */
+    /** @var string $cardHolderLastName1 Customer's paternal surname */
     public $cardHolderLastName1;
 
-    /** @var string $cardHolderLastName2 Apellido materno del cliente */
+    /** @var string $cardHolderLastName2 Customer's maternal surname */
     public $cardHolderLastName2;
 
-    /** @var string $cardHolderMail Correo electrónico del cliente */
+    /** @var string $cardHolderMail Customer's e-mail */
     public $cardHolderMail;
 
-    /** @var string $cellPhoneNumber Teléfono del cliente */
+    /** @var string $cellPhoneNumber Customer's phone number */
     public $cellPhoneNumber;
 
-    /** @var string $expirationDate Fecha de expiración de la suscripción */
+    /** @var string $expirationDate Expiry date of the subscription */
     public $expirationDate;
 
-    /** @var string $commerceMail Correo electrónico del comercio */
+    /** @var string $commerceMail Commerce e-mail */
     public $commerceMail;
 
-    /** @var string $ufFlag Indica si el cobro es realizado en UF */
+    /** @var string $ufFlag Indicates if the payment is made in UF */
     public $ufFlag;
 }

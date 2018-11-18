@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase OneClickFinishInscriptionOutput
+ * Class OneClickFinishInscriptionOutput
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayOneClick
@@ -11,25 +11,25 @@
 namespace Freshwork\Transbank\WebpayOneClick;
 
 /**
- * Clase OneClickFinishInscriptionOutput
+ * Class OneClickFinishInscriptionOutput
  *
  * @package Freshwork\Transbank\WebpayOneClick
  */
 class OneClickFinishInscriptionOutput
 {
 
-    /** @var string $authCode Código que identifica la autorización de la inscripción */
+    /** @var string $authCode Authorization code of the inscription */
     public $authCode;
 
-    /** @var string $creditCardType Marca de la tarjeta de crédito que fue inscrita por el cliente */
+    /** @var string $creditCardType Customer's credit card brand */
     public $creditCardType;
 
-    /** @var string $last4CardDigits Últimos 4 dígitos y/o BIN de la tarjeta de crédito utilizada */
+    /** @var string $last4CardDigits Last 4 digits and/or BIN of the credit card */
     public $last4CardDigits;
 
-    /** @var int $responseCode Código de respuesta del proceso de inscripción */
+    /** @var int $responseCode Response code of the inscription process */
     public $responseCode;
 
-    /** @var string $tbkUser Identificador único de la inscripción del cliente */
+    /** @var string $tbkUser Unique customer inscription identifier */
     public $tbkUser;
 }

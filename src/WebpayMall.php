@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase WebpayMall
+ * Class WebpayMall
  *
  * @package Freshwork\Transbank
  * @author Gonzalo De Spirito <gonzunigad@gmail.com>
@@ -10,23 +10,25 @@
 namespace Freshwork\Transbank;
 
 /**
- * Clase WebpayMall
+ * Class WebpayMall
  *
  * @package Freshwork\Transbank
  */
 class WebpayMall extends WebpayWebService
 {
     /**
-     * Inicializa una transacción Mall en Webpay
+     * Initialize a Mall transaction on Webpay
      *
-     * @param string $returnURL URL del comercio, a la cual Webpay redireccionará posterior al proceso de autorización
-     * @param string $finalURL URL del comercio a la cual Webpay redireccionará posterior al voucher de éxito de Webpay
-     * @param string|null $buyOrder Orden de compra de la tienda
-     * @param string|null $sessionId Identificador de sesión, uso interno de comercio
-     * @param string|null $commerceCode Código del comercio
+     * @param string $returnURL URL of the commerce, to which Webpay will redirect after the authorization process
+     * @param string $finalURL URL of the commerce, to which Webpay will redirect subsequent to Webpay's success voucher
+     * @param string|null $buyOrder Order identifier
+     * @param string|null $sessionId Session identifier, internal use of commerce
+     * @param string|null $commerceCode Commerce's code
      *
      * @return WebpayStandard\InitTransactionOutput
-     * @throws EmptyTransactionException
+     * @throws Exceptions\EmptyTransactionException
+     * @throws Exceptions\InvalidCertificateException
+     * @throws \SoapFault
      */
     public function initTransaction($returnURL, $finalURL, $buyOrder, $sessionId = null, $commerceCode = null)
     {

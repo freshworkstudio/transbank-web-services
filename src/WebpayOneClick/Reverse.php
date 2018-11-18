@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase Reverse
+ * Class Reverse
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayOneClick
@@ -11,12 +11,12 @@
 namespace Freshwork\Transbank\WebpayOneClick;
 
 /**
- * Clase Reverse
+ * Class Reverse
  *
  * @package Freshwork\Transbank\WebpayOneClick
  */
 class Reverse
 {
-    /** @var OneClickReverseInput $arg0 Detalles de la reversa a realizar */
+    /** @var OneClickReverseInput $arg0 Reverse information */
     public $arg0;
 }

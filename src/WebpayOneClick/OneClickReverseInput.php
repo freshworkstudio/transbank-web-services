@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase OneClickReverseInput
+ * Class OneClickReverseInput
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayOneClick
@@ -11,12 +11,12 @@
 namespace Freshwork\Transbank\WebpayOneClick;
 
 /**
- * Clase OneClickReverseInput
+ * Class OneClickReverseInput
  *
  * @package Freshwork\Transbank\WebpayOneClick
  */
 class OneClickReverseInput
 {
-    /** @var int $buyorder Orden de compra de la transacción a reversar */
+    /** @var int $buyorder Order identifier to reverse */
     public $buyorder;
 }

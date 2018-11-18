@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase InvalidCertificateException
+ * Class InvalidCertificateException
  *
  * @package Freshwork\Transbank
  * @subpackage Exceptions
@@ -11,7 +11,7 @@
 namespace Freshwork\Transbank\Exceptions;
 
 /**
- * Clase InvalidCertificateException
+ * Class InvalidCertificateException
  *
  * @package Freshwork\Transbank\Exceptions
  */

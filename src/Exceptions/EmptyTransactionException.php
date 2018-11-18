@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase EmptyTransactionException
+ * Class EmptyTransactionException
  *
  * @package Freshwork\Transbank
  * @subpackage Exceptions
@@ -11,7 +11,7 @@
 namespace Freshwork\Transbank\Exceptions;
 
 /**
- * Clase EmptyTransactionException
+ * Class EmptyTransactionException
  *
  * @package Freshwork\Transbank\Exceptions
  */

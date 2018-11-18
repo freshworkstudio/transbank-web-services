@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase Authorize
+ * Class Authorize
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayOneClick
@@ -11,12 +11,12 @@
 namespace Freshwork\Transbank\WebpayOneClick;
 
 /**
- * Clase Authorize
+ * Class Authorize
  *
  * @package Freshwork\Transbank\WebpayOneClick
  */
 class Authorize
 {
-    /** @var OneClickPayInput $arg0 Detalles del pago a autorizar */
+    /** @var OneClickPayInput $arg0 Details of the payment to be authorized */
     public $arg0;
 }

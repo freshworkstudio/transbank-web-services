@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase LogHandler
+ * Class LogHandler
  *
  * @package Freshwork\Transbank
  * @subpackage Log
@@ -11,18 +11,18 @@
 namespace Freshwork\Transbank\Log;
 
 /**
- * Clase LogHandler
+ * Class LogHandler
  *
  * @package Freshwork\Transbank\Log
  */
 class LogHandler
 {
     /**
-     * Registra un evento
+     * Log an event
      *
-     * @param mixed $data Información a registrar
-     * @param string $level Tipo de evento
-     * @param mixed $type Identificador adicional
+     * @param mixed $data Data to log
+     * @param string $level Event type
+     * @param mixed $type Additional information
      */
     public static function log($data, $level = LoggerInterface::LEVEL_INFO, $type = null)
     {

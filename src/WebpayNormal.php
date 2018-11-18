@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase WebpayNormal
+ * Class WebpayNormal
  *
  * @package Freshwork\Transbank
  * @author Gonzalo De Spirito <gonzunigad@gmail.com>
@@ -10,7 +10,7 @@
 namespace Freshwork\Transbank;
 
 /**
- * Clase WebpayNormal
+ * Class WebpayNormal
  *
  * @package Freshwork\Transbank
  */

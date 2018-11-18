@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase WebpayOneClick
+ * Class WebpayOneClick
  *
  * @package Freshwork\Transbank
  * @author Gonzalo De Spirito <gonzunigad@gmail.com>
@@ -17,20 +17,20 @@ use Freshwork\Transbank\WebpayOneClick\oneClickReverseInput;
 use Freshwork\Transbank\WebpayOneClick\WebpayOneClickWebService;
 
 /**
- * Clase WebpayOneClick
+ * Class WebpayOneClick
  * @package Freshwork\Transbank
  */
 class WebpayOneClick extends TransbankService
 {
     /**
-     * @var WebpayOneClickWebService Cliente SOAP involucrado en la comunicación de OneClick
+     * @var WebpayOneClickWebService SOAP client involved in OneClick communication
      */
     private $service;
 
     /**
      * WebpayOneClick constructor
      *
-     * @param WebpayOneClickWebService $service Instancia del cliente SOAP de OneClick
+     * @param WebpayOneClickWebService $service SOAP Client instance
      */
     public function __construct(WebpayOneClickWebService $service)
     {
@@ -38,16 +38,15 @@ class WebpayOneClick extends TransbankService
     }
 
     /**
-     * Permite realizar la inscripción del tarjetahabiente e información de su tarjeta de crédito
+     *  Inscribe a customer and his/her credit card
      *
-     * Retorna como respuesta un objeto que contiene un token que representa la transacción de inscripción
-     * y una URL que corresponde a la URL de inscripción de OneClick.
-     *
-     * @param string $username Nombre de usuario del cliente
-     * @param string $email Correo electrónico del cliente
-     * @param string $responseURL URL del comercio a la cual Webpay redireccionará posterior al proceso de inscripción
+     * @param string $username Customer username
+     * @param string $email Customer's email
+     * @param string $responseURL URL of the commerce to which Webpay will redirect subsequent to the subscription
      *
      * @return WebpayOneClick\OneClickInscriptionOutput
+     * @throws Exceptions\InvalidCertificateException
+     * @throws \SoapFault
      */
     public function initInscription($username, $email, $responseURL)
     {
@@ -59,14 +58,13 @@ class WebpayOneClick extends TransbankService
     }
 
     /**
-     * Finaliza el proceso de inscripción del tarjetahabiente en Oneclick.
+     * Finish the inscription of the customer on OneClick
      *
-     * Retorna un objeto que contiene, entre otras cosas, el token del usuario en Oneclick que deberá ser utilizado
-     * para realizar las transacciones de pago.
-     *
-     * @param string $token Token recibido luego de la inscripción del cliente
+     * @param string $token Subscription token
      *
      * @return WebpayOneClick\OneClickFinishInscriptionOutput
+     * @throws Exceptions\InvalidCertificateException
+     * @throws \SoapFault
      */
     public function finishInscription($token = null)
     {
@@ -81,17 +79,16 @@ class WebpayOneClick extends TransbankService
     }
 
     /**
-     * Reliza transacciones de pago.
+     * Authorize a payment
      *
-     * Retorna un objeto que contiene el resultado de la autorización y debe ser ejecutado cada vez que el
-     * usuario selecciona pagar con Oneclick.
-     *
-     * @param int $amount Monto del pago en pesos
-     * @param string $buyOrder Orden de compra de la tienda
-     * @param string $username Nombre de usuario del cliente
-     * @param string $userToken Token de OneClick asociado al cliente
+     * @param int $amount Amount
+     * @param string $buyOrder Order identifier
+     * @param string $username Customer username
+     * @param string $userToken Customer token
      *
      * @return WebpayOneClick\OneClickPayOutput
+     * @throws Exceptions\InvalidCertificateException
+     * @throws \SoapFault
      */
     public function authorize($amount, $buyOrder, $username, $userToken)
     {
@@ -106,12 +103,12 @@ class WebpayOneClick extends TransbankService
 
 
     /**
-     * Reversa una transacción de venta autorizada con anterioridad
+     * Reverse a previous payment
      *
-     * Retorna un objeto que contiene un identificador único de la transacción de reversa
-     *
-     * @param string $buyOrder Orden de compra de la tienda
+     * @param string $buyOrder Order identifier
      * @return WebpayOneClick\OneClickReverseOutput
+     * @throws Exceptions\InvalidCertificateException
+     * @throws \SoapFault
      */
     public function codeReverseOneClick($buyOrder)
     {
@@ -122,11 +119,13 @@ class WebpayOneClick extends TransbankService
     }
 
     /**
-     * Elimina una inscripción de usuario en Transbank
+     * Deletes a customer inscription
      *
-     * @param string $userToken Token de OneClick asociado al cliente
-     * @param string $username Nombre de usuario del cliente
+     * @param string $userToken Customer's token
+     * @param string $username Customer username
      * @return bool
+     * @throws Exceptions\InvalidCertificateException
+     * @throws \SoapFault
      */
     public function removeUser($userToken, $username)
     {

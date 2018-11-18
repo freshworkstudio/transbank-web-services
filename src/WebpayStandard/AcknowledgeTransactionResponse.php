@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase AcknowledgeTransactionResponse
+ * Class AcknowledgeTransactionResponse
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayStandard
@@ -11,7 +11,7 @@
 namespace Freshwork\Transbank\WebpayStandard;
 
 /**
- * Clase AcknowledgeTransactionResponse
+ * Class AcknowledgeTransactionResponse
  *
  * @package Freshwork\Transbank\WebpayStandard
  */

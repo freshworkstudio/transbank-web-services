@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase Nullify
+ * Class Nullify
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayCaptureNullify
@@ -11,12 +11,12 @@
 namespace Freshwork\Transbank\WebpayCaptureNullify;
 
 /**
- * Clase Nullify
+ * Class Nullify
  *
  * @package Freshwork\Transbank\WebpayCaptureNullify
  */
 class Nullify
 {
-    /** @var NullificationInput $nullificationInput Detalles de la transacción a anular */
+    /** @var NullificationInput $nullificationInput Nullification details */
     public $nullificationInput;
 }

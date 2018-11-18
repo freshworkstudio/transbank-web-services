@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase RemoveUserResponse
+ * Class RemoveUserResponse
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayOneClick
@@ -11,12 +11,12 @@
 namespace Freshwork\Transbank\WebpayOneClick;
 
 /**
- * Clase RemoveUserResponse
+ * Class RemoveUserResponse
  *
  * @package Freshwork\Transbank\WebpayOneClick
  */
 class RemoveUserResponse
 {
-    /** @var boolean $return Indica si la eliminación del usuario tuvo éxito */
+    /** @var boolean $return Result of removal */
     public $return;
 }

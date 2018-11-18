@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase OneClickPayOutput
+ * Class OneClickPayOutput
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayOneClick
@@ -11,24 +11,24 @@
 namespace Freshwork\Transbank\WebpayOneClick;
 
 /**
- * Clase OneClickPayOutput
+ * Class OneClickPayOutput
  *
  * @package Freshwork\Transbank\WebpayOneClick
  */
 class OneClickPayOutput
 {
-    /** @var string $authorizationCode Código de autorización de la transacción de pago */
+    /** @var string $authorizationCode Payment authorization code */
     public $authorizationCode;
 
-    /** @var string $creditCardType Indica el tipo de tarjeta que fue inscrita por el cliente  */
+    /** @var string $creditCardType Customer's credit card brand */
     public $creditCardType;
 
-    /** @var string $last4CardDigits Los últimos 4 dígitos de la tarjeta usada en la transacción */
+    /** @var string $last4CardDigits Last 4 digits and/or BIN of the credit card */
     public $last4CardDigits;
 
-    /** @var int $responseCode Código de retorno del proceso de pago */
+    /** @var int $responseCode Response code of the payment process */
     public $responseCode;
 
-    /** @var int $transactionId Identificador único de la transacción de pago */
+    /** @var int $transactionId Unique transaction identifier */
     public $transactionId;
 }

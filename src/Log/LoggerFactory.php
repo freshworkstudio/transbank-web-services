@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase LoggerFactory
+ * Class LoggerFactory
  *
  * @package Freshwork\Transbank
  * @subpackage Log
@@ -11,19 +11,19 @@
 namespace Freshwork\Transbank\Log;
 
 /**
- * Clase LoggerFactory
+ * Class LoggerFactory
  *
  * @package Freshwork\Transbank\Log
  */
 class LoggerFactory
 {
-    /** @var LoggerInterface $instance Instancia del registrador */
+    /** @var LoggerInterface $instance Logger instance */
     private static $instance;
 
     /**
-     * Establece la instancia del registrador a utilizar
+     * Set a logger instance
      *
-     * @param LoggerInterface $instance Instancia del registrador
+     * @param LoggerInterface $instance Logger instance
      */
     public static function setLogger(LoggerInterface $instance)
     {
@@ -31,7 +31,7 @@ class LoggerFactory
     }
 
     /**
-     * Obtiene la instancia del registrador
+     * Get logger instance
      *
      * @return LoggerInterface
      */
@@ -45,7 +45,7 @@ class LoggerFactory
     }
 
     /**
-     * Genera un registrador vacío
+     * Create an void logger
      *
      * @return VoidLogger
      */

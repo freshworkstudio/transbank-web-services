@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase VoidLogger
+ * Class VoidLogger
  *
  * @package Freshwork\Transbank
  * @subpackage Log
@@ -11,18 +11,18 @@
 namespace Freshwork\Transbank\Log;
 
 /**
- * Clase VoidLogger
+ * Class VoidLogger
  *
  * @package Freshwork\Transbank\Log
  */
 class VoidLogger implements LoggerInterface
 {
     /**
-     * No registra eventos
+     * Logger without functionality
      *
-     * @param mixed $data Información a registrar
-     * @param string $level Tipo de evento
-     * @param mixed $type Identificador adicional
+     * @param mixed $data Data to log
+     * @param string $level Event type
+     * @param mixed $type Additional identifier
      * @return void
      */
     public function log($data, $level = self::INFO, $type = null)

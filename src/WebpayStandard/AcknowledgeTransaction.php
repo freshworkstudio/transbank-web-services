@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase AcknowledgeTransaction
+ * Class AcknowledgeTransaction
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayStandard
@@ -11,12 +11,12 @@
 namespace Freshwork\Transbank\WebpayStandard;
 
 /**
- * Clase AcknowledgeTransaction
+ * Class AcknowledgeTransaction
  *
  * @package Freshwork\Transbank\WebpayStandard
  */
 class AcknowledgeTransaction
 {
-    /** @var string $tokenInput Token de la transacción */
+    /** @var string $tokenInput Webpay token */
     public $tokenInput;
 }

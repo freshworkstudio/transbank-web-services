@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase InitTransaction
+ * Class InitTransaction
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayStandard
@@ -11,12 +11,12 @@
 namespace Freshwork\Transbank\WebpayStandard;
 
 /**
- * Clase InitTransaction
+ * Class InitTransaction
  *
  * @package Freshwork\Transbank\WebpayStandard
  */
 class InitTransaction
 {
-    /** @var InitTransactionInput $wsInitTransactionInput Datos de la transacción */
+    /** @var InitTransactionInput $wsInitTransactionInput Transaction information */
     public $wsInitTransactionInput;
 }

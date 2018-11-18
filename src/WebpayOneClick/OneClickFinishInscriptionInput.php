@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase OneClickFinishInscriptionInput
+ * Class OneClickFinishInscriptionInput
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayOneClick
@@ -11,12 +11,12 @@
 namespace Freshwork\Transbank\WebpayOneClick;
 
 /**
- * Clase OneClickFinishInscriptionInput
+ * Class OneClickFinishInscriptionInput
  *
  * @package Freshwork\Transbank\WebpayOneClick
  */
 class OneClickFinishInscriptionInput
 {
-    /** @var string $token Identificador del proceso de inscripción */
+    /** @var string $token Webpay token of inscription */
     public $token;
 }

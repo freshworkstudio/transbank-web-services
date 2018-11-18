@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase TransbankSoap
+ * Class TransbankSoap
  *
  * @package Freshwork\Transbank
  * @author Gonzalo De Spirito <gonzunigad@gmail.com>
@@ -17,20 +17,20 @@ use WSSESoap;
 use XMLSecurityKey;
 
 /**
- * Clase TransbankSoap
+ * Class TransbankSoap
  *
  * @package Freshwork\Transbank
  */
 class TransbankSoap extends SoapClient
 {
-    /** @var string $privateKey Ruta o contenido de la llave privada del cliente */
+    /** @var string $privateKey Content or path of client private key */
     protected $privateKey;
 
-    /** @var string $certificate Ruta o contenido del certificado público del cliente */
+    /** @var string $certificate Content or path of client public certificate */
     protected $certificate;
 
     /**
-     * Obtiene la ruta o contenido de la llave privada del cliente
+     * Get the content or path of client private key
      *
      * @return string
      */
@@ -40,7 +40,7 @@ class TransbankSoap extends SoapClient
     }
 
     /**
-     * Establece la ruta o contenido de la llave privada del cliente
+     * Set the content or path of client private key
      *
      * @param string $privateKey
      */
@@ -50,7 +50,7 @@ class TransbankSoap extends SoapClient
     }
 
     /**
-     * Obtiene la ruta o contenido del certificado público del cliente
+     * Get the content or path of client public certificate
      *
      * @return string
      */
@@ -60,7 +60,7 @@ class TransbankSoap extends SoapClient
     }
 
     /**
-     * Establece la ruta o contenido del certificado público del cliente
+     * Set the content or path of client public certificate
      *
      * @param string $certificate
      */
@@ -70,13 +70,13 @@ class TransbankSoap extends SoapClient
     }
 
     /**
-     * Realiza una petición SOAP
+     * Execute SOAP request
      *
-     * @param string $request XML de la petición
-     * @param string $location URL donde realizar la petición
-     * @param string $action Acción del SOAP
-     * @param int $version Versión del SOAP
-     * @param int $oneWay Establece si existirá un retorno
+     * @param string $request request XML
+     * @param string $location request URL
+     * @param string $action SOAP action
+     * @param int $version SOAP version
+     * @param int $oneWay Indicates whether there will be a return
      * @return string
      * @throws \Exception
      */

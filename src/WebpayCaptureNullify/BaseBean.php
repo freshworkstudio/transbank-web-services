@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase BaseBean
+ * Class BaseBean
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayCaptureNullify
@@ -11,7 +11,7 @@
 namespace Freshwork\Transbank\WebpayCaptureNullify;
 
 /**
- * Clase BaseBean
+ * Class BaseBean
  *
  * @package Freshwork\Transbank\WebpayCaptureNullify
  */

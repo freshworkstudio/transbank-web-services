@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase Capture
+ * Class Capture
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayCaptureNullify
@@ -11,12 +11,12 @@
 namespace Freshwork\Transbank\WebpayCaptureNullify;
 
 /**
- * Clase Capture
+ * Class Capture
  *
  * @package Freshwork\Transbank\WebpayCaptureNullify
  */
 class Capture
 {
-    /** @var CaptureInput $captureInput Detalles para realizar la captura */
+    /** @var CaptureInput $captureInput Capture information */
     public $captureInput;
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase OneClickInscriptionInput
+ * Class OneClickInscriptionInput
  *
  * @package Freshwork\Transbank
  * @subpackage WebpayOneClick
@@ -11,18 +11,18 @@
 namespace Freshwork\Transbank\WebpayOneClick;
 
 /**
- * Clase OneClickInscriptionInput
+ * Class OneClickInscriptionInput
  *
  * @package Freshwork\Transbank\WebpayOneClick
  */
 class OneClickInscriptionInput
 {
-    /** @var string $email Correo electrónico del cliente registrado en el comercio */
+    /** @var string $email Customer's e-mail */
     public $email;
 
-    /** @var string $responseURL URL a la que será enviado el cliente finalizado el proceso de inscripción */
+    /** @var string $responseURL URL of the commerce to which Webpay will redirect subsequent to the subscription */
     public $responseURL;
 
-    /** @var string $username Identificador único del cliente en el comercio */
+    /** @var string $username Customer username */
     public $username;
 }
