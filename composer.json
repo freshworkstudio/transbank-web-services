@@ -21,9 +21,6 @@
         "ext-soap": "*",
         "ext-openssl": "*"
     },
-    "require-dev": {
-        "phpdocumentor/phpdocumentor": "dev-master"
-    },
     "minimum-stability": "dev"
 
 }
