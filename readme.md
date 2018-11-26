@@ -17,6 +17,10 @@ Librería para la integración de Webpay Plus, Webpay OneClick y Webpay Patpass.
     * [Inicio de la transacción](#inicio-de-la-transacción)
     * [Retorno a URL intermedia](#retorno-a-url-intermedia)
     * [Retorno a URL final](#retorno-a-url-final)
+  * [Webpay Plus Captura Diferida](#webpay-plus-captura-diferida)
+    * [Inicio de la transacción diferida](#inicio-de-la-transacción-diferida)
+    * [Capturar monto total o parcial de la transacción](#capturar-monto-total-o-parcial-de-la-transacción)
+  * [Anulaciones](#anulaciones)
   * [OneClick](#oneclick)
     * [Inscripción del cliente](#inscripción-del-cliente)
     * [Finalizar la inscripción](#finalizar-la-inscripción)
@@ -132,6 +136,87 @@ return RedirectorHelper::redirectBackNormal($response->urlRedirection);
 
 ### Retorno a URL final
 En esta página deberás mostrar la mayor cantidad de información que fue obtenida en el paso anterior al invocar `getTransactionResult` y además detalles de la orden.
+
+## Webpay Plus Captura diferida
+En esta modalidad, se retiene el valor de la compra del saldo de la tarjeta de crédito del cliente, reservando cupo pero sin realizar la transacción definitivamente hasta que el comercio confirma la compra (vía captura diferida) y lo comunique a Transbank.
+
+### Inicio de la transacción diferida
+Para iniciar una transacción de captura diferida se utiliza el mismo flujo de [Webpay Plus Normal](#webpay-plus-normal), sin embargo, los certificacdos son los que informan a Transbank que se iniciará una transacción con captura diferida, por tanto varia únicamente en estos.
+``` php
+<?php
+
+use Freshwork\Transbank\CertificationBagFactory;
+use Freshwork\Transbank\TransbankServiceFactory;
+use Freshwork\Transbank\RedirectorHelper;
+
+include 'vendor/autoload.php';
+
+// Obtenemos los certificados y llaves para utilizar el ambiente de integración de Webpay Diferido
+$bag = CertificationBagFactory::integrationWebpayDeferred();
+
+$plus = TransbankServiceFactory::deferred($bag);
+
+// Para transacciones normales, solo puedes añadir una linea de detalle de transacción.
+$plus->addTransactionDetail(10000, 'Orden824201'); // Monto e identificador de la orden
+
+// Debes además, registrar las URLs a las cuales volverá el cliente durante y después del flujo de Webpay
+$response = $plus->initTransaction('http://test.dev/response', 'http://test.dev/thanks');
+
+// Utilidad para generar formulario y realizar redirección POST
+echo RedirectorHelper::redirectHTML($response->url, $response->token);
+```
+
+Los siguientes pasos son tal cual [Webpay Plus Normal](#webpay-plus-normal), es decir, [retornamos a URL intermedia](#retorno-a-url-intermedia) y luego [retornamos a URL final](#retorno-a-url-final).
+
+### Capturar monto total o parcial de la transacción
+Luego de terminar el flujo inicial, tendremos 7 días calendario máximos para realizar la captura, ya que superado ese tiempo la retención de la tarjeta de crédito será reversada y el cupo liberado.
+
+Podemos capturar el monto total o parcial retenido, y para ello deberemos especificar el código de autorización entregado durante el flujo inicial y además el identificador de la orden.
+``` php
+<?php
+
+use Freshwork\Transbank\CertificationBagFactory;
+use Freshwork\Transbank\TransbankServiceFactory;
+
+include 'vendor/autoload.php';
+
+// Obtenemos los certificados y llaves para utilizar el ambiente de integración de Webpay Diferido
+$bag = CertificationBagFactory::integrationWebpayDeferred();
+
+$plus = TransbankServiceFactory::captureNullify($bag);
+
+$authCode = 'this-auth-code-is-an-example';
+
+// Puedes capturar el monto total o parcial
+$plus->capture($authCode, 'Orden824201', 5000); // Código de autorización, identificador de la orden y monto
+```
+
+## Anulaciones
+Solo las transacciones Webpay (Normal o Captura diferida) realizadas con **tarjeta de crédito** pueden ser anuladas mediante servicios web.
+
+Las anulaciones pueden ser totales o parciales y estas últimas, solo están permitidas en la modalidad de Venta Normal (VN).
+
+Para realizar una anulación necesitaremos conocer el monto autorizado previamente, el código de autorización y el identificador de la orden.
+
+``` php
+<?php
+
+use Freshwork\Transbank\CertificationBagFactory;
+use Freshwork\Transbank\TransbankServiceFactory;
+
+include 'vendor/autoload.php';
+
+// Obtenemos los certificados y llaves para utilizar el ambiente de integración de Webpay Normal
+$bag = CertificationBagFactory::normal();
+
+$plus = TransbankServiceFactory::captureNullify($bag);
+
+$authorizedAmount = '10000';
+$authCode = 'this-auth-code-is-an-example';
+
+// Puedes capturar el monto total o parcial
+$plus->nullify($authCode, $authorizedAmount, 'Orden824201', 2000); // Solo se anularán $2.000 y quedará un balance de $8.000
+```
 
 
 ## OneClick
@@ -307,6 +392,7 @@ $plus->acknowledgeTransaction();
 //Redirect back to Webpay Flow and then to the thanks page
 return RedirectorHelper::redirectBackNormal($response->urlRedirection);
 ```
+
 # Logs
 Para el proceso de certificación con Transbank, muchas veces se solicitan los registros de las transacciones realizadas y esta biblioteca provee una utilidad para facilitar dicho proceso.
 
