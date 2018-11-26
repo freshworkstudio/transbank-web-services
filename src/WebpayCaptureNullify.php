@@ -18,39 +18,43 @@ class WebpayCaptureNullify extends TransbankService
     }
 
     /**
-     * Método que permite realizar la captura de cierto monto en una transacción diferida
+     * Capture amount
      *
      * @param $authorizationCode
      * @param $buyOrder
      * @param $captureAmount
-     * @param $commerceId
-     * @return Freshwork\Transbank\WebpayCaptureNullify\CaptureOutput
+     * @param $commerceCode
+     * @return WebpayCaptureNullify\CaptureOutput
+     * @throws Exceptions\InvalidCertificateException
      * @throws \SoapFault
      */
     public function capture(
         $authorizationCode,
         $buyOrder,
         $captureAmount,
-        $commerceId
+        $commerceCode = null
     ) {
         $capture = new CaptureInput();
         $capture->authorizationCode = $authorizationCode;
         $capture->buyOrder = $buyOrder;
         $capture->captureAmount = $captureAmount;
-        $capture->commerceId = $commerceId;
+        $capture->commerceId = $commerceCode ? $commerceCode : SecurityHelper::getCommonName(
+            $this->service->getCertificationBag()->getClientCertificate()
+        );;
 
         return $this->service->capture($capture);
     }
 
     /**
-     * Método que permite anular total o parcialmente una transacción
+     * Nullify a credit card based transaction
      *
      * @param $authorizationCode
      * @param $authorizedAmount
      * @param $buyOrder
      * @param $nullifyAmount
-     * @param $commerceId
+     * @param $commerceCode
      * @return WebpayCaptureNullify\NullificationOutput
+     * @throws Exceptions\InvalidCertificateException
      * @throws \SoapFault
      */
     public function nullify(
@@ -58,14 +62,16 @@ class WebpayCaptureNullify extends TransbankService
         $authorizedAmount,
         $buyOrder,
         $nullifyAmount,
-        $commerceId
+        $commerceCode = null
     ) {
         $nullify = new NullificationInput();
         $nullify->authorizationCode = $authorizationCode;
         $nullify->authorizedAmount = $authorizedAmount;
         $nullify->buyOrder = $buyOrder;
         $nullify->nullifyAmount = $nullifyAmount;
-        $nullify->commerceId = $commerceId;
+        $nullify->commerceId = $commerceCode ? $commerceCode : SecurityHelper::getCommonName(
+            $this->service->getCertificationBag()->getClientCertificate()
+        );;
 
         return $this->service->nullify($nullify);
     }
