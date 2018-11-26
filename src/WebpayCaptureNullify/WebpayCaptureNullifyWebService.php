@@ -39,7 +39,7 @@ class WebpayCaptureNullifyWebService extends TransbankWebService
     );
 
     /**
-     * Nullify a normal transaction
+     * Nullify a credit card based transaction
      *
      * @param NullificationInput $nullificationInput
      * @return mixed
