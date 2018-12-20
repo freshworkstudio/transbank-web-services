@@ -501,12 +501,14 @@ Finalmente, tras recibir esta confirmación, ya puedes usar tu implementación e
 
 Ejemplo: Si estás implementando Webpay Normal, debes eliminar esta línea ( o la que estés usando para crear el CertificationBag) 
 ```php
+//Eliminar esta
 $bag = CertificationBagFactory::integrationWebpayNormal();
 ...
 ```
 
 Y reemplazarla por esta: 
 ```php
+//Reemplazar por esta
 $bag = CertificationBagFactory::production('tu/llave/privada.key', 'path/a/tu/ceriticado_publico.crt');
 ...
 ```
