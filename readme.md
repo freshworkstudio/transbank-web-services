@@ -443,13 +443,13 @@ LogHandler::log(['datos' => 'más datos', 'otros_datos']);
 
 # CertificationBag
 Es una clase utilizada envolver certificados y llaves privadas con la finalidad de facilitar el manejo de los mismos a través de la biblioteca.
-
 Es obligatorio y necesario el uso de `CertificationBag` ya que contiene todos los datos necesarios para cifrar la comunicación con Transbank y validar las respuestas de este.
 
 ```php
 <?php
 
 use Freshwork\Transbank\CertificationBag;
+use Freshwork\Transbank\CertificationBagFactory;
 
 // Integración / Desarrollo
 $bag = new CertificationBag(
@@ -466,6 +466,13 @@ $bag = new CertificationBag(
 	null,
 	CertificationBag::PRODUCTION
 );
+
+//También se puede crear usando la clase CertificationBagFactory, que permite crear instancias de CertificationBag de manera más simple
+CertificationBagFactory::production('path/to/cert/597020000001.key', 'path/to/cert/597020000001.crt');
+
+//O si queremos crear un certification bag que venga con los certificados de integración para webpaynormal
+CertificationBagFactory::integrationWebpayNormal();
+
 ```
 Teniendo una `CertificationBag`,  se puede crear una instancia de los servicios de Webpay, por ejemplo:   `WebpayOneClickWebService`
 
@@ -483,6 +490,27 @@ $bag->setEnvironment(CertificationBag::INTEGRATION);
 
 $oneClickService = new WebpayOneClickWebService($bag);
 ```
+# Pasar a producción
+Para pasar a producción, es importante destacar que Transbank solicitará crear un par de llaves (privada y pública) utilizando el código de comercio como Common Name (CN). 
+Transbank te enviará las instrucciones para que generes este certificado, una vez que hayas pasado el proceso de certificación. 
+
+Una vez que les envíes los certificados que generaste, debes esperar a que te confirmen que efectivamente los cargaron en sus servidores.
+
+Finalmente, tras recibir esta confirmación, ya puedes usar tu implementación en modo producción (con dinero real). En el código de tu proyecto, el único cambio que debes realizar es el cambio de los certificados del CertificationBag.
+
+Ejemplo: Si estás implementando Webpay Normal, debes eliminar esta línea ( o la que estés usando para crear el CertificationBag) 
+```php
+$bag = CertificationBagFactory::integrationWebpayNormal();
+...
+```
+
+Y reemplazarla por esta: 
+```php
+$bag = CertificationBagFactory::production('tu/llave/privada.key', 'path/a/tu/ceriticado_publico.crt');
+...
+```
+
+Lo importante es solo cambiar el CertificationBag que usas, en vez de usar el de integración, debes crear uno para el ambiente de producción. 
 
 # Datos de prueba
 Estos son los datos de tarjetas para que puedas probar en el ambiente de integración. 

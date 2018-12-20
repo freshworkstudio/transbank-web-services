@@ -50,7 +50,11 @@ class CertificationBag
         $environment = self::INTEGRATION
     ) {
         if ($server_certificate === null) {
-            $server_certificate = dirname(__FILE__) . '/certs/transbank.pem';
+            if ($environment === self::PRODUCTION) {
+                $server_certificate = dirname(__FILE__) . '/certs/transbank-production.pem';
+            } else {
+                $server_certificate = dirname(__FILE__) . '/certs/transbank.pem';
+            }
         }
         $this->client_private_key = $client_private_key;
         $this->client_certificate = $client_certificate;
