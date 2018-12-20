@@ -32,6 +32,7 @@ Librería para la integración de Webpay Plus, Webpay OneClick y Webpay Patpass.
     * [response](#response)
 * [Logs](#logs)
 * [CertificationBag](#certificationbag)
+* [Pasar a producción](#pasar-a-producción)
 * [Datos de prueba](#datos-de-prueba)
   * [Tarjeta de crédito VISA (Será aprobada)](#tarjeta-de-crédito-visa-será-aprobada)·
   * [Tarjeta de crédito MASTERCARD (Será rechazada)](#tarjeta-de-crédito-mastercard-será-rechazada)
