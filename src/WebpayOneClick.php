@@ -9,11 +9,11 @@
 
 namespace Freshwork\Transbank;
 
-use Freshwork\Transbank\WebpayOneClick\oneClickFinishInscriptionInput;
-use Freshwork\Transbank\WebpayOneClick\oneClickInscriptionInput;
-use Freshwork\Transbank\WebpayOneClick\oneClickPayInput;
-use Freshwork\Transbank\WebpayOneClick\oneClickRemoveUserInput;
-use Freshwork\Transbank\WebpayOneClick\oneClickReverseInput;
+use Freshwork\Transbank\WebpayOneClick\OneClickFinishInscriptionInput;
+use Freshwork\Transbank\WebpayOneClick\OneClickInscriptionInput;
+use Freshwork\Transbank\WebpayOneClick\OneClickPayInput;
+use Freshwork\Transbank\WebpayOneClick\OneClickRemoveUserInput;
+use Freshwork\Transbank\WebpayOneClick\OneClickReverseInput;
 use Freshwork\Transbank\WebpayOneClick\WebpayOneClickWebService;
 
 /**
