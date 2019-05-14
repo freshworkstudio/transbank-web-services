@@ -550,5 +550,12 @@ Biblioteca desarrollada por [Simplepay](https://simplepay.cl)
 
 Powered by [Freshwork Studio](https://freshworkstudio.com)
 
-# Licencia
-Freshwork Transbank está licenciada bajo [La licencia MIT (MIT)](LICENSE).
+---
+# Licencia y Postalware
+Puedes usar este paquete gratuitamente sin ninguna restricción, aunque como está de moda, implementamos una licencia 'Postalware'. Si usas este paquete en producción y te gusta como funciona, Agradeceríamos bastante si nos envías una postal de tu ciudad/comuna, una nota de agradecimiento o un súper8.
+
+Dirección
+Nombre: Gonzalo De Spirito
+Apoquindo 5980. Piso 17, Las Condes, Santiago. 
+Chile,
+
