@@ -1,62 +1,79 @@
 <?php
+/**
+ * Class RedirectorHelper
+ *
+ * @package Freshwork\Transbank
+ * @author Gonzalo De Spirito <gonzunigad@gmail.com>
+ * @version 0.1 (06/07/2016)
+ */
+
 namespace Freshwork\Transbank;
-
-
-use Freshwork\Transbank\WebpayOneClick\initInscriptionResponse;
-use Freshwork\Transbank\WebpayOneClick\oneClickInscriptionOutput;
 
 /**
  * Class RedirectorHelper
+ *
  * @package Freshwork\Transbank
  */
 class RedirectorHelper
 {
-    /**
-     * @var string
-     */
-    static $title = 'Redireccionando a Webpay...';
+    /** @var string $title Title of the generated page */
+    public static $title = 'Redireccionando a Webpay...';
 
     /**
-     * Get the basic form a script to redirect the user for one click
-     * @param string $url
-     * @param string $token
-     * @param string $field_name
+     * Redirect to Webpay
+     *
+     * @param string $url Webpay URL
+     * @param string $token Webpay token
+     * @param string $field_name Webpay token field name
      * @return string
      */
     public static function redirectHTML($url, $token = '', $field_name = 'TBK_TOKEN')
     {
-        if (!$token) $token = $_POST['token_ws'];
+        if (!$token) {
+            $token = $_POST['token_ws'];
+        }
         return self::addHtmlWrapper(self::getForm($url, $token, $field_name));
     }
 
+    /**
+     * Redirect to Webpay voucher
+     *
+     * @param string $url Webpay URL
+     * @param string $token Webpay token
+     * @param string $field_name Webpay token field name
+     * @return string
+     */
     public static function redirectBackNormal($url, $token = '', $field_name = 'token_ws')
     {
         return self::redirectHTML($url, $token, $field_name);
     }
 
     /**
-     * Add Base HTML tags
+     * Create HTML base to wrap the form
      *
-     * @param $formHtml
+     * @param string $form_html Form HTML
      * @return string
      */
-    public static function addHtmlWrapper($formHtml)
+    public static function addHtmlWrapper($form_html)
     {
         return
-'<html>
-    <head>
-        <title>' . self::$title . '</title>
-    </head>
-    <body>
-        ' . $formHtml . '
-    </body>
-
-</html>';
+        '<html>
+            <head>
+                <title>' . self::$title . '</title>
+            </head>
+            <body>
+                ' . $form_html . '
+            </body>
+        
+        </html>';
     }
 
     /**
-     * @param string $urlWebpay
-     * @param string $token
+     * Create a HTML form
+     *
+     * @param string $url Webpay URL
+     * @param string $token Webpay token
+     * @param string $field_name Webpay token field name
      * @return string
      */
     public static function getForm($url, $token, $field_name)

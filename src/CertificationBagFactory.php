@@ -1,13 +1,24 @@
 <?php
+/**
+ * Class CertificationBagFactory
+ *
+ * @package Freshwork\Transbank
+ * @author Gonzalo De Spirito <gonzunigad@gmail.com>
+ * @version 0.1 (06/07/2016)
+ */
+
 namespace Freshwork\Transbank;
 
 /**
  * Class CertificationBagFactory
+ *
  * @package Freshwork\Transbank
  */
 class CertificationBagFactory
 {
     /**
+     * Create an instance of Webpay OneClick keys and certificates
+     *
      * @return CertificationBag
      */
     public static function integrationOneClick()
@@ -19,6 +30,8 @@ class CertificationBagFactory
     }
 
     /**
+     * Create an instance of Webpay Normal keys and certificates
+     *
      * @return CertificationBag
      */
     public static function integrationWebpayNormal()
@@ -30,6 +43,8 @@ class CertificationBagFactory
     }
 
     /**
+     * Create an instance of Webpay PatPass keys and certificates
+     *
      * @return CertificationBag
      */
     public static function integrationPatPass()
@@ -41,11 +56,28 @@ class CertificationBagFactory
     }
 
     /**
-     * CertificationBag constructor.
-     * @param string $client_private_key Client private key
-     * @param string $client_certificate Client public certificate
-     * @param null|string $server_certificate Transbank's server public certificate
+     * @return CertificationBag
+     */
+    public static function integrationWebpayDeferred()
+    {
+        $private_key = dirname(__FILE__) . '/certs/webpay-deferred-integration/597044444404.key';
+        $client_certificate = dirname(__FILE__) . '/certs/webpay-deferred-integration/597044444404.crt';
+        $server_certificate = dirname(__FILE__) . '/certs/webpay-deferred-integration/transbank.pem';
+
+        return new CertificationBag(
+            $private_key,
+            $client_certificate,
+            $server_certificate,
+            CertificationBag::INTEGRATION
+        );
+    }
+
+    /**
+     * Create a production instance of keys and certificates
      *
+     * @param string $client_private_key Content or path of client private key
+     * @param string $client_certificate Content or path of client public certificate
+     * @param string|null $server_certificate Content or path of Transbank public certificate
      * @return CertificationBag
      */
     public static function production($client_private_key, $client_certificate, $server_certificate = null)
@@ -55,16 +87,20 @@ class CertificationBagFactory
     }
 
     /**
-     * @param $client_private_key
-     * @param $client_certificate
-     * @param null $server_certificate
-     * @param int $environment
+     * Create a generic instance of keys and certificates
+     *
+     * @param string $client_private_key Content or path of client private key
+     * @param string $client_certificate Content or path of client public certificate
+     * @param string|null $server_certificate Content or path of Transbank public certificate
+     * @param string $environment Environment
      * @return CertificationBag
      */
-    public static function create($client_private_key, $client_certificate, $server_certificate = null, $environment = CertificationBag::INTEGRATION)
-    {
+    public static function create(
+        $client_private_key,
+        $client_certificate,
+        $server_certificate = null,
+        $environment = CertificationBag::INTEGRATION
+    ) {
         return new CertificationBag($client_private_key, $client_certificate, $server_certificate, $environment);
     }
-
-
 }

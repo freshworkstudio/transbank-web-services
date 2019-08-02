@@ -1,53 +1,60 @@
 <?php
-namespace Freshwork\Transbank;
+/**
+ * Class CertificationBag
+ *
+ * @package Freshwork\Transbank
+ * @author Gonzalo De Spirito <gonzunigad@gmail.com>
+ * @version 0.1 (06/07/2016)
+ */
 
+namespace Freshwork\Transbank;
 
 /**
  * Class CertificationBag
+ *
  * @package Freshwork\Transbank
  */
 class CertificationBag
 {
 
-    /**
-     * Transbank integration environment
-     */
+    /** @const INTEGRATION Development environment */
     const INTEGRATION = 'integration';
 
-    /**
-     * Transbank production environment
-     */
+    /** @const PRODUCTION Production environment */
     const PRODUCTION = 'production';
 
-    /**
-     * @var string
-     */
+    /** @var string $client_private_key Content or path of client private key */
     private $client_private_key;
-    /**
-     * @var string
-     */
+
+    /** @var string $client_certificate Content or path of client public certificate */
     private $client_certificate;
-    /**
-     * @var null
-     */
+
+    /** @var null|string $server_certificate Content or path of Transbank public certificate */
     private $server_certificate;
-    /**
-     * @var int
-     */
+
+    /** @var string $environment Environment */
     private $environment;
 
     /**
-     * CertificationBag constructor.
-     * @param string $client_private_key Client private key
-     * @param string $client_certificate Client public certificate
-     * @param null|string $server_certificate Transbank's server public certificate
-     * @param int $environment The environment of the certification bag
+     * CertificationBag constructor
+     *
+     * @param string $client_private_key Content or path of client private key
+     * @param string $client_certificate Content or path of client public certificate
+     * @param null|string $server_certificate Content or path of Transbank public certificate
+     * @param string $environment Environment
      */
-    public function __construct($client_private_key, $client_certificate, $server_certificate = null, $environment = self::INTEGRATION)
-    {
-        if ($server_certificate === null)
-        {
-            $server_certificate = dirname(__FILE__) . '/certs/transbank.pem';
+    public function __construct(
+        $client_private_key,
+        $client_certificate,
+        $server_certificate = null,
+        $environment = self::INTEGRATION
+    ) {
+        if ($server_certificate === null) {
+            if ($environment === self::PRODUCTION) {
+                $server_certificate = dirname(__FILE__) . '/certs/transbank-production.pem';
+            } else {
+                $server_certificate = dirname(__FILE__) . '/certs/transbank.pem';
+            }
         }
         $this->client_private_key = $client_private_key;
         $this->client_certificate = $client_certificate;
@@ -55,9 +62,10 @@ class CertificationBag
         $this->environment = $environment;
     }
 
-
     /**
-     * @return mixed
+     * Get content or path of client private key
+     *
+     * @return string
      */
     public function getClientPrivateKey()
     {
@@ -65,7 +73,9 @@ class CertificationBag
     }
 
     /**
-     * @param mixed $client_private_key
+     * Set content or path of client private key
+     *
+     * @param string $client_private_key Content or path of client private key
      */
     public function setClientPrivateKey($client_private_key)
     {
@@ -73,7 +83,9 @@ class CertificationBag
     }
 
     /**
-     * @return mixed
+     * Get content or path of client public certificate
+     *
+     * @return string
      */
     public function getClientCertificate()
     {
@@ -81,7 +93,9 @@ class CertificationBag
     }
 
     /**
-     * @param mixed $client_certificate
+     * Set content or path of client public certificate
+     *
+     * @param string $client_certificate Content or path of client public certificate
      */
     public function setClientCertificate($client_certificate)
     {
@@ -89,7 +103,9 @@ class CertificationBag
     }
 
     /**
-     * @return null
+     * Get content or path of Transbank public certificate
+     *
+     * @return null|string
      */
     public function getServerCertificate()
     {
@@ -97,7 +113,9 @@ class CertificationBag
     }
 
     /**
-     * @param null $server_certificate
+     * Set content or path of Transbank public certificate
+     *
+     * @param string $server_certificate Content or path of Transbank public certificate
      */
     public function setServerCertificate($server_certificate)
     {
@@ -105,7 +123,9 @@ class CertificationBag
     }
 
     /**
-     * @return int
+     * Get environment
+     *
+     * @return string
      */
     public function getEnvironment()
     {
@@ -113,12 +133,12 @@ class CertificationBag
     }
 
     /**
-     * @param int $environment
+     * Set environment
+     *
+     * @param string $environment Environment
      */
     public function setEnvironment($environment)
     {
         $this->environment = $environment;
     }
-
-
 }

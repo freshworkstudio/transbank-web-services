@@ -1,98 +1,93 @@
 <?php
+/**
+ * Class WebpayStandardWebService
+ *
+ * @package Freshwork\Transbank
+ * @subpackage WebpayStandard
+ * @author Gonzalo De Spirito <gonzunigad@gmail.com>
+ * @version 0.1 (06/07/2016)
+ */
+
 namespace Freshwork\Transbank\WebpayStandard;
 
-use Freshwork\Transbank\TransbankSoap;
 use Freshwork\Transbank\TransbankWebService;
-use Freshwork\Transbank\WebpayStandard\acknowledgeTransaction;
-use Freshwork\Transbank\WebpayStandard\acknowledgeTransactionResponse;
-use Freshwork\Transbank\WebpayStandard\cardDetail;
-use Freshwork\Transbank\WebpayStandard\getTransactionResult;
-use Freshwork\Transbank\WebpayStandard\getTransactionResultResponse;
-use Freshwork\Transbank\WebpayStandard\initTransaction;
-use Freshwork\Transbank\WebpayStandard\initTransactionResponse;
-use Freshwork\Transbank\WebpayStandard\transactionResultOutput;
-use Freshwork\Transbank\WebpayStandard\wpmDetailInput;
-use Freshwork\Transbank\WebpayStandard\wsInitTransactionInput;
-use Freshwork\Transbank\WebpayStandard\wsInitTransactionOutput;
-use Freshwork\Transbank\WebpayStandard\wsTransactionDetail;
-use Freshwork\Transbank\WebpayStandard\wsTransactionDetailOutput;
 
 /**
- * Class WebpayNormal
- * @package Freshwork\Transbank\WebpayNormal
+ * Class WebpayStandardWebService
+ *
+ * @package Freshwork\Transbank\WebpayStandard
  */
 class WebpayStandardWebService extends TransbankWebService
 {
-    /**
-     * Integration URL
-     */
+
+    /** @const INTEGRATION_WSDL Development WSDL URL */
     const INTEGRATION_WSDL  = 'https://webpay3gint.transbank.cl/WSWebpayTransaction/cxf/WSWebpayService?wsdl';
 
-    /**
-     * Production URL
-     */
+    /** @const PRODUCTION_WSDL Production WSDL URL */
     const PRODUCTION_WSDL   = 'https://webpay3g.transbank.cl/WSWebpayTransaction/cxf/WSWebpayService?wsdl';
 
-    /**
-     * @var array
-     */
+    /** @var array $classmap Association of WSDL types to classes */
     protected static $classmap = [
-        'getTransactionResult' => getTransactionResult::class,
-        'getTransactionResultResponse' => getTransactionResultResponse::class,
-        'transactionResultOutput' => transactionResultOutput::class,
-        'cardDetail' => cardDetail::class,
-        'wsTransactionDetailOutput' => wsTransactionDetailOutput::class,
-        'wsTransactionDetail' => wsTransactionDetail::class,
-        'acknowledgeTransaction' => acknowledgeTransaction::class,
-        'acknowledgeTransactionResponse' => acknowledgeTransactionResponse::class,
-        'initTransaction' => initTransaction::class,
-        'wsInitTransactionInput' => wsInitTransactionInput::class,
-        'wpmDetailInput' => wpmDetailInput::class,
-        'initTransactionResponse' => initTransactionResponse::class,
-        'wsInitTransactionOutput' => wsInitTransactionOutput::class
+        'initTransaction' => InitTransaction::class,
+        'initTransactionResponse' => InitTransactionResponse::class,
+        'wsInitTransactionInput' => InitTransactionInput::class,
+        'wsInitTransactionOutput' => InitTransactionOutput::class,
+        'wpmDetailInput' => DetailInput::class,
+        'getTransactionResult' => TransactionResult::class,
+        'getTransactionResultResponse' => TransactionResultResponse::class,
+        'transactionResultOutput' => TransactionResultOutput::class,
+        'cardDetail' => CardDetail::class,
+        'wsTransactionDetailOutput' => TransactionDetailOutput::class,
+        'wsTransactionDetail' => TransactionDetail::class,
+        'acknowledgeTransaction' => AcknowledgeTransaction::class,
+        'acknowledgeTransactionResponse' => AcknowledgeTransactionResponse::class,
     ];
 
     /**
-     * Método que permite iniciar una transacción de pago Webpay.
+     * Initialize a Webpay transaction
      *
-     * @param wsInitTransactionInput $initTransactionInput
-     * @return initTransactionResponse
+     * @param InitTransactionInput $initTransactionInput Transaction information
+     * @return mixed
+     * @throws \Freshwork\Transbank\Exceptions\InvalidCertificateException
+     * @throws \SoapFault
      */
-    function initTransaction(wsInitTransactionInput $initTransactionInput)
+    public function initTransaction(InitTransactionInput $initTransactionInput)
     {
-        $initInscription = new initTransaction();
+        $initInscription = new InitTransaction();
         $initInscription->wsInitTransactionInput = $initTransactionInput;
 
         return $this->callSoapMethod('initTransaction', $initInscription);
     }
 
     /**
-     * Método que permite obtener el resultado de la transacción y los datos de la misma.
+     * Get the transaction result once Webpay has resolved the financial authorization
      *
-     * @param string $token
-     * @return getTransactionResultResponse
+     * @param string $token Webpay token
+     * @return mixed
+     * @throws \Freshwork\Transbank\Exceptions\InvalidCertificateException
+     * @throws \SoapFault
      */
-    function getTransactionResult($token)
+    public function getTransactionResult($token)
     {
-        $getTransactionResult = new getTransactionResult();
-        $getTransactionResult->tokenInput = $token;
+        $transactionResult = new TransactionResult();
+        $transactionResult->tokenInput = $token;
 
-        return $this->callSoapMethod('getTransactionResult', $getTransactionResult);
+        return $this->callSoapMethod('getTransactionResult', $transactionResult);
     }
 
     /**
-     * Método que permite informar a Webpay la correcta recepción del resultado de la transacción.
+     * Indicates to Webpay that the transaction result was received
      *
-     * @param string $token
-     * @return acknowledgeTransactionResponse
+     * @param string $token Webpay token
+     * @return mixed
+     * @throws \Freshwork\Transbank\Exceptions\InvalidCertificateException
+     * @throws \SoapFault
      */
-    function acknowledgeTransaction($token)
+    public function acknowledgeTransaction($token)
     {
-        $acknowledgeTransactionInput = new acknowledgeTransaction();
+        $acknowledgeTransactionInput = new AcknowledgeTransaction();
         $acknowledgeTransactionInput->tokenInput = $token;
 
         return $this->callSoapMethod('acknowledgeTransaction', $acknowledgeTransactionInput);
     }
 }
-
-?>
