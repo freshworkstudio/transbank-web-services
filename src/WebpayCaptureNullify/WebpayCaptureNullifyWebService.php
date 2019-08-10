@@ -26,7 +26,7 @@ class WebpayCaptureNullifyWebService extends TransbankWebService
     const PRODUCTION_WSDL   = 'https://webpay3g.transbank.cl/WSWebpayTransaction/cxf/WSCommerceIntegrationService?wsdl';
 
     /** @var array $classmap Association of WSDL types to classes */
-    private static $classmap = array(
+    protected static $classmap = array(
         'nullify' => Nullify::class,
         'nullificationInput' => NullificationInput::class,
         'baseBean' => BaseBean::class,
