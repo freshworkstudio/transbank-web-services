@@ -21,6 +21,13 @@
         "ext-soap": "*",
         "ext-openssl": "*"
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Freshwork\\Transbank\\Laravel\\WebpayServiceProvider"
+            ]
+        }
+    },
     "minimum-stability": "dev"
 
 }

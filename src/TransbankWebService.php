@@ -133,7 +133,7 @@ abstract class TransbankWebService
                 LoggerInterface::LEVEL_ERROR,
                 'error'
             );
-            throw new \SoapFault($e->faultcode, $e->faultstring);
+            throw $e;
         }
 
         $this->validateResponseCertificate();

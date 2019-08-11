@@ -25,7 +25,7 @@ class WebpayOneClick extends TransbankService
     /**
      * @var WebpayOneClickWebService SOAP client involved in OneClick communication
      */
-    private $service;
+    protected $service;
 
     /**
      * WebpayOneClick constructor

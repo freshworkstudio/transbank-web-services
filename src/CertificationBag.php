@@ -24,16 +24,16 @@ class CertificationBag
     const PRODUCTION = 'production';
 
     /** @var string $client_private_key Content or path of client private key */
-    private $client_private_key;
+    protected $client_private_key;
 
     /** @var string $client_certificate Content or path of client public certificate */
-    private $client_certificate;
+    protected $client_certificate;
 
     /** @var null|string $server_certificate Content or path of Transbank public certificate */
-    private $server_certificate;
+    protected $server_certificate;
 
     /** @var string $environment Environment */
-    private $environment;
+    protected $environment;
 
     /**
      * CertificationBag constructor
@@ -60,6 +60,13 @@ class CertificationBag
         $this->client_certificate = $client_certificate;
         $this->server_certificate = $server_certificate;
         $this->environment = $environment;
+
+        if (empty($this->client_private_key)) {
+            throw new Exceptions\EmptyClientPrivateKeyException();
+        }
+        if (empty($this->client_certificate)) {
+            throw new Exceptions\EmptyClientCertificateException();
+        }
     }
 
     /**

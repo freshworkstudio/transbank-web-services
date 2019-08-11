@@ -81,7 +81,7 @@ class TransbankServiceFactory
     public static function deferred(CertificationBag $certificationBag, $wsdlUrl = null)
     {
         $service = new WebpayStandardWebService($certificationBag, $wsdlUrl);
-        return new WebpayNormal($service);
+        return new WebpayDeferred($service);
     }
 
     /**

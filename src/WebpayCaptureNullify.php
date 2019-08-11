@@ -10,7 +10,7 @@ class WebpayCaptureNullify extends TransbankService
     /**
      * @var WebpayCaptureNullifyWebService
      */
-    private $service;
+    protected $service;
 
     public function __construct(WebpayCaptureNullifyWebService $service)
     {
@@ -40,7 +40,7 @@ class WebpayCaptureNullify extends TransbankService
         $capture->captureAmount = $captureAmount;
         $capture->commerceId = $commerceCode ? $commerceCode : SecurityHelper::getCommonName(
             $this->service->getCertificationBag()->getClientCertificate()
-        );;
+        );
 
         return $this->service->capture($capture);
     }

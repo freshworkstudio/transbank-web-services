@@ -26,7 +26,7 @@ class CertificationBagFactory
         $private_key = dirname(__FILE__) . '/certs/webpay-oneclick-integration/597020000547.key';
         $client_certificate = dirname(__FILE__) . '/certs/webpay-oneclick-integration/597020000547.crt';
 
-        return new CertificationBag($private_key, $client_certificate, null, CertificationBag::INTEGRATION);
+        return static::create($private_key, $client_certificate, null, CertificationBag::INTEGRATION);
     }
 
     /**
@@ -39,7 +39,7 @@ class CertificationBagFactory
         $private_key = dirname(__FILE__) . '/certs/webpay-plus-integration/597020000541.key';
         $client_certificate = dirname(__FILE__) . '/certs/webpay-plus-integration/597020000541.crt';
 
-        return new CertificationBag($private_key, $client_certificate, null, CertificationBag::INTEGRATION);
+        return static::create($private_key, $client_certificate, null, CertificationBag::INTEGRATION);
     }
 
     /**
@@ -52,7 +52,7 @@ class CertificationBagFactory
         $private_key = dirname(__FILE__) . '/certs/webpay-patpass-integration/597020000548.key';
         $client_certificate = dirname(__FILE__) . '/certs/webpay-patpass-integration/597020000548.crt';
 
-        return new CertificationBag($private_key, $client_certificate, null, CertificationBag::INTEGRATION);
+        return static::create($private_key, $client_certificate, null, CertificationBag::INTEGRATION);
     }
 
     /**
@@ -64,7 +64,7 @@ class CertificationBagFactory
         $client_certificate = dirname(__FILE__) . '/certs/webpay-deferred-integration/597044444404.crt';
         $server_certificate = dirname(__FILE__) . '/certs/webpay-deferred-integration/transbank.pem';
 
-        return new CertificationBag(
+        return static::create(
             $private_key,
             $client_certificate,
             $server_certificate,
@@ -83,7 +83,7 @@ class CertificationBagFactory
     public static function production($client_private_key, $client_certificate, $server_certificate = null)
     {
         $env = CertificationBag::PRODUCTION;
-        return new CertificationBag($client_private_key, $client_certificate, $server_certificate, $env);
+        return static::create($client_private_key, $client_certificate, $server_certificate, $env);
     }
 
     /**

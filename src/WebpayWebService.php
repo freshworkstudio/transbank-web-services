@@ -33,6 +33,8 @@ class WebpayWebService extends TransbankService
     /** @const PATPASS Identifies a PatPass transaction */
     const PATPASS = 'TR_NORMAL_WS_WPM';
 
+    const RESULT_OK = 0;
+
     /**
      * @var WebpayStandardWebService $service SOAP Client used in the implemented service
      */
