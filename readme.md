@@ -14,7 +14,8 @@ En la versión `1.2.0` se incluye integración con Laravel
 * [Instalación](#instalación)  
 * [Inicio rápido](#inicio-rápido)  
   * [Video Tutorial | Implementar Webpay Plus Normal](#video-tutorial--implementar-webpay-plus-normal)  
-  * [Tienda de ejemplo usando Webpay OneClick](#tienda-de-ejemplo-webpay-oneclick)  
+  * [Tienda de ejemplo usando Webpay OneClick y WebPay Plus](#tienda-de-ejemplo-webpay-oneclick)
+* [Ejemplos](#ejemplos)  
 * [Implemetación de distintos servicios](#implemetación-de-distintos-servicios)  
   * [Webpay Plus Normal](#webpay-plus-normal)  
     * [Inicio de la transacción](#inicio-de-la-transacción)  
@@ -56,21 +57,35 @@ composer require freshwork/transbank
 [![image](https://user-images.githubusercontent.com/1103494/46308744-d6880100-c590-11e8-99d5-08cd67971d77.png)](https://www.youtube.com/watch?v=VavxN-a9SIk)  
 [Ver screencast](https://www.youtube.com/watch?v=VavxN-a9SIk)  
   
-### Tienda de ejemplo Webpay OneClick  
-Tienda de prueba desarrollada en Laravel que ocupa OneClick.  
-  
+### Tienda de ejemplo Webpay OneClick y Webpay Plus
+Tienda de prueba desarrollada en Laravel que ocupa Webpay OneClick y Webpay Plus.  
+
 [https://github.com/freshworkstudio/demo-store](https://github.com/freshworkstudio/demo-store)  
-  
-  
+
+# Ejemplos
+En la carpeta `example` se encuentran algunos ejemplos de uso. Iremos sumando más con el tiempo
+Para correr los ejemplos: 
+
+```php
+git clone git@github.com:freshworkstudio/transbank-web-services.git
+cd transbank-web-services/
+php -S localhost:8888 -t examples
+```  
+Ahora solo debes abrir tu navegador web en http://localhost:8888/
+
+
 # Implemetación de distintos servicios  
 Transbank cuenta con distintos productos para implementar pagos en comercios y otras aplicaciones.  
 En esta documentación podrás encontrar detalles sobre:  
   
 * Webservices Webpay Plus con Autorización y Captura Simultánea (Normal)  
 * Webservices Webpay Plus con Autorización y Captura diferida  
-* Webpay OneClick  
-* PatPass  
-  
+* Webpay OneClick
+* PatPass
+
+# Credenciales
+Las credenciales (certificados) para los ambientes de integración se encuentran incluidos en esta librería para simplificar su implementación. 
+Se actualiza constantemente con el repositorio oficial que mantiene esta información: https://github.com/TransbankDevelopers/transbank-webpay-credenciales
   
 ## Webpay Plus Normal  
 Transacción normal con Webpay. (Pago tarjeta de crédito y débito)  
@@ -129,7 +144,7 @@ $response = $plus->getTransactionResult();
   
 // Comprueba que el pago se haya efectuado correctamente  
 if (  
-    $response->detailOutput->responseCode == 0 &&   
+    $response->detailOutput->responseCode == 0
     /* Comprueba que la orden no haya sido pagada */  
 ) {  
     $plus->acknowledgeTransaction();  
@@ -665,5 +680,5 @@ Puedes usar este paquete gratuitamente sin ninguna restricción, aunque como est
   
 Dirección  
 Nombre: Gonzalo De Spirito  
-Apoquindo 5980. Piso 17, Las Condes, Santiago.   
+General Bustamante 24. Oficina N, Providencia.    
 Chile,

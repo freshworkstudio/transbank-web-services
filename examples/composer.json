@@ -1,0 +1,25 @@
+{
+    "name": "freshwork/transbank-sdk-example",
+    "description": "Test Transbank SDK",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gonzalo De Spírito",
+            "email": "gonzunigad@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": false,
+    "require": {
+        "freshwork/transbank": "*"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "rm -rf vendor/freshwork/transbank && ln -s ../../../ vendor/freshwork/transbank"
+        ],
+        "post-update-cmd": [
+            "rm -rf vendor/freshwork/transbank && ln -s ../../../ vendor/freshwork/transbank"
+        ]
+    }
+}
