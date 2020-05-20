@@ -7,7 +7,8 @@ Librería para la integración de Webpay Plus, Webpay OneClick y Webpay Patpass.
 <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square" alt="Software License"></img></a>  
 
 # Nuevo: 
-En la versión `1.2.0` se incluye integración con Laravel
+- En la versión `1.2.0` se incluye integración con Laravel
+- Se creó un [**generador de certificados**](#generador-de-certificados) que usa las instrucciones oficiales, sin que tengas que correr los comandos en tu máquina. 
   
 # Índice  
   
@@ -38,6 +39,7 @@ En la versión `1.2.0` se incluye integración con Laravel
 * [Logs](#logs)  
 * [CertificationBag](#certificationbag)  
 * [Pasar a producción](#pasar-a-producción)  
+  * [Generador de certificados](#generador-de-certificados)  
 * [Datos de prueba](#datos-de-prueba)  
   * [Tarjeta de crédito VISA (Será aprobada)](#tarjeta-de-crédito-visa-será-aprobada)
   * [Tarjeta de crédito MASTERCARD (Será rechazada)](#tarjeta-de-crédito-mastercard-será-rechazada)  
@@ -617,7 +619,11 @@ $oneClickService = new WebpayOneClickWebService($bag);
 ```  
 # Pasar a producción  
 Para pasar a producción, es importante destacar que Transbank solicitará crear un par de llaves (privada y pública) utilizando el código de comercio como Common Name (CN).   
-Transbank te enviará las instrucciones para que generes este certificado, una vez que hayas pasado el proceso de certificación.   
+Transbank te enviará las instrucciones para que generes este certificado, una vez que hayas pasado el proceso de certificación, aunque las puedes encontrar acá: [https://transbankdevelopers.cl/documentacion/como_empezar#credenciales-en-webpay](https://transbankdevelopers.cl/documentacion/como_empezar#credenciales-en-webpay)
+
+## Generador de certificados
+Para realizar este proceso de manera más simple, creé una app web que te permite crear tus certificados de producción en un simple formulario. 
+Puedes ingresar acá: [https://certificados.digitalpartner.cl/](https://certificados.digitalpartner.cl)
   
 **Una vez que les envíes los certificados que generaste, debes esperar a que te confirmen que efectivamente los cargaron en sus servidores.**
   
