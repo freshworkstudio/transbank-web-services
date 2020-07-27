@@ -9,7 +9,10 @@ Librería para la integración de Webpay Plus, Webpay OneClick y Webpay Patpass.
 # Nuevo: 
 - En la versión `1.2.0` se incluye integración con Laravel
 - Se creó un [**generador de certificados**](#generador-de-certificados) que usa las instrucciones oficiales, sin que tengas que correr los comandos en tu máquina. 
-  
+
+# Se necesita ayuda: 
+- Este SDK no tiene soporte para el API REST de Webpay. Por falta de tiempo, no lo he podido hacer, pero si me quieres ayudar, deja un issue, o contactame de alguna forma :). Encantado de recibir apoyo. 
+
 # Índice  
   
 * [Instalación](#instalación)  
