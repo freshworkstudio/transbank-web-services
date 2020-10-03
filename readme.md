@@ -433,7 +433,7 @@ $providers = [
 ]
 ```
 Opcionalmente, puedes crear el archivo de configuración `config/webpay.php` usando este comando:
-`php artisan vendor:publish --provider=\Freshwork\Transbank\Laravel\WebpayServiceProvider`
+`php artisan vendor:publish --provider="Freshwork\Transbank\Laravel\WebpayServiceProvider"`
 
 ## Usando en Laravel
 La gracia de esta integración, en que puedes usar los servicios (webpay normal, patpass, one click, etc) usando el sistema de dependencias de Laravel. 
