@@ -1,3 +1,11 @@
+# DEPRECADO: 
+Este SDK ya no tiene sentido, ya que Transbank lazó su nueva API REST y este SDk usa la antigua metodología REST. 
+Transbank ya no acepta integraciones SOAP, y felizmente, ahora estoy a cargo del SDK Oficial de TBK, así que les recomiendo utilizar ese SDK ahora: https://github.com/TransbankDevelopers/transbank-sdk-php
+
+Pueden encontrar toda la documentación en transbankdevelopers.cl
+
+
+
 # Transbank WebServices SDK
 Librería para la integración de Webpay Plus, Webpay OneClick y Webpay Patpass. Esta librería es mantenida por Gonzalo De Spirito de [freshworkstudio.com](http://freshworkstudio.com) y [simplepay.cl](http://simplepay.cl). También incluye integración con Laravel.  
   
